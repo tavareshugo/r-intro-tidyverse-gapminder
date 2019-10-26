@@ -58,4 +58,8 @@ the file link and choose "Save link as..."):
 - [Gapminder energy dataset 1960-2010](https://raw.githubusercontent.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/gapminder1960to2010_energy.csv)
 
 
+**Note:** these data were slightly modified from the original and should not be 
+used for research. 
+
+
 {% include links.md %}
