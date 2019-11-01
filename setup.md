@@ -7,17 +7,17 @@ contact your instructors before the course.
 
 ## Software installation
 
-- Download and install R ([here](https://cran.r-project.org/))
-- Download and install RStudio ([here](https://www.rstudio.com/products/rstudio/download/#download))
-- Install necessary R packages: 
+- [Download R](https://cran.r-project.org/) and install it using default options. (Note: choose the "base" version for Windows)
+- [Download RStudio](https://www.rstudio.com/products/rstudio/download/#download) and install it using default options. 
+- Install required R packages: 
   - open RStudio and from the upper menu press <kbd>Tools</kbd> > <kbd>Install Packages...</kbd>
   - under "Packages" type: `tidyverse,naniar`
-  - press <kbd>Install</kbd>
+  - press <kbd>Install</kbd> (a lot of text will start printing on the panel called "Console")
 
-Make sure you test your installation by doing the following:
+<br>
+#### Testing your installation
 
-- Open RStudio
-- On the panel called "Console" type `library(tidyverse)` and press <kbd>Enter</kbd>
+On the RStudio panel named "Console" type `library(tidyverse)` and press <kbd>Enter</kbd>
 
 A message similar to this should print:
 
@@ -31,6 +31,7 @@ A message similar to this should print:
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ```
+<p></p>
 
 If instead you get the message: 
 
@@ -41,7 +42,7 @@ Error in library(tidyverse) : there is no package called ‘tidyverse’
 then your package installation did not work. Please ask the instructors for 
 assistance before the course. 
 
-
+<br>
 #### Setting up RStudio
 
 After installing RStudio, change some of its default options (you only need to 
@@ -50,6 +51,7 @@ do this once):
 - From the upper menu go to <kbd>Tools</kbd> > <kbd>Global Options...</kbd> 
 - _Untick_ the option "Restore .RData to workspace on startup."
 - Change "Save workspace to .RData on exit" option to "Never"
+- Press <kbd>OK</kbd>
 
 
 ## Getting data
