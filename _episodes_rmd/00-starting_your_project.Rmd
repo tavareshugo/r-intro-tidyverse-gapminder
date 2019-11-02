@@ -16,6 +16,7 @@ keypoints:
 - "When you come back to work on the project, open the RProj file to resume your work."
 - "Ensure your project directory is well structured, for example with directories for scripts and data."
 - "To document your analysis write and save your code in scripts."
+- "You should try to comment your code. Use `#` to write comments in your scripts."
 - "Use `install.packages()` to install (or update) packages."
 source: Rmd
 ---
@@ -36,22 +37,19 @@ To function correctly, RStudio needs R and therefore both need to be installed o
 
 Some advantages of using R for your data analysis include:
 
-- analysis steps are documented with code, allowing for greater reproducibility. 
-- there are thousands of packages (extensions) available, making R very a very flexible 
+- Analysis steps are documented with code, allowing for greater reproducibility. 
+- There are thousands of packages (extensions) available, making R a very flexible 
   and powerful tool, for a wide range of applications. 
-- analysis can be scaled to large data.
-- produce a wide range of high-quality graphics for data visualisation.
-- there is a large community of contributors.
-- it's free and open source.
+- Analysis can be scaled to large data.
+- Can generate a wide range of high-quality graphics for data visualisation.
+- There is a large community of contributors.
+- It's free and open source.
 
 
 ### The RStudio Interface  
 
-Let's take a quick tour of RStudio.
-
-![RStudio_startup](../fig/00-RStudio_screen.png)
-
-RStudio is divided into four "panes". The default layout is:
+RStudio is divided into four "panes", illustrated below. 
+The default layout is:
 
 - Top Left - **Source**: this is where you edit your R scripts 
   (this panel might not appear until you create a script, which we demonstrate below).
@@ -60,6 +58,10 @@ RStudio is divided into four "panes". The default layout is:
   while working with R.
 - Bottom Right - **Files**/**Plots**/**Packages**/**Help**: several tabs that allow 
   you to navigate your files, view plots, view installed packages and search help files. 
+
+
+![RStudio_startup](../fig/00-RStudio_screen.png)
+
 
 
 ## Getting set up
@@ -77,11 +79,11 @@ Working this way makes it a lot easier to move your project around on your compu
 and share it with others without having to directly modify file paths in the individual 
 scripts.
 
-RStudio provides a helpful set of tools to do this through its "**Projects**"
+RStudio provides a helpful set of tools to do this through its **Projects**
 interface, which not only creates a working directory for you but also remembers
 its location (allowing you to quickly navigate to it). The interface also 
-(optionally) preserves custom settings and open files to make it easier to 
-resume work after a break. 
+preserves custom settings and open files to make it easier to resume work after 
+a break. 
 
 
 ### Creating a new project
@@ -97,7 +99,6 @@ At the moment, your directory should schematically look like:
 r-workshop/
 └── data
     └── raw
-        ├── gapminder1960to2010_energy.csv
         ├── gapminder1960to2010_socioeconomic.csv
         └── gapminder2010_socioeconomic.csv
 ```
@@ -196,7 +197,7 @@ From highest to lowest precedence:
 (3 + 5) * 2   # 3 + 5 will be evaluated first
 ```
 
-The text after each line of code is called a **[comment](../reference.html#comment)**. 
+The text after each line of code is called a **comment**. 
 Anything that follows after the hash `#` symbol is ignored by R when it executes code.
 Comments are extremely important part of the code, as they help you document the 
 logic of the analysis you are running. 
@@ -240,8 +241,8 @@ Additional packages can be installed to extend the functionality of R.
 Most packages are available in a central repository called CRAN and can be 
 installed from within R using the `install.packages()` function.
 
-For example, to install (or update) the `tidyverse` package, run the following 
-command on the console:
+For example, to install (or update) the `tidyverse` package, you would run the 
+following command on the console:
 
 ```{r, eval = FALSE}
 install.packages("tidyverse")

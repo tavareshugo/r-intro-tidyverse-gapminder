@@ -1,0 +1,78 @@
+---
+title: "Extra practice exercises"
+teaching: 00
+exercises: 00
+questions:
+  - "How to apply the tools and concepts learned to new data?"
+objectives: 
+  - "Use R and the `tidyverse` collection of packages to explore a new dataset."
+keypoints:
+  - "The initial exploration of data is crucial to detect any data quality issues that need fixing."
+source: Rmd
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("90-")
+```
+
+<br>
+
+This document suggests new exercises to practice the skills and concepts learned 
+in the course. 
+Each exercise section links to one or several of the main lesson episodes it refers to.
+
+(**Note:** solutions are not yet available for these exercises and will be added in time)
+
+
+## Starting a data analysis project
+
+This exercise uses skills learned in the episodes 
+[Introduction to R and RStudio]({{ page.root }}{% link _episodes/00-starting_your_project.md %}),
+[Basic objects and data types in R]({{ page.root }}{% link _episodes/01-objects_functions_vectors.md %}) 
+and [Working with Tabular Data]({{ page.root }}{% link _episodes/02-data_frames.md %}).
+
+For this set of questions, we will use a new dataset from the Gapminder Foundation, 
+which includes data about energy consumption and CO2 emmissions in the different 
+countries. 
+This new data file includes the following variables:
+
+| Column                       | Description                             |
+|------------------------------|-----------------------------------------|
+| country_id                   | gapminder country identifier            |
+| country                      | country name                            |
+| world_region                 | 6 world regions                         |
+| year                         | year that each datapoint refers to      |
+| yearly_co2_emissions         | yearly CO2 emissions, 1000 metric tones |
+| energy_use_per_person        | energy use per person                   |
+| energy_production_per_person | energy production per person            |
+
+
+### Part I - setting up your project
+
+1. On your computer, create a new directory for this project, for example `gapminder-energy`
+2. Create a new R Project on this directory
+3. Create directories that you feel are important, including one for saving the raw data.
+4. Download the [gapminder energy dataset](https://raw.githubusercontent.com/tavareshugo/r-eda-gapminder/gh-pages/_episodes_rmd/data/gapminder1990to2010_energy.tsv) 
+and save it in your project's data folder. 
+(<kbd>right-click</kbd> the file link and choose "Save link as...")
+5. Install the `skimr` package, which you will use to do some quality control checks 
+on the data file. (Hint: `install.packages()`)
+
+
+### Part II - reading and checking quality of data
+
+1. Read the `gapminder1990to2010_energy.tsv` file into a `data.frame`/`tibble` object 
+called `energy`. (Hint: note that this is a _tab-delimited_ file.)
+2. Make a basic check that your data import went well. Your data frame should have 
+3968 rows and 7 columns. (Hint: use `summary()` and `str()` to check data integrity)
+3. Use the `skim()` function from the `skimr` package to get an informative summary
+of your data frame. Make sure columns were imported as the correct type of value, 
+and that you have the expected number of categories for character columns. 
+(Hint: don't forget to load the package first with `library()`)
+
+Note any problems you find during this exploratory analysis.
+
+
+
+{% include links.md %}
