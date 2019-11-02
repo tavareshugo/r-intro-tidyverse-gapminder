@@ -1,194 +1,194 @@
-country,name,world_region,economic_organisation,income_groups,main_religion,year,population_male,population_female,income_per_person,life_expectancy,life_expectancy_female,life_expectancy_male,children_per_woman,newborn_mortality,child_mortality,employment_percent_female,employment_percent_male,hdi_human_development_index
-afg,Afghanistan,south_asia,g77,low_income,muslim,2010,14797692,14005472,1614,56.2,62.476,60.054,5.82,38.7,90.2,12.885,80.412,0.454
-ago,Angola,sub_saharan_africa,g77,upper_middle_income,christian,2010,11433112,11936012,5895,60.08,60.908,55.506,6.16,52.6,119.4,67.448,72.956,0.495
-alb,Albania,europe_central_asia,others,upper_middle_income,muslim,2010,1475395,1465122,9927,76.31,79.209,74.404,1.65,7.5,16.6,39.433,53.808,0.738
-and,Andorra,europe_central_asia,others,high_income,christian,2010,NA,NA,38982,82.66,NA,NA,NA,1.7,3.3,NA,NA,0.819
-are,United Arab Emirates,middle_east_north_africa,g77,high_income,muslim,2010,6161489,2109193,57580,76.51,77.792,75.65,1.87,4.3,8.6,37.866,90.789,0.824
-arg,Argentina,america,g77,upper_middle_income,christian,2010,20163796,21060099,18712,75.82,79.439,71.733,2.37,7.5,14.5,42.1,69.081,0.816
-arm,Armenia,europe_central_asia,others,lower_middle_income,christian,2010,1346350,1530958,6703,73.34,76.415,69.961,1.55,9.5,18.1,39.054,59.399,0.729
-atg,Antigua and Barbuda,america,g77,high_income,christian,2010,45367,49287,19148,76.85,77.8,72.945,2.13,6,10.3,NA,NA,0.782
-aus,Australia,east_asia_pacific,oecd,high_income,christian,2010,11061412,11058649,41385,81.98,84.114,79.725,1.93,2.8,4.8,55.548,68.776,0.927
-aut,Austria,europe_central_asia,oecd,high_income,christian,2010,4098642,4311303,43175,80.5,83.165,77.859,1.44,2.5,4.3,51.029,63.533,0.88
-aze,Azerbaijan,europe_central_asia,others,upper_middle_income,muslim,2010,4475090,4557375,15950,69.13,74.127,67.863,1.96,21.7,39.2,57.14,63.882,0.741
-bdi,Burundi,sub_saharan_africa,g77,low_income,christian,2010,4304969,4461967,764,57.73,56.685,53.077,6.26,31.7,93.6,79.441,76.634,0.385
-bel,Belgium,europe_central_asia,oecd,high_income,christian,2010,5371961,5566774,41087,79.98,82.652,77.41,1.81,2.3,4.5,43.447,55.864,0.884
-ben,Benin,sub_saharan_africa,g77,low_income,NA,2010,4568834,4630420,1819,61.82,60.718,57.87,5.36,33.5,111.1,68.402,72.298,0.454
-bfa,Burkina Faso,sub_saharan_africa,g77,low_income,muslim,2010,7737619,7867592,1425,57.89,57.616,56.442,5.87,30.4,116.4,56.035,78.866,0.377
-bgd,Bangladesh,south_asia,g77,low_income,muslim,2010,76941073,75208038,2443,70.39,71.521,69.024,2.28,28.9,49.4,28.752,81.001,0.545
-bgr,Bulgaria,europe_central_asia,others,upper_middle_income,christian,2010,3605148,3799445,15283,73.86,77.288,70.259,1.49,7.1,10.8,43.115,53.064,0.775
-bhr,Bahrain,middle_east_north_africa,g77,high_income,muslim,2010,774053,466813,41107,76.03,77.087,75.268,2.14,1.4,8.6,42.142,86.999,0.812
-bhs,Bahamas,america,g77,high_income,christian,2010,176387,184441,22895,73.79,77.709,71.633,1.87,8,13.8,60.162,70.104,0.788
-bih,Bosnia and Herzegovina,europe_central_asia,g77,upper_middle_income,NA,2010,1828007,1894073,9717,76.75,78.43,73.283,1.31,5.1,6.9,26.064,44.631,0.711
-blr,Belarus,europe_central_asia,others,upper_middle_income,christian,2010,4403462,5069608,16235,70.43,76.491,65.066,1.54,2.3,5.5,56.866,68.737,0.787
-blz,Belize,america,g77,upper_middle_income,christian,2010,160868,160738,7875,71.38,72.533,67.123,2.72,9.6,18.8,43.132,76.041,0.7
-bol,Bolivia,america,g77,lower_middle_income,christian,2010,4970472,4947772,5407,71.64,68.829,64.098,3.2,22.6,46.6,60.121,80.287,0.649
-bra,Brazil,america,g77,upper_middle_income,christian,2010,96931916,99864355,14539,74.19,77.589,70.132,1.81,10.7,19.8,49.199,73.562,0.724
-brb,Barbados,america,g77,high_income,christian,2010,134147,145421,15346,76.68,77.293,72.521,1.78,9.1,14.2,56.879,65.048,0.78
-brn,Brunei,east_asia_pacific,g77,high_income,muslim,2010,200662,187995,80553,77.08,78.447,75.142,1.84,4.6,10.5,53.895,72.269,0.846
-btn,Bhutan,south_asia,g77,lower_middle_income,eastern_religions,2010,385614,342031,6420,72.13,67.93,67.626,2.38,22.2,42.7,61.837,72.342,0.572
-bwa,Botswana,sub_saharan_africa,g77,upper_middle_income,christian,2010,996189,1018675,13334,57.06,62.514,57.178,2.88,24.2,52.5,41.961,57.368,0.678
-caf,Central African Republic,sub_saharan_africa,g77,low_income,NA,2010,2194630,2253891,888,47.48,49.057,46.081,5.22,46.4,148.9,59.726,74.496,0.361
-can,Canada,america,oecd,high_income,christian,2010,16952293,17216375,40699,81.29,83.397,79.082,1.64,3.7,5.6,57.379,65.162,0.903
-che,Switzerland,europe_central_asia,oecd,high_income,christian,2010,3856024,3975943,55542,82.21,84.447,79.931,1.5,3.1,4.5,56.807,70.975,0.932
-chl,Chile,america,g77,high_income,christian,2010,8410312,8583039,19442,79.12,81.042,75.706,1.88,5.4,8.7,42.393,69.388,0.82
-chn,China,east_asia_pacific,g77,upper_middle_income,eastern_religions,2010,699882239,659872868,9526,74.59,76.837,73.77,1.59,8.2,15.7,61.43,74.29,0.7
-civ,Cote d'Ivoire,sub_saharan_africa,g77,lower_middle_income,NA,2010,10408967,9992365,2690,56.34,51.555,49.399,5.22,41.8,110.5,46.236,70.471,0.441
-cmr,Cameroon,sub_saharan_africa,g77,lower_middle_income,christian,2010,9985480,9985022,2655,57.25,56.571,54.287,5.11,28.1,108.3,67.122,78.58,0.486
-cod,"Congo, Dem. Rep.",sub_saharan_africa,g77,low_income,christian,2010,32121415,32401848,609,57.53,58.333,55.477,6.47,32.9,115.6,68.141,71.356,0.398
-cog,"Congo, Rep.",sub_saharan_africa,g77,lower_middle_income,christian,2010,2193991,2192709,5186,60.43,61.897,59.077,4.95,21.9,63.9,57.002,61.772,0.558
-col,Colombia,america,g77,upper_middle_income,christian,2010,22640901,23277207,10901,76.44,77.025,69.719,2.01,10,18.6,48.238,75.443,0.7
-com,Comoros,sub_saharan_africa,g77,low_income,muslim,2010,347627,342069,1413,65.93,63.503,60.27,4.92,37.6,88.2,32.781,47.716,0.479
-cpv,Cape Verde,sub_saharan_africa,g77,lower_middle_income,christian,2010,249595,252786,5828,72.45,73.642,69.996,2.67,13.9,26.5,40.713,65.456,0.632
-cri,Costa Rica,america,g77,upper_middle_income,christian,2010,2276833,2268445,13000,80.4,81.247,76.338,1.92,6.6,10.2,39.261,71.153,0.752
-cub,Cuba,america,g77,upper_middle_income,christian,2010,5677985,5655069,18293,78.39,81.072,76.903,1.64,2.7,6.1,41.141,67.118,0.78
-cyp,Cyprus,europe_central_asia,others,high_income,christian,2010,555578,557033,33941,79.88,81.634,77.243,1.42,1.9,3.6,53.909,66.264,0.847
-cze,Czech Republic,europe_central_asia,oecd,high_income,christian,2010,5171406,5364879,28290,77.47,80.672,74.511,1.47,2.4,3.4,45.067,63.616,0.861
-deu,Germany,europe_central_asia,oecd,high_income,christian,2010,39656447,41238351,40429,80.09,82.66,77.495,1.39,2.3,4.2,49.358,61.565,0.912
-dji,Djibouti,middle_east_north_africa,g77,lower_middle_income,muslim,2010,427561,423588,2635,63.69,61.932,58.876,3.3,37.4,76.5,44.181,67.111,0.451
-dma,Dominica,america,g77,upper_middle_income,christian,2010,NA,NA,10198,73.04,NA,NA,NA,13.9,22.1,NA,NA,0.722
-dnk,Denmark,europe_central_asia,oecd,high_income,christian,2010,2756283,2798566,43998,79.49,81.504,77.269,1.88,2.8,4.1,55.939,63.298,0.91
-dom,Dominican Republic,america,g77,upper_middle_income,christian,2010,4940721,4957255,11124,74.6,75.963,69.68,2.6,23.5,34.4,45.874,75.738,0.703
-dza,Algeria,middle_east_north_africa,g77,upper_middle_income,muslim,2010,18230400,17887241,12870,76.55,75.918,73.481,2.89,16.5,27.3,11.634,64.368,0.724
-ecu,Ecuador,america,g77,upper_middle_income,christian,2010,7472290,7462396,9352,76.72,77.936,72.269,2.66,12.6,25.1,47.404,77.648,0.71
-egy,Egypt,middle_east_north_africa,g77,lower_middle_income,muslim,2010,42465970,41641633,9857,70.52,72.613,68.178,3.19,15.5,29.1,16.925,69.964,0.671
-eri,Eritrea,sub_saharan_africa,g77,low_income,muslim,2010,2197503,2193336,1416,61.66,64.261,60.19,4.61,20.5,55.2,69.269,81.164,0.405
-esp,Spain,europe_central_asia,oecd,high_income,christian,2010,23132789,23655836,32506,81.94,84.857,78.889,1.37,3,3.8,41.121,54.133,0.867
-est,Estonia,europe_central_asia,others,high_income,christian,2010,620356,711747,22741,76,80.221,70.172,1.64,2.5,4.5,47.27,54.152,0.838
-eth,Ethiopia,sub_saharan_africa,g77,low_income,christian,2010,43768157,43934519,1074,61.3,63.309,59.976,4.92,32.5,80.9,71.611,87.363,0.411
-fin,Finland,europe_central_asia,oecd,high_income,christian,2010,2633331,2732453,39848,80,83.327,76.895,1.87,1.7,3,51.746,58.061,0.878
-fji,Fiji,east_asia_pacific,g77,upper_middle_income,christian,2010,438922,421032,7352,65.28,72.421,66.505,2.67,10.3,24.1,34.199,68.63,0.709
-fra,France,europe_central_asia,oecd,high_income,christian,2010,30933311,32093432,36872,81.42,84.664,78.088,1.99,2.3,4.2,46.303,56.575,0.882
-fsm,"Micronesia, Fed. Sts.",east_asia_pacific,g77,lower_middle_income,christian,2010,52901,50718,3337,65.38,69.493,67.653,3.46,21.2,40,NA,NA,0.638
-gab,Gabon,sub_saharan_africa,g77,upper_middle_income,christian,2010,836931,803282,15356,62.86,63.779,61.978,4.08,25.9,63.7,28.278,49.522,0.664
-gbr,United Kingdom,europe_central_asia,oecd,high_income,christian,2010,31099747,32207098,36196,80.34,82.325,78.328,1.89,3,5.2,51.64,62.685,0.902
-geo,Georgia,europe_central_asia,others,lower_middle_income,christian,2010,2010118,2221534,6734,72.82,76.717,68.48,1.92,10,16.5,47.926,61.628,0.742
-gha,Ghana,sub_saharan_africa,g77,lower_middle_income,christian,2010,12133842,12378251,3059,62.16,61.808,60.023,4.27,31.9,74.7,69.583,74.77,0.554
-gin,Guinea,sub_saharan_africa,g77,low_income,muslim,2010,5399923,5394253,1194,57.99,57.51,56.013,5.34,34.6,109.4,60.653,62.947,0.385
-gmb,Gambia,sub_saharan_africa,g77,low_income,muslim,2010,838031,854116,1656,65.55,60.959,58.395,5.71,33.2,80.3,43.843,64.038,0.441
-gnb,Guinea-Bissau,sub_saharan_africa,g77,low_income,NA,2010,762680,793189,1393,55.65,56.616,53.462,5.05,45.5,114,60.265,73.513,0.41
-gnq,Equatorial Guinea,sub_saharan_africa,g77,high_income,christian,2010,516479,434623,33723,60.93,57.326,54.657,5.21,36.4,110.6,52.078,58.235,0.58
-grc,Greece,europe_central_asia,oecd,high_income,christian,2010,5642095,5803902,28726,80.41,83.089,77.605,1.41,3,3.9,37.422,57.986,0.86
-grd,Grenada,america,g77,upper_middle_income,christian,2010,52296,52380,11178,71.34,75.029,70.232,2.24,6.8,14.6,NA,NA,0.741
-gtm,Guatemala,america,g77,lower_middle_income,christian,2010,7186236,7444184,6714,71.25,74.674,68.255,3.38,15.8,35.4,39.902,82.637,0.609
-guy,Guyana,america,g77,lower_middle_income,christian,2010,373463,373096,5836,65.49,68.445,63.723,2.66,23.9,37.6,31.696,68.995,0.624
-hnd,Honduras,america,g77,lower_middle_income,christian,2010,4082934,4111848,3971,71.58,74.934,69.977,2.87,13.1,23.4,42.07,81.934,0.611
-hrv,Croatia,europe_central_asia,others,high_income,christian,2010,2084697,2243454,20118,76.33,79.982,73.122,1.47,3.5,5.5,40.508,53.222,0.808
-hti,Haiti,america,g77,low_income,christian,2010,4943177,5056431,1502,32.11,63.387,59.221,3.33,29.9,208,49.643,61.429,0.47
-hun,Hungary,europe_central_asia,oecd,upper_middle_income,christian,2010,4710604,5217246,22277,74.52,78.355,70.685,1.33,4,6,39.111,51.405,0.821
-idn,Indonesia,east_asia_pacific,g77,lower_middle_income,muslim,2010,122278344,120245778,8433,69.9,70.285,66.122,2.48,16.4,33.3,48.545,79.627,0.662
-ind,India,south_asia,g77,lower_middle_income,eastern_religions,2010,638471937,592508747,4405,66.2,67.84,65.497,2.6,32.7,58.8,27.304,77.908,0.58
-irl,Ireland,europe_central_asia,oecd,high_income,christian,2010,2305264,2321664,45661,80.38,82.545,78.123,2,2.5,4.2,48.068,57.411,0.909
-irn,Iran,middle_east_north_africa,g77,upper_middle_income,muslim,2010,37716501,36851012,17444,74.45,75.481,72.504,1.77,11.7,19.3,12.653,61.615,0.745
-irq,Iraq,middle_east_north_africa,g77,upper_middle_income,muslim,2010,15549002,15213700,12718,67.24,71.247,65.849,4.56,20.7,36.9,16.162,69.825,0.649
-isl,Iceland,europe_central_asia,oecd,high_income,christian,2010,161382,158960,38815,82.03,83.49,80.059,2.07,1.2,2.6,65.881,72.57,0.894
-isr,Israel,middle_east_north_africa,oecd,high_income,NA,2010,3668088,3757868,29600,81.42,83.257,79.532,3,2.4,4.6,52.495,63.159,0.883
-ita,Italy,europe_central_asia,oecd,high_income,christian,2010,29016922,30712878,36201,81.69,84.381,79.349,1.43,2.4,4,34.157,54.527,0.872
-jam,Jamaica,america,g77,upper_middle_income,christian,2010,1398927,1418292,7997,74.66,77.388,72.426,2.17,13.5,18.1,47.057,69.691,0.722
-jor,Jordan,middle_east_north_africa,g77,upper_middle_income,muslim,2010,3662927,3519460,9473,75.78,75.081,71.874,3.66,12.5,21.1,11.944,60.273,0.737
-jpn,Japan,east_asia_pacific,oecd,high_income,eastern_religions,2010,62879304,65672569,35750,82.85,86.218,79.588,1.37,1.1,3.2,46.49,68.206,0.884
-kaz,Kazakhstan,europe_central_asia,others,upper_middle_income,muslim,2010,7927069,8471909,20097,68.37,72.924,62.465,2.67,10.7,21.5,61.019,72.101,0.766
-ken,Kenya,sub_saharan_africa,g77,low_income,christian,2010,20553888,20796269,2476,62.76,64.898,60.974,4.37,25.9,62.2,51.682,64.446,0.53
-kgz,Kyrgyz Republic,europe_central_asia,others,low_income,muslim,2010,2679705,2742637,2790,68.45,73.001,64.911,2.98,16.1,29.6,46.973,70.715,0.632
-khm,Cambodia,east_asia_pacific,g77,low_income,eastern_religions,2010,6970352,7338384,2523,66.12,68.638,64.307,2.88,20.7,44.4,81.623,88.921,0.533
-kir,Kiribati,east_asia_pacific,others,lower_middle_income,christian,2010,50529,52117,1732,60.73,68.509,62.2,3.84,25.7,62.7,NA,NA,0.585
-kna,St. Kitts and Nevis,america,g77,high_income,christian,2010,NA,NA,21412,NA,NA,NA,NA,7.8,12,NA,NA,0.741
-kor,South Korea,east_asia_pacific,oecd,high_income,NA,2010,24828498,24724347,30352,80.13,83.65,77.016,1.19,1.7,4.1,47.844,69.285,0.884
-kwt,Kuwait,middle_east_north_africa,g77,high_income,muslim,2010,1733582,1264497,75204,78.2,75.084,73.227,2.22,4.6,10.8,46.858,83.409,0.792
-lao,Lao,east_asia_pacific,g77,lower_middle_income,eastern_religions,2010,3107387,3138888,3984,63.8,65.74,62.935,3.15,33.6,78.9,76.335,78.705,0.542
-lbn,Lebanon,middle_east_north_africa,g77,upper_middle_income,NA,2010,2211690,2125452,16281,79.85,80.417,76.749,1.61,5.9,10.3,19.959,64.373,0.758
-lbr,Liberia,sub_saharan_africa,g77,low_income,NA,2010,1985387,1962749,700,60.77,60.508,58.746,5.02,27.6,89.3,52.328,57.952,0.406
-lby,Libya,middle_east_north_africa,g77,upper_middle_income,muslim,2010,3149563,3019589,29630,76.1,74.468,69.136,2.41,8.9,16.6,22.007,64.736,0.756
-lca,St. Lucia,america,g77,upper_middle_income,christian,2010,84684,87890,10842,75.48,77.216,71.817,1.54,10.5,15.4,45.085,61.538,0.733
-lka,Sri Lanka,south_asia,g77,lower_middle_income,eastern_religions,2010,9828887,10369473,8563,74.42,77.861,70.934,2.2,6.4,11.2,32.072,73.597,0.746
-lso,Lesotho,sub_saharan_africa,g77,lower_middle_income,christian,2010,988404,1052151,2375,46.5,52.563,48.85,3.3,34.8,99.7,42.603,58.579,0.469
-ltu,Lithuania,europe_central_asia,others,high_income,christian,2010,1437952,1685859,21069,73.17,78.54,67.174,1.51,3.4,6.1,44.918,49.129,0.826
-lux,Luxembourg,europe_central_asia,oecd,high_income,christian,2010,252297,255593,91743,81.35,82.82,77.785,1.58,1.2,2.8,46.339,62.888,0.894
-lva,Latvia,europe_central_asia,others,high_income,christian,2010,970263,1148578,18252,73.06,77.846,67.369,1.51,6.3,7.8,45.084,50.45,0.81
-mar,Morocco,middle_east_north_africa,g77,lower_middle_income,muslim,2010,15972814,16436823,6443,73.55,75.303,72.644,2.58,21.1,33.5,23.1,68.943,0.612
-mco,Monaco,europe_central_asia,others,high_income,christian,2010,NA,NA,54146,NA,NA,NA,NA,2.2,4,NA,NA,NA
-mda,Moldova,europe_central_asia,others,lower_middle_income,christian,2010,1963731,2120759,3911,69.74,73.641,65.577,1.27,12.9,17.2,36.652,41.331,0.672
-mdg,Madagascar,sub_saharan_africa,g77,low_income,NA,2010,10536295,10615345,1386,60.84,64.857,61.93,4.6,22.3,62.2,83.622,87.684,0.504
-mdv,Maldives,south_asia,g77,upper_middle_income,muslim,2010,199635,164873,10514,77.91,77.232,75.133,2.23,7.4,13.2,47.48,75.298,0.663
-mex,Mexico,america,oecd,upper_middle_income,christian,2010,58388317,58930623,15535,75.47,78.518,73.668,2.34,7.7,17.3,40.926,75.8,0.745
-mhl,Marshall Islands,east_asia_pacific,g77,upper_middle_income,christian,2010,NA,NA,3451,63.72,NA,NA,NA,17.7,39.2,NA,NA,NA
-mkd,"Macedonia, FYR",europe_central_asia,others,upper_middle_income,christian,2010,1034490,1036243,11355,74.01,76.658,72.648,1.47,6.5,10.4,28.993,46.753,0.735
-mli,Mali,sub_saharan_africa,g77,low_income,muslim,2010,7530904,7544177,1872,59.46,55.87,54.62,6.55,42.1,136.5,44.36,75.551,0.404
-mlt,Malta,europe_central_asia,others,high_income,christian,2010,207165,208949,28321,80.28,81.55,78.109,1.39,4.6,6.8,31.652,61.97,0.826
-mmr,Myanmar,east_asia_pacific,g77,low_income,eastern_religions,2010,24477977,25677919,3721,66.84,67.302,63.011,2.41,29.7,64.4,53.008,81.742,0.526
-mne,Montenegro,europe_central_asia,others,upper_middle_income,christian,2010,307613,316672,14035,76.36,77.575,72.945,1.77,4.5,6.8,33.807,45.924,0.792
-mng,Mongolia,east_asia_pacific,g77,lower_middle_income,NA,2010,1345895,1366755,7709,66.18,71.601,63.488,2.64,14.9,26.1,49.987,60.463,0.701
-moz,Mozambique,sub_saharan_africa,g77,low_income,christian,2010,11761394,12460012,918,54.48,56.586,52.712,5.56,30.6,100.8,64.148,63.099,0.397
-mrt,Mauritania,sub_saharan_africa,g77,lower_middle_income,muslim,2010,1812440,1797102,3317,68.23,63.469,60.506,4.98,39.1,97.4,26.386,63.095,0.487
-mus,Mauritius,sub_saharan_africa,g77,upper_middle_income,NA,2010,618578,629375,15938,73.42,77.003,70.014,1.58,9.1,15,37.329,70.66,0.748
-mwi,Malawi,sub_saharan_africa,g77,low_income,christian,2010,7498804,7668292,1033,53.07,59.33,55.086,5.31,25.7,90.5,67.07,77.48,0.444
-mys,Malaysia,east_asia_pacific,g77,upper_middle_income,muslim,2010,14487868,13624432,21107,74.46,76.624,72.061,2.15,4.3,7.9,41.939,73.762,0.774
-nam,Namibia,sub_saharan_africa,g77,upper_middle_income,christian,2010,1052446,1120726,8461,58.6,60.191,56.059,3.61,17.1,56,41.259,51.092,0.612
-ner,Niger,sub_saharan_africa,g77,low_income,muslim,2010,8209607,8215975,814,58.78,57.668,56.062,7.49,30.8,123.3,67.52,89.893,0.323
-nga,Nigeria,sub_saharan_africa,g77,lower_middle_income,NA,2010,80204204,78374055,5150,60.53,51.561,50.148,5.84,38.2,129.6,47.342,58.243,0.5
-nic,Nicaragua,america,g77,lower_middle_income,christian,2010,2826852,2910867,4029,77.36,76.728,70.606,2.43,11.8,24.6,43.001,76.852,0.62
-nld,Netherlands,europe_central_asia,oecd,high_income,christian,2010,8284404,8398523,45525,80.73,82.714,78.744,1.8,2.8,4.5,55.622,68.182,0.911
-nor,Norway,europe_central_asia,oecd,high_income,christian,2010,2442442,2443436,62268,81.04,83.258,78.953,1.95,1.9,3.2,59.973,66.841,0.939
-npl,Nepal,south_asia,g77,low_income,eastern_religions,2010,13181560,13841577,1986,68.26,69.373,66.517,2.61,26.7,47,78.222,84.922,0.529
-nru,Nauru,east_asia_pacific,others,NA,christian,2010,NA,NA,6592,NA,NA,NA,NA,24.6,39.4,NA,NA,NA
-nzl,New Zealand,east_asia_pacific,oecd,high_income,christian,2010,2145763,2224297,32253,80.9,82.741,78.928,2.12,3.3,6.2,57.071,69.448,0.901
-omn,Oman,middle_east_north_africa,g77,high_income,muslim,2010,1834557,1206907,45335,76.09,78.172,73.873,2.9,5.3,11.7,26.095,78.59,0.797
-pak,Pakistan,south_asia,g77,lower_middle_income,muslim,2010,87686774,82873404,4284,65.33,66.093,64.252,3.86,50,92.1,21.595,79.53,0.525
-pan,Panama,america,g77,upper_middle_income,christian,2010,1830166,1813054,15419,77.85,79.976,73.883,2.62,11.3,19.7,44.921,78.246,0.758
-per,Peru,america,g77,upper_middle_income,christian,2010,14675720,14697919,9957,77.92,76.387,71.046,2.55,10.2,20.3,69.289,83.513,0.721
-phl,Philippines,east_asia_pacific,g77,lower_middle_income,christian,2010,47309832,46416787,5597,69.03,71.791,65.089,3.16,14.3,31.9,46.752,73.47,0.669
-plw,Palau,east_asia_pacific,others,upper_middle_income,christian,2010,NA,NA,12408,NA,NA,NA,NA,10.6,19.3,NA,NA,0.77
-png,Papua New Guinea,east_asia_pacific,g77,lower_middle_income,christian,2010,3615000,3493248,2087,58.7,67.108,62.29,3.99,27.1,65.2,69.35,71.025,0.494
-pol,Poland,europe_central_asia,oecd,high_income,christian,2010,18529195,19794212,21771,76.3,80.414,72.107,1.37,3.6,6,43.432,58.271,0.829
-prk,North Korea,east_asia_pacific,g77,low_income,NA,2010,12016471,12575133,1393,70.1,72.863,65.96,1.98,16.9,29.5,72.122,82.574,NA
-prt,Portugal,europe_central_asia,oecd,high_income,christian,2010,5100019,5552306,27238,79.84,83.089,76.698,1.33,2.1,3.9,49.196,60.352,0.818
-pry,Paraguay,america,g77,lower_middle_income,christian,2010,3150390,3059482,7290,74.07,74.451,70.248,2.73,13,24.1,50.597,80.685,0.675
-pse,Palestine,middle_east_north_africa,g77,lower_middle_income,muslim,2010,2062524,2004302,2443,72.27,74.337,70.647,4.42,13.4,23,10.873,51.101,0.669
-qat,Qatar,middle_east_north_africa,g77,high_income,muslim,2010,1349480,430199,125141,79.52,78.985,76.36,2.07,4.5,9,49.748,95.65,0.827
-rou,Romania,europe_central_asia,others,upper_middle_income,christian,2010,9924158,10516190,17818,73.66,77.621,70.493,1.47,7.9,11.5,43.471,59.437,0.798
-rus,Russia,europe_central_asia,others,high_income,christian,2010,66388824,76765050,23108,69.24,74.866,62.912,1.57,6.3,10,52.65,65.187,0.785
-rwa,Rwanda,sub_saharan_africa,g77,low_income,christian,2010,5017009,5229828,1353,64.59,64.869,61.348,4.52,24.3,63.6,83.087,85.457,0.464
-sau,Saudi Arabia,middle_east_north_africa,g77,high_income,muslim,2010,15400643,12025048,45421,75.13,75.185,72.286,2.96,9.3,15.7,15.035,71.813,0.804
-sdn,Sudan,sub_saharan_africa,g77,lower_middle_income,muslim,2010,17153255,17232706,3366,66.29,64.249,61.031,4.88,32.2,76.7,17.512,66.014,0.463
-sen,Senegal,sub_saharan_africa,g77,lower_middle_income,muslim,2010,6323796,6592433,2181,64.01,65.737,62.509,5.06,25.5,66.8,36.661,64.078,0.455
-sgp,Singapore,east_asia_pacific,g77,high_income,eastern_religions,2010,2503787,2570470,72105,82.69,84.178,79.453,1.26,1.1,2.8,55.178,74.829,0.911
-slb,Solomon Islands,east_asia_pacific,g77,lower_middle_income,christian,2010,268171,259625,1783,61.71,70.037,67.276,4.24,13.8,28.1,62.01,79.748,0.497
-sle,Sierra Leone,sub_saharan_africa,g77,low_income,NA,2010,3189798,3268921,1217,55.05,48.884,47.572,5.2,40.7,159.7,58.535,58.601,0.392
-slv,El Salvador,america,g77,lower_middle_income,christian,2010,2918538,3246088,7300,74.11,76.387,67.178,2.27,9.8,19.2,44.472,74.784,0.666
-smr,San Marino,europe_central_asia,others,high_income,christian,2010,NA,NA,44525,NA,NA,NA,NA,0.8,3.4,NA,NA,NA
-som,Somalia,sub_saharan_africa,g77,low_income,muslim,2010,6017235,6035996,614,53.13,55.621,52.439,6.87,43,159.2,16.359,70.607,NA
-srb,Serbia,europe_central_asia,others,upper_middle_income,christian,2010,4416196,4613525,12688,74.65,76.806,71.241,1.58,4.8,7.6,34.219,48.432,0.757
-ssd,South Sudan,sub_saharan_africa,others,low_income,NA,2010,5032251,5034945,3790,58.13,54.62,52.691,5.38,43.7,112.5,61.317,67.393,0.429
-stp,Sao Tome and Principe,sub_saharan_africa,g77,lower_middle_income,christian,2010,86964,87806,2642,68.91,67.841,63.873,4.79,19,45.4,30.793,67.977,0.546
-sur,Suriname,america,g77,upper_middle_income,christian,2010,264557,261538,14212,70.32,73.693,67.194,2.52,13.5,24.1,35.954,62.435,0.704
-svk,Slovak Republic,europe_central_asia,oecd,high_income,christian,2010,2621333,2782960,25159,75.52,79.244,71.756,1.36,5,7,43.243,58.011,0.829
-svn,Slovenia,europe_central_asia,others,high_income,christian,2010,1011590,1033574,28678,79.45,82.683,76.21,1.52,1.8,3.2,49.448,60.631,0.876
-swe,Sweden,europe_central_asia,oecd,high_income,christian,2010,4677170,4712987,42943,81.52,83.414,79.508,1.99,1.6,3,53.892,61.567,0.901
-swz,Swaziland,sub_saharan_africa,g77,lower_middle_income,christian,2010,583309,619534,7297,46.98,54.128,48.896,3.53,16.6,97.4,28.82,48.178,0.526
-syc,Seychelles,sub_saharan_africa,g77,upper_middle_income,christian,2010,47139,44262,20365,73.38,77.567,68.317,2.36,9,14.4,NA,NA,0.744
-syr,Syria,middle_east_north_africa,g77,lower_middle_income,muslim,2010,10609286,10409563,6603,76.15,76.778,68.113,3.21,8.4,16.3,10.339,68.27,0.646
-tcd,Chad,sub_saharan_africa,g77,low_income,muslim,2010,5945019,5942189,1925,56.49,51.2,49.26,6.59,42.5,149.7,60.391,75.276,0.37
-tgo,Togo,sub_saharan_africa,g77,low_income,NA,2010,3237086,3265860,1208,58.74,58.135,56.783,4.87,29.2,90.3,75.816,78.552,0.457
-tha,Thailand,east_asia_pacific,g77,upper_middle_income,eastern_religions,2010,32937515,34271289,13487,76.57,77.561,70.402,1.55,8.1,14.9,64.054,80.297,0.72
-tjk,Tajikistan,europe_central_asia,others,low_income,muslim,2010,3851349,3790275,2106,69.61,72.79,66.957,3.51,22.8,52.4,41.363,62.995,0.608
-tkm,Turkmenistan,europe_central_asia,g77,upper_middle_income,muslim,2010,2502513,2584695,9942,67.94,70.222,63.161,2.83,25.3,62,50.76,73.155,0.665
-tls,Timor-Leste,east_asia_pacific,g77,lower_middle_income,christian,2010,563431,546157,1853,71.1,68.793,65.879,6.23,25.3,62.6,25.303,54.596,0.607
-ton,Tonga,east_asia_pacific,g77,upper_middle_income,christian,2010,52153,51981,4984,69.86,75.164,69.276,3.91,7.2,17.4,44.709,74.422,0.712
-tto,Trinidad and Tobago,america,g77,high_income,christian,2010,657278,670815,31261,72.56,73.382,66.374,1.81,15.3,22.4,48.835,71.492,0.774
-tun,Tunisia,middle_east_north_africa,g77,upper_middle_income,muslim,2010,5276099,5363833,10436,76.89,77.068,72.662,2.14,10.1,17.4,19.826,62.077,0.714
-tur,Turkey,europe_central_asia,oecd,upper_middle_income,muslim,2010,35564195,36762714,17959,78.21,77.578,70.776,2.16,10.1,19.1,23.994,62.384,0.737
-tuv,Tuvalu,east_asia_pacific,others,upper_middle_income,christian,2010,NA,NA,3007,NA,NA,NA,NA,20.8,30.7,NA,NA,NA
-tza,Tanzania,sub_saharan_africa,g77,low_income,christian,2010,22749591,23349004,2091,59.3,62.549,59.243,5.43,21.5,71.9,78.774,82.625,0.498
-uga,Uganda,sub_saharan_africa,g77,low_income,christian,2010,16840539,17074599,1540,56.81,58.899,55.343,6.15,22.1,81,62.705,73.538,0.477
-ukr,Ukraine,europe_central_asia,others,lower_middle_income,christian,2010,21136606,24655899,7824,70.41,74.868,64.113,1.45,7.1,11.7,45.089,57.107,0.734
-ury,Uruguay,america,g77,high_income,christian,2010,1627196,1747221,17082,76.36,80.087,72.881,2.08,6.1,10.6,50.094,72.673,0.78
-usa,United States,america,oecd,high_income,christian,2010,152447660,156193735,49373,78.74,80.953,76.072,1.93,4.1,7.3,52.55,62.585,0.91
-uzb,Uzbekistan,europe_central_asia,others,lower_middle_income,muslim,2010,14228018,14378270,4240,68.77,72.911,67.166,2.44,23.1,36.3,48.703,69.389,0.664
-vct,St. Vincent and the Grenadines,america,g77,upper_middle_income,christian,2010,55198,54112,9916,71.64,74.445,70.324,2.07,13.1,20.7,45.462,66.756,0.712
-ven,Venezuela,america,g77,upper_middle_income,christian,2010,14490428,14537620,16545,75.41,77.932,69.621,2.47,10.1,17.1,45.841,73.126,0.756
-vnm,Vietnam,east_asia_pacific,g77,lower_middle_income,eastern_religions,2010,43683064,44789442,4486,73.07,79.992,70.188,1.95,12.8,23.3,70.57,79.453,0.655
-vut,Vanuatu,east_asia_pacific,g77,lower_middle_income,christian,2010,119970,116340,2948,63.02,72.877,68.828,3.5,12.1,29.2,57.459,75.701,0.591
-wsm,Samoa,east_asia_pacific,g77,lower_middle_income,christian,2010,96051,90154,5400,71.46,76.442,70.171,4.34,10.2,18.9,22.959,38.62,0.693
-yem,Yemen,middle_east_north_africa,g77,lower_middle_income,muslim,2010,11928388,11678403,4479,67.51,64.895,62.168,4.67,26.4,56.3,4.54,60.229,0.493
-zaf,South Africa,sub_saharan_africa,g77,upper_middle_income,christian,2010,25329199,26255470,12029,54.27,58.868,53.014,2.59,11.7,53.7,32.642,46.634,0.638
-zmb,Zambia,sub_saharan_africa,g77,lower_middle_income,christian,2010,6864296,6985740,3279,52.02,58.52,54.624,5.4,25,83.1,61.242,71.85,0.543
-zwe,Zimbabwe,sub_saharan_africa,g77,low_income,christian,2010,6859210,7227116,1460,49.57,54.125,51.69,4.03,25.3,89.9,72.845,84.221,0.452
+country_id,country,world_region,economic_organisation,income_groups,main_religion,year,population_male,population_female,income_per_person,life_expectancy,life_expectancy_female,life_expectancy_male,children_per_woman,newborn_mortality,child_mortality,school_years_men,school_years_women,hdi_human_development_index
+afg,Afghanistan,south_asia,g77,low_income,muslim,2010,14797692,14005472,1614,56.2,62.476,60.054,5.82,38.7,90.2,,,0.454
+ago,Angola,sub_saharan_africa,g77,upper_middle_income,christian,2010,11433112,11936012,5895,60.08,60.908,55.506,6.16,52.6,119.4,,,0.495
+alb,Albania,europe_central_asia,others,upper_middle_income,muslim,2010,1475395,1465122,9927,76.31,79.209,74.404,1.65,7.5,16.6,,,0.738
+and,Andorra,europe_central_asia,others,high_income,christian,2010,,,38982,82.66,-,-999,,1.7,3.3,,,0.819
+are,United Arab Emirates,middle_east_north_africa,g77,high_income,muslim,2010,6161489,2109193,57580,76.51,77.792,75.65,1.87,4.3,8.6,,,0.824
+arg,Argentina,america,g77,upper_middle_income,christian,2010,20163796,21060099,18712,75.82,79.439,71.733,2.37,7.5,14.5,,,0.816
+arm,Armenia,europe_central_asia,others,lower_middle_income,christian,2010,1346350,1530958,6703,73.34,76.415,69.961,1.55,9.5,18.1,,,0.729
+atg,Antigua and Barbuda,america,g77,high_income,christian,2010,45367,49287,19148,76.85,77.8,72.945,2.13,6,10.3,,,0.782
+aus,Australia,east_asia_pacific,oecd,high_income,christian,2010,11061412,11058649,41385,81.98,84.114,79.725,1.93,2.8,4.8,,,0.927
+aut,Austria,europe_central_asia,oecd,high_income,christian,2010,4098642,4311303,43175,80.5,83.165,77.859,1.44,2.5,4.3,,,0.88
+aze,Azerbaijan,europe_central_asia,others,upper_middle_income,Muslim,2010,4475090,4557375,15950,69.13,74.127,67.863,1.96,21.7,39.2,,,0.741
+bdi,Burundi,sub_saharan_africa,g77,low_income,christian,2010,4304969,4461967,764,57.73,56.685,53.077,6.26,31.7,93.6,,,0.385
+bel,Belgium,europe_central_asia,oecd,high_income,christian,2010,5371961,5566774,41087,79.98,82.652,77.41,1.81,2.3,4.5,,,0.884
+ben,Benin,sub_saharan_africa,g77,low_income,,2010,4568834,4630420,1819,61.82,60.718,57.87,5.36,33.5,111.1,,,0.454
+bfa,Burkina Faso,sub_saharan_africa,g77,low_income,muslim,2010,7737619,7867592,1425,57.89,57.616,56.442,5.87,30.4,116.4,,,0.377
+bgd,Bangladesh,south_asia,g77,low_income,muslim,2010,76941073,75208038,2443,70.39,71.521,69.024,2.28,28.9,49.4,,,0.545
+bgr,Bulgaria,europe_central_asia,others,upper_middle_income,christian,2010,3605148,3799445,15283,73.86,77.288,70.259,1.49,7.1,10.8,,,0.775
+bhr,Bahrain,middle_east_north_africa,g77,high_income,muslim,2010,774053,466813,41107,76.03,77.087,75.268,2.14,1.4,8.6,,,0.812
+bhs,Bahamas,america,g77,high_income,christian,2010,176387,184441,22895,73.79,77.709,71.633,1.87,8,13.8,,,0.788
+bih,Bosnia and Herzegovina,europe_central_asia,g77,upper_middle_income,,2010,1828007,1894073,9717,76.75,78.43,73.283,1.31,5.1,6.9,,,0.711
+blr,Belarus,europe_central_asia,others,upper_middle_income,christian,2010,4403462,5069608,16235,70.43,76.491,65.066,1.54,2.3,5.5,,,0.787
+blz,Belize,america,g77,upper_middle_income,christian,2010,160868,160738,7875,71.38,72.533,67.123,2.72,9.6,18.8,,,0.7
+bol,Bolivia,america,g77,lower_middle_income,christian,2010,4970472,4947772,5407,71.64,68.829,64.098,3.2,22.6,46.6,,,0.649
+bra,Brazil,america,g77,upper_middle_income,christian,2010,96931916,99864355,14539,74.19,77.589,70.132,1.81,10.7,19.8,,,0.724
+brb,Barbados,america,g77,high_income,christian,2010,134147,145421,15346,76.68,77.293,72.521,1.78,9.1,14.2,,,0.78
+brn,Brunei,east_asia_pacific,g77,high_income,muslim,2010,200662,187995,80553,77.08,78.447,75.142,1.84,4.6,10.5,,,0.846
+btn,Bhutan,south_asia,g77,lower_middle_income,eastern religions,2010,385614,342031,6420,72.13,67.93,67.626,2.38,22.2,42.7,,,0.572
+bwa,Botswana,sub_saharan_africa,g77,upper_middle_income,Christian,2010,996189,1018675,13334,57.06,62.514,57.178,2.88,24.2,52.5,,,0.678
+caf,Central African Republic,sub_saharan_africa,g77,low_income,,2010,2194630,2253891,888,47.48,49.057,46.081,5.22,46.4,148.9,,,0.361
+can,Canada,america,oecd,high_income,christian,2010,16952293,17216375,40699,81.29,83.397,79.082,1.64,3.7,5.6,,,0.903
+che,Switzerland,europe_central_asia,oecd,high_income,christian,2010,3856024,3975943,55542,82.21,84.447,79.931,1.5,3.1,4.5,,,0.932
+chl,Chile,america,g77,high_income,christian,2010,8410312,8583039,19442,79.12,81.042,75.706,1.88,5.4,8.7,,,0.82
+chn,China,east_asia_pacific,g77,upper_middle_income,eastern religions,2010,699882239,659872868,9526,74.59,76.837,73.77,1.59,8.2,15.7,,,0.7
+civ,Cote d'Ivoire,sub_saharan_africa,g77,lower_middle_income,,2010,10408967,9992365,2690,56.34,51.555,49.399,5.22,41.8,110.5,,,0.441
+cmr,Cameroon,sub_saharan_africa,g77,lower_middle_income,christian,2010,9985480,9985022,2655,57.25,56.571,54.287,5.11,28.1,108.3,,,0.486
+cod,"Congo, Dem. Rep.",sub_saharan_africa,g77,low_income,christian,2010,32121415,32401848,609,57.53,58.333,55.477,6.47,32.9,115.6,,,0.398
+cog,"Congo, Rep.",sub_saharan_africa,g77,lower_middle_income,christian,2010,2193991,2192709,5186,60.43,61.897,59.077,4.95,21.9,63.9,,,0.558
+col,Colombia,america,g77,upper_middle_income,christian,2010,22640901,23277207,10901,76.44,77.025,69.719,2.01,10,18.6,,,0.7
+com,Comoros,sub_saharan_africa,g77,low_income,muslim,2010,347627,342069,1413,65.93,63.503,60.27,4.92,37.6,88.2,,,0.479
+cpv,Cape Verde,sub_saharan_africa,g77,lower_middle_income,christian,2010,249595,252786,5828,72.45,73.642,69.996,2.67,13.9,26.5,,,0.632
+cri,Costa Rica,america,g77,upper_middle_income,Christian,2010,2276833,2268445,13000,80.4,81.247,76.338,1.92,6.6,10.2,,,0.752
+cub,Cuba,america,g77,upper_middle_income,christian,2010,5677985,5655069,18293,78.39,81.072,76.903,1.64,2.7,6.1,,,0.78
+cyp,Cyprus,europe_central_asia,others,high_income,christian,2010,555578,557033,33941,79.88,81.634,77.243,1.42,1.9,3.6,,,0.847
+cze,Czech Republic,europe_central_asia,oecd,high_income,christian,2010,5171406,5364879,28290,77.47,80.672,74.511,1.47,2.4,3.4,,,0.861
+deu,Germany,europe_central_asia,oecd,high_income,christian,2010,39656447,41238351,40429,80.09,82.66,77.495,1.39,2.3,4.2,,,0.912
+dji,Djibouti,middle_east_north_africa,g77,lower_middle_income,Muslim,2010,427561,423588,2635,63.69,61.932,58.876,3.3,37.4,76.5,,,0.451
+dma,Dominica,america,g77,upper_middle_income,christian,2010,,,10198,73.04,-,-999,,13.9,22.1,,,0.722
+dnk,Denmark,europe_central_asia,oecd,high_income,christian,2010,2756283,2798566,43998,79.49,81.504,77.269,1.88,2.8,4.1,,,0.91
+dom,Dominican Republic,america,g77,upper_middle_income,christian,2010,4940721,4957255,11124,74.6,75.963,69.68,2.6,23.5,34.4,,,0.703
+dza,Algeria,middle_east_north_africa,g77,upper_middle_income,muslim,2010,18230400,17887241,12870,76.55,75.918,73.481,2.89,16.5,27.3,,,0.724
+ecu,Ecuador,america,g77,upper_middle_income,christian,2010,7472290,7462396,9352,76.72,77.936,72.269,2.66,12.6,25.1,,,0.71
+egy,Egypt,middle_east_north_africa,g77,lower_middle_income,muslim,2010,42465970,41641633,9857,70.52,72.613,68.178,3.19,15.5,29.1,,,0.671
+eri,Eritrea,sub_saharan_africa,g77,low_income,muslim,2010,2197503,2193336,1416,61.66,64.261,60.19,4.61,20.5,55.2,,,0.405
+esp,Spain,europe_central_asia,oecd,high_income,Christian,2010,23132789,23655836,32506,81.94,84.857,78.889,1.37,3,3.8,,,0.867
+est,Estonia,europe_central_asia,others,high_income,Christian,2010,620356,711747,22741,76,80.221,70.172,1.64,2.5,4.5,,,0.838
+eth,Ethiopia,sub_saharan_africa,g77,low_income,christian,2010,43768157,43934519,1074,61.3,63.309,59.976,4.92,32.5,80.9,,,0.411
+fin,Finland,europe_central_asia,oecd,high_income,christian,2010,2633331,2732453,39848,80,83.327,76.895,1.87,1.7,3,,,0.878
+fji,Fiji,east_asia_pacific,g77,upper_middle_income,christian,2010,438922,421032,7352,65.28,72.421,66.505,2.67,10.3,24.1,,,0.709
+fra,France,europe_central_asia,oecd,high_income,christian,2010,30933311,32093432,36872,81.42,84.664,78.088,1.99,2.3,4.2,,,0.882
+fsm,"Micronesia, Fed. Sts.",east_asia_pacific,g77,lower_middle_income,christian,2010,52901,50718,3337,65.38,69.493,67.653,3.46,21.2,40,,,0.638
+gab,Gabon,sub_saharan_africa,g77,upper_middle_income,christian,2010,836931,803282,15356,62.86,63.779,61.978,4.08,25.9,63.7,,,0.664
+gbr,United Kingdom,europe_central_asia,oecd,high_income,christian,2010,31099747,32207098,36196,80.34,82.325,78.328,1.89,3,5.2,,,0.902
+geo,Georgia,europe_central_asia,others,lower_middle_income,christian,2010,2010118,2221534,6734,72.82,76.717,68.48,1.92,10,16.5,,,0.742
+gha,Ghana,sub_saharan_africa,g77,lower_middle_income,christian,2010,12133842,12378251,3059,62.16,61.808,60.023,4.27,31.9,74.7,,,0.554
+gin,Guinea,sub_saharan_africa,g77,low_income,muslim,2010,5399923,5394253,1194,57.99,57.51,56.013,5.34,34.6,109.4,,,0.385
+gmb,Gambia,sub_saharan_africa,g77,low_income,muslim,2010,838031,854116,1656,65.55,60.959,58.395,5.71,33.2,80.3,,,0.441
+gnb,Guinea-Bissau,sub_saharan_africa,g77,low_income,,2010,762680,793189,1393,55.65,56.616,53.462,5.05,45.5,114,,,0.41
+gnq,Equatorial Guinea,sub_saharan_africa,g77,high_income,christian,2010,516479,434623,33723,60.93,57.326,54.657,5.21,36.4,110.6,,,0.58
+grc,Greece,europe_central_asia,oecd,high_income,christian,2010,5642095,5803902,28726,80.41,83.089,77.605,1.41,3,3.9,,,0.86
+grd,Grenada,america,g77,upper_middle_income,christian,2010,52296,52380,11178,71.34,75.029,70.232,2.24,6.8,14.6,,,0.741
+gtm,Guatemala,america,g77,lower_middle_income,christian,2010,7186236,7444184,6714,71.25,74.674,68.255,3.38,15.8,35.4,,,0.609
+guy,Guyana,america,g77,lower_middle_income,christian,2010,373463,373096,5836,65.49,68.445,63.723,2.66,23.9,37.6,,,0.624
+hnd,Honduras,america,g77,lower_middle_income,christian,2010,4082934,4111848,3971,71.58,74.934,69.977,2.87,13.1,23.4,,,0.611
+hrv,Croatia,europe_central_asia,others,high_income,christian,2010,2084697,2243454,20118,76.33,79.982,73.122,1.47,3.5,5.5,,,0.808
+hti,Haiti,america,g77,low_income,christian,2010,4943177,5056431,1502,32.11,63.387,59.221,3.33,29.9,208,,,0.47
+hun,Hungary,europe_central_asia,oecd,upper_middle_income,christian,2010,4710604,5217246,22277,74.52,78.355,70.685,1.33,4,6,,,0.821
+idn,Indonesia,east_asia_pacific,g77,lower_middle_income,Muslim,2010,122278344,120245778,8433,69.9,70.285,66.122,2.48,16.4,33.3,,,0.662
+ind,India,south_asia,g77,lower_middle_income,eastern   religions,2010,638471937,592508747,4405,66.2,67.84,65.497,2.6,32.7,58.8,,,0.58
+irl,Ireland,europe_central_asia,oecd,high_income,christian,2010,2305264,2321664,45661,80.38,82.545,78.123,2,2.5,4.2,,,0.909
+irn,Iran,middle_east_north_africa,g77,upper_middle_income,Muslim,2010,37716501,36851012,17444,74.45,75.481,72.504,1.77,11.7,19.3,,,0.745
+irq,Iraq,middle_east_north_africa,g77,upper_middle_income,muslim,2010,15549002,15213700,12718,67.24,71.247,65.849,4.56,20.7,36.9,,,0.649
+isl,Iceland,europe_central_asia,oecd,high_income,Christian,2010,161382,158960,38815,82.03,83.49,80.059,2.07,1.2,2.6,,,0.894
+isr,Israel,middle_east_north_africa,oecd,high_income,,2010,3668088,3757868,29600,81.42,83.257,79.532,3,2.4,4.6,,,0.883
+ita,Italy,europe_central_asia,oecd,high_income,christian,2010,29016922,30712878,36201,81.69,84.381,79.349,1.43,2.4,4,,,0.872
+jam,Jamaica,america,g77,upper_middle_income,Christian,2010,1398927,1418292,7997,74.66,77.388,72.426,2.17,13.5,18.1,,,0.722
+jor,Jordan,middle_east_north_africa,g77,upper_middle_income,muslim,2010,3662927,3519460,9473,75.78,75.081,71.874,3.66,12.5,21.1,,,0.737
+jpn,Japan,east_asia_pacific,oecd,high_income,eastern religions,2010,62879304,65672569,35750,82.85,86.218,79.588,1.37,1.1,3.2,,,0.884
+kaz,Kazakhstan,europe_central_asia,others,upper_middle_income,muslim,2010,7927069,8471909,20097,68.37,72.924,62.465,2.67,10.7,21.5,,,0.766
+ken,Kenya,sub_saharan_africa,g77,low_income,christian,2010,20553888,20796269,2476,62.76,64.898,60.974,4.37,25.9,62.2,,,0.53
+kgz,Kyrgyz Republic,europe_central_asia,others,low_income,muslim,2010,2679705,2742637,2790,68.45,73.001,64.911,2.98,16.1,29.6,,,0.632
+khm,Cambodia,east_asia_pacific,g77,low_income,eastern religions,2010,6970352,7338384,2523,66.12,68.638,64.307,2.88,20.7,44.4,,,0.533
+kir,Kiribati,east_asia_pacific,others,lower_middle_income,christian,2010,50529,52117,1732,60.73,68.509,62.2,3.84,25.7,62.7,,,0.585
+kna,St. Kitts and Nevis,america,g77,high_income,christian,2010,,,21412,,-,-999,,7.8,12,,,0.741
+kor,South Korea,east_asia_pacific,oecd,high_income,,2010,24828498,24724347,30352,80.13,83.65,77.016,1.19,1.7,4.1,,,0.884
+kwt,Kuwait,middle_east_north_africa,g77,high_income,muslim,2010,1733582,1264497,75204,78.2,75.084,73.227,2.22,4.6,10.8,,,0.792
+lao,Lao,east_asia_pacific,g77,lower_middle_income,eastern religions,2010,3107387,3138888,3984,63.8,65.74,62.935,3.15,33.6,78.9,,,0.542
+lbn,Lebanon,middle_east_north_africa,g77,upper_middle_income,,2010,2211690,2125452,16281,79.85,80.417,76.749,1.61,5.9,10.3,,,0.758
+lbr,Liberia,sub_saharan_africa,g77,low_income,,2010,1985387,1962749,700,60.77,60.508,58.746,5.02,27.6,89.3,,,0.406
+lby,Libya,middle_east_north_africa,g77,upper_middle_income,muslim,2010,3149563,3019589,29630,76.1,74.468,69.136,2.41,8.9,16.6,,,0.756
+lca,St. Lucia,america,g77,upper_middle_income,christian,2010,84684,87890,10842,75.48,77.216,71.817,1.54,10.5,15.4,,,0.733
+lka,Sri Lanka,south_asia,g77,lower_middle_income,eastern religions,2010,9828887,10369473,8563,74.42,77.861,70.934,2.2,6.4,11.2,,,0.746
+lso,Lesotho,sub_saharan_africa,g77,lower_middle_income,christian,2010,988404,1052151,2375,46.5,52.563,48.85,3.3,34.8,99.7,,,0.469
+ltu,Lithuania,europe_central_asia,others,high_income,christian,2010,1437952,1685859,21069,73.17,78.54,67.174,1.51,3.4,6.1,,,0.826
+lux,Luxembourg,europe_central_asia,oecd,high_income,christian,2010,252297,255593,91743,81.35,82.82,77.785,1.58,1.2,2.8,,,0.894
+lva,Latvia,europe_central_asia,others,high_income,christian,2010,970263,1148578,18252,73.06,77.846,67.369,1.51,6.3,7.8,,,0.81
+mar,Morocco,middle_east_north_africa,g77,lower_middle_income,muslim,2010,15972814,16436823,6443,73.55,75.303,72.644,2.58,21.1,33.5,,,0.612
+mco,Monaco,europe_central_asia,others,high_income,christian,2010,,,54146,,-,-999,,2.2,4,,,
+mda,Moldova,europe_central_asia,others,lower_middle_income,christian,2010,1963731,2120759,3911,69.74,73.641,65.577,1.27,12.9,17.2,,,0.672
+mdg,Madagascar,sub_saharan_africa,g77,low_income,,2010,10536295,10615345,1386,60.84,64.857,61.93,4.6,22.3,62.2,,,0.504
+mdv,Maldives,south_asia,g77,upper_middle_income,muslim,2010,199635,164873,10514,77.91,77.232,75.133,2.23,7.4,13.2,,,0.663
+mex,Mexico,america,oecd,upper_middle_income,christian,2010,58388317,58930623,15535,75.47,78.518,73.668,2.34,7.7,17.3,,,0.745
+mhl,Marshall Islands,east_asia_pacific,g77,upper_middle_income,christian,2010,,,3451,63.72,-,-999,,17.7,39.2,,,
+mkd,"Macedonia, FYR",europe_central_asia,others,upper_middle_income,christian,2010,1034490,1036243,11355,74.01,76.658,72.648,1.47,6.5,10.4,,,0.735
+mli,Mali,sub_saharan_africa,g77,low_income,muslim,2010,7530904,7544177,1872,59.46,55.87,54.62,6.55,42.1,136.5,,,0.404
+mlt,Malta,europe_central_asia,others,high_income,christian,2010,207165,208949,28321,80.28,81.55,78.109,1.39,4.6,6.8,,,0.826
+mmr,Myanmar,east_asia_pacific,g77,low_income,eastern religions,2010,24477977,25677919,3721,66.84,67.302,63.011,2.41,29.7,64.4,,,0.526
+mne,Montenegro,europe_central_asia,others,upper_middle_income,christian,2010,307613,316672,14035,76.36,77.575,72.945,1.77,4.5,6.8,,,0.792
+mng,Mongolia,east_asia_pacific,g77,lower_middle_income,,2010,1345895,1366755,7709,66.18,71.601,63.488,2.64,14.9,26.1,,,0.701
+moz,Mozambique,sub_saharan_africa,g77,low_income,christian,2010,11761394,12460012,918,54.48,56.586,52.712,5.56,30.6,100.8,,,0.397
+mrt,Mauritania,sub_saharan_africa,g77,lower_middle_income,muslim,2010,1812440,1797102,3317,68.23,63.469,60.506,4.98,39.1,97.4,,,0.487
+mus,Mauritius,sub_saharan_africa,g77,upper_middle_income,,2010,618578,629375,15938,73.42,77.003,70.014,1.58,9.1,15,,,0.748
+mwi,Malawi,sub_saharan_africa,g77,low_income,christian,2010,7498804,7668292,1033,53.07,59.33,55.086,5.31,25.7,90.5,,,0.444
+mys,Malaysia,east_asia_pacific,g77,upper_middle_income,muslim,2010,14487868,13624432,21107,74.46,76.624,72.061,2.15,4.3,7.9,,,0.774
+nam,Namibia,sub_saharan_africa,g77,upper_middle_income,christian,2010,1052446,1120726,8461,58.6,60.191,56.059,3.61,17.1,56,,,0.612
+ner,Niger,sub_saharan_africa,g77,low_income,muslim,2010,8209607,8215975,814,58.78,57.668,56.062,7.49,30.8,123.3,,,0.323
+nga,Nigeria,sub_saharan_africa,g77,lower_middle_income,,2010,80204204,78374055,5150,60.53,51.561,50.148,5.84,38.2,129.6,,,0.5
+nic,Nicaragua,america,g77,lower_middle_income,christian,2010,2826852,2910867,4029,77.36,76.728,70.606,2.43,11.8,24.6,,,0.62
+nld,Netherlands,europe_central_asia,oecd,high_income,christian,2010,8284404,8398523,45525,80.73,82.714,78.744,1.8,2.8,4.5,,,0.911
+nor,Norway,europe_central_asia,oecd,high_income,christian,2010,2442442,2443436,62268,81.04,83.258,78.953,1.95,1.9,3.2,,,0.939
+npl,Nepal,south_asia,g77,low_income,eastern religions,2010,13181560,13841577,1986,68.26,69.373,66.517,2.61,26.7,47,,,0.529
+nru,Nauru,east_asia_pacific,others,,christian,2010,,,6592,,-,-999,,24.6,39.4,,,
+nzl,New Zealand,east_asia_pacific,oecd,high_income,christian,2010,2145763,2224297,32253,80.9,82.741,78.928,2.12,3.3,6.2,,,0.901
+omn,Oman,middle_east_north_africa,g77,high_income,muslim,2010,1834557,1206907,45335,76.09,78.172,73.873,2.9,5.3,11.7,,,0.797
+pak,Pakistan,south_asia,g77,lower_middle_income,muslim,2010,87686774,82873404,4284,65.33,66.093,64.252,3.86,50,92.1,,,0.525
+pan,Panama,america,g77,upper_middle_income,Christian,2010,1830166,1813054,15419,77.85,79.976,73.883,2.62,11.3,19.7,,,0.758
+per,Peru,america,g77,upper_middle_income,christian,2010,14675720,14697919,9957,77.92,76.387,71.046,2.55,10.2,20.3,,,0.721
+phl,Philippines,east_asia_pacific,g77,lower_middle_income,Christian,2010,47309832,46416787,5597,69.03,71.791,65.089,3.16,14.3,31.9,,,0.669
+plw,Palau,east_asia_pacific,others,upper_middle_income,christian,2010,,,12408,,-,-999,,10.6,19.3,,,0.77
+png,Papua New Guinea,east_asia_pacific,g77,lower_middle_income,christian,2010,3615000,3493248,2087,58.7,67.108,62.29,3.99,27.1,65.2,,,0.494
+pol,Poland,europe_central_asia,oecd,high_income,christian,2010,18529195,19794212,21771,76.3,80.414,72.107,1.37,3.6,6,,,0.829
+prk,North Korea,east_asia_pacific,g77,low_income,,2010,12016471,12575133,1393,70.1,72.863,65.96,1.98,16.9,29.5,,,
+prt,Portugal,europe_central_asia,oecd,high_income,Christian,2010,5100019,5552306,27238,79.84,83.089,76.698,1.33,2.1,3.9,,,0.818
+pry,Paraguay,america,g77,lower_middle_income,christian,2010,3150390,3059482,7290,74.07,74.451,70.248,2.73,13,24.1,,,0.675
+pse,Palestine,middle_east_north_africa,g77,lower_middle_income,muslim,2010,2062524,2004302,2443,72.27,74.337,70.647,4.42,13.4,23,,,0.669
+qat,Qatar,middle_east_north_africa,g77,high_income,muslim,2010,1349480,430199,125141,79.52,78.985,76.36,2.07,4.5,9,,,0.827
+rou,Romania,europe_central_asia,others,upper_middle_income,Christian,2010,9924158,10516190,17818,73.66,77.621,70.493,1.47,7.9,11.5,,,0.798
+rus,Russia,europe_central_asia,others,high_income,Christian,2010,66388824,76765050,23108,69.24,74.866,62.912,1.57,6.3,10,,,0.785
+rwa,Rwanda,sub_saharan_africa,g77,low_income,christian,2010,5017009,5229828,1353,64.59,64.869,61.348,4.52,24.3,63.6,,,0.464
+sau,Saudi Arabia,middle_east_north_africa,g77,high_income,muslim,2010,15400643,12025048,45421,75.13,75.185,72.286,2.96,9.3,15.7,,,0.804
+sdn,Sudan,sub_saharan_africa,g77,lower_middle_income,muslim,2010,17153255,17232706,3366,66.29,64.249,61.031,4.88,32.2,76.7,,,0.463
+sen,Senegal,sub_saharan_africa,g77,lower_middle_income,muslim,2010,6323796,6592433,2181,64.01,65.737,62.509,5.06,25.5,66.8,,,0.455
+sgp,Singapore,east_asia_pacific,g77,high_income,eastern religions,2010,2503787,2570470,72105,82.69,84.178,79.453,1.26,1.1,2.8,,,0.911
+slb,Solomon Islands,east_asia_pacific,g77,lower_middle_income,christian,2010,268171,259625,1783,61.71,70.037,67.276,4.24,13.8,28.1,,,0.497
+sle,Sierra Leone,sub_saharan_africa,g77,low_income,,2010,3189798,3268921,1217,55.05,48.884,47.572,5.2,40.7,159.7,,,0.392
+slv,El Salvador,america,g77,lower_middle_income,christian,2010,2918538,3246088,7300,74.11,76.387,67.178,2.27,9.8,19.2,,,0.666
+smr,San Marino,europe_central_asia,others,high_income,christian,2010,,,44525,,-,-999,,0.8,3.4,,,
+som,Somalia,sub_saharan_africa,g77,low_income,muslim,2010,6017235,6035996,614,53.13,55.621,52.439,6.87,43,159.2,,,
+srb,Serbia,europe_central_asia,others,upper_middle_income,christian,2010,4416196,4613525,12688,74.65,76.806,71.241,1.58,4.8,7.6,,,0.757
+ssd,South Sudan,sub_saharan_africa,others,low_income,,2010,5032251,5034945,3790,58.13,54.62,52.691,5.38,43.7,112.5,,,0.429
+stp,Sao Tome and Principe,sub_saharan_africa,g77,lower_middle_income,christian,2010,86964,87806,2642,68.91,67.841,63.873,4.79,19,45.4,,,0.546
+sur,Suriname,america,g77,upper_middle_income,christian,2010,264557,261538,14212,70.32,73.693,67.194,2.52,13.5,24.1,,,0.704
+svk,Slovak Republic,europe_central_asia,oecd,high_income,christian,2010,2621333,2782960,25159,75.52,79.244,71.756,1.36,5,7,,,0.829
+svn,Slovenia,europe_central_asia,others,high_income,christian,2010,1011590,1033574,28678,79.45,82.683,76.21,1.52,1.8,3.2,,,0.876
+swe,Sweden,europe_central_asia,oecd,high_income,christian,2010,4677170,4712987,42943,81.52,83.414,79.508,1.99,1.6,3,,,0.901
+swz,Swaziland,sub_saharan_africa,g77,lower_middle_income,christian,2010,583309,619534,7297,46.98,54.128,48.896,3.53,16.6,97.4,,,0.526
+syc,Seychelles,sub_saharan_africa,g77,upper_middle_income,christian,2010,47139,44262,20365,73.38,77.567,68.317,2.36,9,14.4,,,0.744
+syr,Syria,middle_east_north_africa,g77,lower_middle_income,muslim,2010,10609286,10409563,6603,76.15,76.778,68.113,3.21,8.4,16.3,,,0.646
+tcd,Chad,sub_saharan_africa,g77,low_income,muslim,2010,5945019,5942189,1925,56.49,51.2,49.26,6.59,42.5,149.7,,,0.37
+tgo,Togo,sub_saharan_africa,g77,low_income,,2010,3237086,3265860,1208,58.74,58.135,56.783,4.87,29.2,90.3,,,0.457
+tha,Thailand,east_asia_pacific,g77,upper_middle_income,eastern religions,2010,32937515,34271289,13487,76.57,77.561,70.402,1.55,8.1,14.9,,,0.72
+tjk,Tajikistan,europe_central_asia,others,low_income,muslim,2010,3851349,3790275,2106,69.61,72.79,66.957,3.51,22.8,52.4,,,0.608
+tkm,Turkmenistan,europe_central_asia,g77,upper_middle_income,muslim,2010,2502513,2584695,9942,67.94,70.222,63.161,2.83,25.3,62,,,0.665
+tls,Timor-Leste,east_asia_pacific,g77,lower_middle_income,christian,2010,563431,546157,1853,71.1,68.793,65.879,6.23,25.3,62.6,,,0.607
+ton,Tonga,east_asia_pacific,g77,upper_middle_income,christian,2010,52153,51981,4984,69.86,75.164,69.276,3.91,7.2,17.4,,,0.712
+tto,Trinidad and Tobago,america,g77,high_income,Christian,2010,657278,670815,31261,72.56,73.382,66.374,1.81,15.3,22.4,,,0.774
+tun,Tunisia,middle_east_north_africa,g77,upper_middle_income,muslim,2010,5276099,5363833,10436,76.89,77.068,72.662,2.14,10.1,17.4,,,0.714
+tur,Turkey,europe_central_asia,oecd,upper_middle_income,muslim,2010,35564195,36762714,17959,78.21,77.578,70.776,2.16,10.1,19.1,,,0.737
+tuv,Tuvalu,east_asia_pacific,others,upper_middle_income,christian,2010,,,3007,,-,-999,,20.8,30.7,,,
+tza,Tanzania,sub_saharan_africa,g77,low_income,christian,2010,22749591,23349004,2091,59.3,62.549,59.243,5.43,21.5,71.9,,,0.498
+uga,Uganda,sub_saharan_africa,g77,low_income,christian,2010,16840539,17074599,1540,56.81,58.899,55.343,6.15,22.1,81,,,0.477
+ukr,Ukraine,europe_central_asia,others,lower_middle_income,christian,2010,21136606,24655899,7824,70.41,74.868,64.113,1.45,7.1,11.7,,,0.734
+ury,Uruguay,america,g77,high_income,christian,2010,1627196,1747221,17082,76.36,80.087,72.881,2.08,6.1,10.6,,,0.78
+usa,United States,america,oecd,high_income,christian,2010,152447660,156193735,49373,78.74,80.953,76.072,1.93,4.1,7.3,,,0.91
+uzb,Uzbekistan,europe_central_asia,others,lower_middle_income,muslim,2010,14228018,14378270,4240,68.77,72.911,67.166,2.44,23.1,36.3,,,0.664
+vct,St. Vincent and the Grenadines,america,g77,upper_middle_income,christian,2010,55198,54112,9916,71.64,74.445,70.324,2.07,13.1,20.7,,,0.712
+ven,Venezuela,america,g77,upper_middle_income,christian,2010,14490428,14537620,16545,75.41,77.932,69.621,2.47,10.1,17.1,,,0.756
+vnm,Vietnam,east_asia_pacific,g77,lower_middle_income,eastern religions,2010,43683064,44789442,4486,73.07,79.992,70.188,1.95,12.8,23.3,,,0.655
+vut,Vanuatu,east_asia_pacific,g77,lower_middle_income,christian,2010,119970,116340,2948,63.02,72.877,68.828,3.5,12.1,29.2,,,0.591
+wsm,Samoa,east_asia_pacific,g77,lower_middle_income,christian,2010,96051,90154,5400,71.46,76.442,70.171,4.34,10.2,18.9,,,0.693
+yem,Yemen,middle_east_north_africa,g77,lower_middle_income,muslim,2010,11928388,11678403,4479,67.51,64.895,62.168,4.67,26.4,56.3,,,0.493
+zaf,South Africa,sub_saharan_africa,g77,upper_middle_income,christian,2010,25329199,26255470,12029,54.27,58.868,53.014,2.59,11.7,53.7,,,0.638
+zmb,Zambia,sub_saharan_africa,g77,lower_middle_income,christian,2010,6864296,6985740,3279,52.02,58.52,54.624,5.4,25,83.1,,,0.543
+zwe,Zimbabwe,sub_saharan_africa,g77,low_income,christian,2010,6859210,7227116,1460,49.57,54.125,51.69,4.03,25.3,89.9,,,0.452
