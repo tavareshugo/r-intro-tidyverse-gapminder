@@ -271,3 +271,24 @@ in each package's page.
 > > ```
 > {: .solution}
 {: .challenge}
+
+
+> ## Data Tip: Organising your Analysis Project
+> 
+> A key step for a successful analysis is to start with a tidy directory structure. 
+> This ensures that you can keep track of what each file is and can avoid many 
+> headaches when analysis gets more complex. 
+> 
+> Here's some practical suggestions: 
+> 
+> - Early in your project create a few sub-directories such as `scripts`, `data/raw`, 
+>   `data/processed`, `figures` and any others that might be relevant for your specific 
+>   work. 
+> - To ensure reproducibility, save your code in _scripts_ and define file paths 
+>   _relative_ to your project's folder.
+> - Keep your raw data separate from processed data, so that you can go back to it 
+>   if needed. 
+> - In RStudio specifically, you can create an "R Project" within your project's folder 
+>   (<kbd>File</kbd> > <kbd>New Project...</kbd>). This will ensure you always have 
+>   the right working directory set up.
+{: .discussion}

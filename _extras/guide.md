@@ -2,16 +2,26 @@
 title: "Instructor Notes"
 ---
 
-Remember that there's 2 objectives that go in parallel: 
+----
+
+(Hugo's notes)
+
+My idea is to have two objectives going in parallel: 
 
 - teach R syntax
 - teach EDA concepts and principles
 
 In that sense, R is being taught as a _tool_ for data analysis. 
-We are not teaching _programming_, thus the choice of focusing on `tidyverse`
+I would not aim to teach _programming_, thus the choice of focusing on `tidyverse`
 (although this choice is somewhat debatable, we could just as easily have chosen 
 `data.table` or even base R).
 
+I'm hoping that eventually the materials are rooted in a higher-level conceptual framework, inspired by: 
+
+- [The Art of Data Science](https://leanpub.com/artofdatascience), by Roger D. Peng and Elizabeth Matsui
+- [Elements and Principles for Characterizing Variation between Data Analyses](https://arxiv.org/abs/1903.07639), by Stephanie C. Hicks and Roger D. Peng
+
+----
 
 #### Session 1:
 

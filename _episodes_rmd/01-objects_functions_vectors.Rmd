@@ -427,5 +427,19 @@ The importance of value coercion will become apparent in the next lesson,
 when we import data from a file.
 
 
+> ## Data Tip: Variable Types
+> 
+> In data we often have variables (i.e. columns in a table) of different types. 
+> An important step when starting your analysis is to recognise which kind each 
+> variable is. 
+> 
+> - Categorical
+>   - nominal (non-ordered categories) - e.g. country
+>   - ordinal (ordered categories) - e.g. "low < medium < high", ratings in surveys, Likert scale
+>   - binary (True/False, Yes/No, 1/0)
+> - Numerical
+>   - continuous (any real number) - e.g. height, time
+>   - discrete (whole numbers) - e.g. counts
+{: .discussion}
 
 {% include links.md %}
