@@ -74,5 +74,40 @@ and that you have the expected number of categories for character columns.
 Note any problems you find during this exploratory analysis.
 
 
+## Data Visualisation
+
+Following from the previous exercise on the `gapminder1990to2010_energy.tsv` dataset:
+
+1. Use a histogram to investigate the distribution of yearly CO2 emissions in the dataset. 
+Consider whether the original scale is adequate. 
+2. Has the distribution of yearly CO2 emissions changed dramatically over the years? 
+Try using `geom_density()` or `geom_freqpoly()` with the following aesthetic `group = year`.
+(to ensure one line is drawn for each year).
+3. Look at the trend over time (x-axis) of CO2 emissions (y-axis) for each country, 
+both on a linear and on a log scales. How does the scale change your perception of the data? 
+(hint use `geom_line()` with `aes(group = country)`).
+4. Try and recreate the following graph, showing the relationship between energy use 
+and CO2 emissions. Note that the axis are on a log-scale. The "Dark2" palette was used 
+from the _brewer_ colour scale. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=15, fig.height=15}
+library(tidyverse)
+energy <- read_tsv("data/gapminder1990to2010_energy.tsv", na = "")
+
+energy %>% 
+  ggplot(aes(energy_use_per_person, yearly_co2_emissions)) +
+  geom_point(aes(colour = world_region)) +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  scale_colour_brewer(palette = "Dark2") +
+  facet_wrap(facets = vars(year)) +
+  labs(x = "Energy use per Person", y = "Total CO2 emissions (tons)",
+       colour = "World Region", tag = "A") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        text = element_text(size = 20))
+```
+
+
 
 {% include links.md %}

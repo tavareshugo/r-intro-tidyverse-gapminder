@@ -73,5 +73,24 @@ and that you have the expected number of categories for character columns.
 Note any problems you find during this exploratory analysis.
 
 
+## Data Visualisation
+
+Following from the previous exercise on the `gapminder1990to2010_energy.tsv` dataset:
+
+1. Use a histogram to investigate the distribution of yearly CO2 emissions in the dataset. 
+Consider whether the original scale is adequate. 
+2. Has the distribution of yearly CO2 emissions changed dramatically over the years? 
+Try using `geom_density()` or `geom_freqpoly()` with the following aesthetic `group = year`.
+(to ensure one line is drawn for each year).
+3. Look at the trend over time (x-axis) of CO2 emissions (y-axis) for each country, 
+both on a linear and on a log scales. How does the scale change your perception of the data? 
+(hint use `geom_line()` with `aes(group = country)`).
+4. Try and recreate the following graph, showing the relationship between energy use 
+and CO2 emissions. Note that the axis are on a log-scale. The "Dark2" palette was used 
+from the _brewer_ colour scale. 
+
+<img src="../fig/rmd-90-unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="1080" style="display: block; margin: auto;" />
+
+
 
 {% include links.md %}
