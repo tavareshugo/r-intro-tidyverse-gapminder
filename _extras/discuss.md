@@ -65,6 +65,39 @@ title: Data Tips
 {: .discussion}
 
 
+> ## Visualising Data
+> 
+> Data visualisation is one of the fundamental elements of data analysis. 
+> It allows you to assess variation within variables and relationships between variables. 
+> 
+> Choosing the right type of graph to answer particular questions (or convey a particular 
+> message) can be daunting. The [data-to-viz](https://www.data-to-viz.com/) website can 
+> be a great place to get inspiration from.
+> 
+> Here are some common types of graph you may want to do for particular situations:
+> 
+> - Look at variation within a single variable using _histograms_ (`geom_histogram()`) or,
+>   less commonly (but [quite useful](https://towardsdatascience.com/what-why-and-how-to-read-empirical-cdf-123e2b922480)) 
+>   _empirical cumulative density function_ plots (`stat_ecdf`).
+> - Look at variation of a variable across categorical groups using _boxplots_ (`geom_boxplot()`), 
+>   _violin plots_ (`geom_violin()`) or frequency polygons (`geom_freqpoly()`).
+> - Look at the relationship between two numeric variables using _scatterplots_ 
+>   (`geom_point()`).
+> - If your x-axis is ordered (e.g. year) use a line plot (`geom_line()`) to convey 
+>   the change on your y-variable.
+>
+> Also, make sure you represent data on a suitable scale, for example: 
+> 
+> - emphasising the right range of values (e.g. 
+>   [should your axis start at zero?](https://www.data-to-viz.com/caveat/cut_y_axis.html))
+> - use suitable data transformations (e.g. when comparing relative changes, consider 
+>   a log-scale - see this [StatQuest video explaining logs](https://youtu.be/VSi0Z04fWj0)).
+> 
+> When used effectively, aesthetics (colour, shape, size, transparency, etc.) and 
+> facets can be used to display many dimensions on a single graph.
+{: .discussion}
+
+
 ## Further reading
 
 - [Cheatsheets for dplyr, ggplot2 and more](https://www.rstudio.com/resources/cheatsheets/)
