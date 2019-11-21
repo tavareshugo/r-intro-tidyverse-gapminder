@@ -425,6 +425,7 @@ gapminder1960to2010 %>%
 
 
 USE THIS EXERCISE WITH `filter()` AND `arrange()` TO IDENTIFY THE COUNTRIES
+THIS COMES AFTER FIXING LIFE_EXPECTANCY
 
 > How did the difference in life expectancy between male and female change over time for each country? 
 > (hint: use the aesthetic `group = country` within `geom_line()` to have a line for each country).

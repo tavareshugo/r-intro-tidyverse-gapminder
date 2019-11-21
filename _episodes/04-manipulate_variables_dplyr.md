@@ -18,7 +18,7 @@ objectives:
 - "Use factors to order categories and encode ordinal data."
 keypoints:
 - "Use `dplyr::select()` to select columns from a table."
-- "Select a range of columns using `:`, columns matching a pattern with `matches()`, and _unselect_ columns by using `-`."
+- "Select a range of columns using `:`, columns matching a string with `contains()`, and _unselect_ columns by using `-`."
 - "Rename columns using `dplyr::rename()`."
 - "Modify or update columns using `dplyr::mutate()`."
 - "Chain several commands together with `%>%` pipes."
@@ -97,7 +97,7 @@ For example:
 
 ~~~
 # Select columns which have the word "_male" in their name
-select(gapminder1960to2010, matches("_male"))
+select(gapminder1960to2010, contains("_male"))
 ~~~
 {: .language-r}
 
@@ -153,7 +153,7 @@ And these can be combined with each other:
 
 
 ~~~
-select(gapminder1960to2010, country, matches("_male"), matches("_men"))
+select(gapminder1960to2010, country, contains("_male"), contains("_men"))
 ~~~
 {: .language-r}
 
