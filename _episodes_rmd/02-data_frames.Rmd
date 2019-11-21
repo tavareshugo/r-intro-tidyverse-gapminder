@@ -178,7 +178,7 @@ such as a better printing method. For the rest of the course we'll refer to
 A technical point that is worth being aware of is that _a data frame is a list 
 of vectors of the same length_. In other words, we can manipulate each column in 
 a data frame just as we've learned for vectors in the
-[previous episode]({{ page.root }}{% link _episodes/01-objects_functions_vectors.md %})). 
+[previous episode]({{ page.root }}{% link _episodes/01-objects_functions_vectors.md %}). 
 
 To return the values of a column as a vector, we can use the `$` accessor. 
 For example try:
