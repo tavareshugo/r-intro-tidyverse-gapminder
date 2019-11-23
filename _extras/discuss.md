@@ -24,19 +24,16 @@ title: Data Tips
 >   the right working directory set up.
 {: .discussion}
 
-> ## Variable Types
+> ## Data Tip: Variable Types
 > 
 > In data we often have variables (i.e. columns in a table) of different types. 
 > An important step when starting your analysis is to recognise which kind each 
 > variable is. 
 > 
-> - Categorical
->   - nominal (non-ordered categories) - e.g. country
->   - ordinal (ordered categories) - e.g. "low < medium < high", ratings in surveys, Likert scale
->   - binary (True/False, Yes/No, 1/0)
-> - Numerical
->   - continuous (any real number) - e.g. height, time
->   - discrete (whole numbers) - e.g. counts
+> | Numerical | Categorical |
+> |:-----------:|:---------:|
+> | <a href="https://github.com/allisonhorst/stats-illustrations/blob/master/README.md"><img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/continuous_discrete.png" height="400"></a>  |  <a href="https://github.com/allisonhorst/stats-illustrations/blob/master/README.md"><img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/nominal_ordinal_binary.png" height="400"></a> |
+> 
 {: .discussion}
 
 

@@ -250,16 +250,16 @@ be interested in temporarily.
 
 > ## Exercise
 > 
-> When we [previously explored our data]({{ page.root }}{% link _episodes/02-data_frames.md %}), 
-> we realised that `life_expectancy_female` was imported as _character_ rather than _numeric_. 
-> 
-> 1. Modify this variable by _coercing_ it to numeric type (hint: `as.numeric()`). 
+> 1. When we [previously explored our data]({{ page.root }}{% link _episodes/02-data_frames.md %}), 
+>    we realised that `life_expectancy_female` was imported as _character_ rather than _numeric_. 
+>    Update `gapminder1960to2010` by _coercing_ (i.e. converting) this variable to numeric type 
+>    (hint: use `as.numeric()` within the `mutate()` function).
 > 2. Make a histogram showing the distribution of the difference between the life expectancy 
 >    of the two sexes with a binwidth of 1 year. 
 > 3. How did the total income of a country change over time? (hint: calculate the total 
 >    income from the total population and income per capita)
 > 
-> (While doing the excercise, always try to critically evaluate your results!)
+> (While doing the exercise, always try to critically evaluate your results!)
 > 
 > > ## Answer
 > > 
