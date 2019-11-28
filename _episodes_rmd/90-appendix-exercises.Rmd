@@ -109,5 +109,47 @@ energy %>%
 ```
 
 
+## Data manipulation 
+
+The `gapminder1990to2010_energy.tsv` dataset contains some mistakes that need correcting. 
+
+Create a new table, `energy_clean`, that has the following issues fixed:
+
+- Convert the `energy_production_per_person` from character to numeric. 
+  (hint: use the `as.numeric()` function within `mutate()`)
+- `country` has 191 unique categories, whereas `country_id` has 190 (you can check 
+  this with `unique(energy$country)` and `unique(energy$country_id)`). One of the 
+  countries, _Brazil_ is spelled with an "s" and a "z". Change the values of "Brasil" 
+  to "Brazil". (hint: use the `ifelse()` function within `mutate()`)
+
+From the new table, try and fix the following code, by writing the correct condition 
+in `filter()`, which produces the plot below:
+
+```{r, eval=FALSE}
+energy_clean %>% 
+  filter(FIXME) %>% 
+  ggplot(aes(energy_use_per_person, energy_production_per_person)) +
+  geom_point(aes(colour = world_region)) + 
+  facet_wrap(facets = vars(year)) +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  scale_colour_brewer(palette = "Dark2")
+```
+
+```{r, echo=FALSE, warning=FALSE}
+energy_clean <- energy %>% 
+  mutate(energy_production_per_person = as.numeric(energy_production_per_person),
+         country = ifelse(country == "Brasil", "Brazil", country))
+
+energy_clean %>% 
+  filter(year <= 1992 | year >= 2008) %>% 
+  ggplot(aes(energy_use_per_person, energy_production_per_person)) +
+  geom_point(aes(colour = world_region)) + 
+  facet_wrap(facets = vars(year)) +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  scale_colour_brewer(palette = "Dark2")
+```
+
 
 {% include links.md %}

@@ -92,5 +92,36 @@ from the _brewer_ colour scale.
 <img src="../fig/rmd-90-unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="1080" style="display: block; margin: auto;" />
 
 
+## Data manipulation 
+
+The `gapminder1990to2010_energy.tsv` dataset contains some mistakes that need correcting. 
+
+Create a new table, `energy_clean`, that has the following issues fixed:
+
+- Convert the `energy_production_per_person` from character to numeric. 
+  (hint: use the `as.numeric()` function within `mutate()`)
+- `country` has 191 unique categories, whereas `country_id` has 190 (you can check 
+  this with `unique(energy$country)` and `unique(energy$country_id)`). One of the 
+  countries, _Brazil_ is spelled with an "s" and a "z". Change the values of "Brasil" 
+  to "Brazil". (hint: use the `ifelse()` function within `mutate()`)
+
+From the new table, try and fix the following code, by writing the correct condition 
+in `filter()`, which produces the plot below:
+
+
+~~~
+energy_clean %>% 
+  filter(FIXME) %>% 
+  ggplot(aes(energy_use_per_person, energy_production_per_person)) +
+  geom_point(aes(colour = world_region)) + 
+  facet_wrap(facets = vars(year)) +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  scale_colour_brewer(palette = "Dark2")
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-90-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
+
 
 {% include links.md %}

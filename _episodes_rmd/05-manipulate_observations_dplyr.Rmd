@@ -21,6 +21,7 @@ keypoints:
 - "Conditions can be set using several operators: `>`, `>=`, `<`, `<=`, `==`, `!=`, `%in%`."
 - "Conditions can be combined using `&` and `|`."
 - "The function `is.na()` can be used to identify missing values. It can be negated `!is.na()` to find non-missing values."
+- "Use the `ifelse()` function to define two different outcomes of a condition."
 source: Rmd
 ---
 
@@ -92,8 +93,8 @@ table by each of them. For example:
 ```{r}
 gapminder1960to2010 %>% 
   select(country, world_region, year) %>% 
-  # order by year, then by world region, then country from z-a
-  arrange(year, world_region, desc(country))
+  # order by year, then by world region (z-a), then country (z-a)
+  arrange(year, desc(world_region), desc(country))
 ```
 
 
@@ -103,13 +104,10 @@ Sometimes it is useful to retain rows with unique combinations of some of our va
 (i.e. remove any duplicated rows). This can be done with the `distinct()` function. 
 
 ```{r}
-# get unique combination of country and world region
+# get unique combination of main religion and world region
 gapminder1960to2010 %>% 
-  distinct(country, world_region)
+  distinct(main_religion, world_region)
 ```
-
-Notice how the table above has 193 rows (compared to the 9843 of the full dataset). 
-That's because now we have a table with only the unique combination of these two variables. 
 
 
 ## Choosing Rows Based on Conditions
@@ -134,7 +132,7 @@ some_years <- c(1985, 1990, 1999, 1995, 2010, 2000)
 some_years < 2000
 ```
 
-So, what the `filter()` function does is evaluate the condition and return the rows 
+So what the `filter()` function does is evaluate the condition and return the rows 
 for which that condition is true. 
 
 It is possible to combine several conditions by using the _logical operators_ 
@@ -180,60 +178,105 @@ some_years < 1990 | some_years > 2000
 > - `!(x %in% y)` returns _TRUE_ if a value in _x_ is NOT present in _y_
 {: .callout}
 
-<!--
+
 Let's see an example on how we can combine the `filter()` function with plotting. 
 
 In Hans Rosling's TED Talk, he compared the change in `income_per_person` and `child_mortality` 
-between three countries: Uganda, Brazil and South Korea. 
+between three countries: Uganda, Brazil and South Korea. We can filter our dataset 
+to retain only these countries by using the `%in%` operator. 
+
+```{r, eval=FALSE}
+gapminder1960to2010 %>% 
+  filter(country %in% c("Uganda", "Brazil", "South Korea"))
+```
+
+We will pipe this filter to ggplot and use `geom_path()` to look at the change of these 
+countries over time. 
+This geometry is similar to `geom_line()`, but it connects points in the order they appear 
+on the table (which we can sort beforehand with `arrange()`), whereas `geom_line()` connects 
+the points based on the order they appear along the x and y axis. 
+(Try changing the code below to see the difference)
 
 ```{r}
 gapminder1960to2010 %>% 
   filter(country %in% c("Uganda", "Brazil", "South Korea")) %>% 
+  # ensure data is in order of country and year for geom_path
   arrange(country, year) %>% 
   ggplot(aes(income_per_person, child_mortality)) +
   geom_path(aes(colour = country), arrow = arrow())
 ```
 
 
-DO THESE AS EXERCISE
+> ## Exercise
+> 
+> 1. Fix the following code (where the word "FIXME" appears), to produce the plot shown below. 
+> 
+> ```{r, eval=FALSE}
+> gapminder1960to2010 %>% 
+>   mutate(population_total = FIXME) %>% 
+>   filter(FIXME) %>% 
+>   ggplot(aes(children_per_woman, life_expectancy)) +
+>   geom_point(aes(size = population_total, colour = world_region)) +
+>   facet_grid(cols = FIXME) +
+>   scale_colour_brewer(palette = "Dark2") +
+>   labs(x = "Fertility Rate (children per woman)", y = "Life Expectancy (years)", 
+>        size = "Total Population", colour = "Region")
+> ```
+> 
+> ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+> gapminder1960to2010 %>% 
+>   mutate(population_total = population_male + population_female) %>% 
+>   filter(year %in% c(1960, 1990, 2010)) %>% 
+>   ggplot(aes(children_per_woman, life_expectancy)) +
+>   geom_point(aes(size = population_total, colour = world_region)) +
+>   facet_grid(cols = vars(year)) +
+>   scale_colour_brewer(palette = "Dark2") +
+>   labs(x = "Fertility Rate (children per woman)", y = "Life Expectancy (years)", 
+>        size = "Total Population", colour = "Region")
+> ```
+> 
+> 2. One of the countries seems to stand out from the general trend in 1960. 
+> What country is it? 
+> 3. Make a line plot showing how the `life_expectancy` of that country changed over 
+>    time compared to another country of your choice.
+> 
+> > ## Answer 
+> > 
+> > A1. Here is the fixed code:
+> > 
+> > ```{r, eval=FALSE}
+> > gapminder1960to2010 %>% 
+> >   mutate(population_total = population_male + population_female) %>% 
+> >   filter(year %in% c(1960, 1990, 2010)) %>% 
+> >   ggplot(aes(children_per_woman, life_expectancy)) +
+> >   geom_point(aes(size = population_total, colour = world_region)) +
+> >   facet_grid(cols = vars(year)) +
+> >   scale_colour_brewer(palette = "Dark2") +
+> >   labs(x = "Fertility Rate (children per woman)", y = "Life Expectancy (years)", 
+> >        size = "Total Population", colour = "Region")
+> > ```
+> > 
+> > A2. Based on the x and y values in the graph, we can set a condition with `filter()`,
+> > for example:
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   filter(year == 1960 & children_per_woman < 5 & life_expectancy < 35) %>% 
+> >   select(country, year, children_per_woman, life_expectancy)
+> > ```
+> > 
+> > A3. Here is a comparison between China and another country:
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   filter(country %in% c("China", "Portugal")) %>% 
+> >   ggplot(aes(x = year, y = life_expectancy)) +
+> >   geom_line(aes(colour = country))
+> > ```
+> {: .solution}
+{: .challenge}
 
-How many rows of data are not missing values for `life_expectancy` and `children_per_woman`?
-
-Try and recreate the graph below, which shows the relationship between `children_per_woman`
-and `life_expectancy` across three specific decades. 
-
-```{r}
-gapminder1960to2010 %>% 
-  mutate(population_total = population_male + population_female) %>% 
-  filter(year %in% c(1960, 1990, 2010)) %>% 
-  ggplot(aes(children_per_woman, life_expectancy)) +
-  geom_point(aes(size = population_total, colour = world_region)) +
-  facet_grid(cols = vars(year)) +
-  scale_colour_brewer(palette = "Dark2") +
-  labs(x = "Fertility Rate (children per woman)", y = "Life Expectancy (years)", 
-       size = "Total Population", colour = "Region")
-```
-
-One of the countries seems to stand out from the general trend in 1960. Can you 
-identify which country that is? Can you plot how its `life_expectancy` changed 
-over time compared to your own country?
-
-```{r}
-gapminder1960to2010 %>% 
-  filter(year == 1960 & children_per_woman < 5 & life_expectancy < 35)
-```
-
-```{r}
-gapminder1960to2010 %>% 
-  filter(country %in% c("China", "Portugal")) %>% 
-  ggplot(aes(x = year, y = life_expectancy)) +
-  geom_line(aes(colour = country))
-```
-
-
-USE THIS EXERCISE WITH `filter()` AND `arrange()` TO IDENTIFY THE COUNTRIES
-THIS COMES AFTER FIXING LIFE_EXPECTANCY
-
+<!--
 > How did the difference in life expectancy between male and female change over time for each country? 
 > (hint: use the aesthetic `group = country` within `geom_line()` to have a line for each country).
 > > 
@@ -247,33 +290,220 @@ THIS COMES AFTER FIXING LIFE_EXPECTANCY
 > >   ggplot(aes(year, life_expectancy_female_minus_male)) +
 > >   geom_line(aes(group = country))
 > > ```
-
+-->
 
 
 ## Filtering Missing Values
 
-As noted in the callout box above, the `is.na()` function can be used to as the 
-question of whether a value is missing or not. 
+As noted in the callout box above, the `is.na()` function can be used to ask the 
+question of whether a value is missing or not (`!is.na()`). 
 
-For example, the following would return the rows where the value 
+For example, the following would return the rows where `main_religion` is _not_
+missing.
 
-- include `drop_na()` or not?
-
-
-## Using `ifelse`
-
-- fix `ifelse(life_expectancy_male == -999, NA, life_expectancy_male)`
-- use `ifelse` to highlight a country amidst all other countries
-- include `na_if()` or not?
+```{r, eval=FALSE}
+gapminder1960to2010 %>% 
+  filter(!is.na(main_religion))
+```
 
 
+> ## Exercise 
+> 
+> - How many observations contain values for both `life_expectancy` _and_ `children_per_woman`?
+> 
+> > ## Answer
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   filter(!is.na(life_expectancy) & !is.na(children_per_woman)) %>% 
+> >   # (optional) pipe the output to nrow() to get the number of rows directly
+> >   nrow()
+> > ```
+> {: .solution}
+{: .challenge}
 
 
-## Exercise
+## Using conditionals with `ifelse`
 
-Create a clean version of the table:
+Conditions are not just useful for filtering rows, but also to modify variables or 
+highlight certain observations in the data. 
 
-- saving cleaned version of our data: `write_csv()`
--->
+For example, take the following graph showing the change in income per person:
+
+```{r}
+gapminder1960to2010 %>% 
+  ggplot(aes(x = year, y = income_per_person)) +
+  geom_line(aes(group = country))
+```
+
+We can highlight one of the countries by creating a new column (`mutate()`) that stores 
+the result of a condition:
+
+```{r}
+gapminder1960to2010 %>% 
+  # the "is_qatar" column will contain TRUE/FALSE values
+  mutate(is_qatar = country == "Qatar") %>% 
+  ggplot(aes(x = year, y = income_per_person)) +
+  geom_line(aes(group = country, colour = is_qatar))
+```
+
+When we want to define two different outcomes from a condition, then the `ifelse()` 
+function is very handy. This function takes 3 arguments: the condition we want to test, 
+the values it should take if it's TRUE, and the values it should take if it's FALSE. 
+
+For example, earlier we saw that `life_expectancy_male` has missing values encoded as 
+-999. 
+
+```{r}
+summary(gapminder1960to2010$life_expectancy_male)
+```
+
+We can fix this problem using `ifelse()` inside a `mutate()` call:
+
+```{r}
+gapminder_clean <- gapminder1960to2010 %>% 
+  mutate(life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male))
+
+summary(gapminder_clean$life_expectancy_male)
+```
+
+In the call above we stated: if `life_expectancy_male` is equal to -999 then return 
+the value `NA`, otherwise return the respective value of `life_expectancy_male` itself. 
+
+Here is another example, where we highlight two countries in a graph by using `ifelse()`:
+
+```{r, warning=FALSE}
+gapminder1960to2010 %>% 
+  mutate(income_total = population_male*income_per_person,
+         country_highlight = ifelse(country %in% c("China", "United States"), country, "Others")) %>% 
+  ggplot(aes(year, income_total)) +
+  geom_line(aes(group = country, colour = country_highlight))
+```
 
 
+
+> ## Exercise
+> 
+> Using the main `dplyr` verbs that we have learned about (`select()`, `mutate()`, 
+> `filter()`), create a clean version of the table called `gapminder_clean`, that 
+> fulfills the following criteria:
+> 
+> - Does not contain the column `country_id`.
+> - Contains a new column called `population_total`, which is the sum of `population_male`
+>   and `population_female`.
+> - All values in `main_religion` are lowercase and there are no typos. (hint:
+>   use `str_*` functions to help)
+> - The value -999 in `life_expectancy_male` is encoded as `NA` instead.
+> - The `life_expectancy` column is numeric.
+> - Remove rows with missing values for `income_groups`.
+> 
+> Bonus (optional):
+> 
+> - Make values in `main_religion` Title Case (with a space separating the words).
+> - Make the `income_groups` column contain the categories: "Low", "Lower Middle", "Upper Middle", "High".
+> - Change the order of the columns so that `population_total` is before the `population_male` 
+>   column (the other columns should remain in the same order).
+> 
+> > ## Answer 
+> > 
+> > Here is the full pipeline to clean our data:
+> > 
+> > ```{r}
+> > gapminder_clean <- gapminder1960to2010 %>% 
+> >   select(-country_id) %>% 
+> >   mutate(population_total = population_male + population_female,
+> >          main_religion = str_to_lower(str_squish(main_religion)),
+> >          life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
+> >          life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
+> >   filter(!is.na(income_groups))
+> > ```
+> > 
+> > When building such a long chain of commands, it's a good idea to check each step 
+> > at a time, to see that we're doing the right thing. 
+> > So, let's go through each step at a time and check the results of each operation. 
+> > 
+> > We used `select()` to _unselect_ the column `coutry_id` (using the `-` sign 
+> > before the column name):
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   select(-country)
+> > ```
+> > 
+> > We used mutate to calculate `population_total`. To confirm we're doing the right thing, 
+> > we could use the function `select()` to check that we're getting the expected result:
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   mutate(population_total = population_male + population_female) %>% 
+> >   select(population_male, population_female, population_total)
+> > ```
+> > 
+> > To fix the values in `main_religion` we used functions from the `stringr` package. 
+> > We can use the function `distinct()` to check our results:
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   mutate(main_religion = str_to_lower(str_squish(main_religion))) %>% 
+> >   distinct(main_religion)
+> > ```
+> > 
+> > To fix `life_expectancy_male` we used an `ifelse()`. We can check that we're 
+> > getting the right result by using `arrange()` to sort our table and check that we 
+> > no longer have values of -999:
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   mutate(life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male)) %>% 
+> >   arrange(life_expectancy_male) %>% 
+> >   select(life_expectancy, life_expectancy_male)
+> > ```
+> > 
+> > Finally, we can use the `as.numeric()` function to convert `life_expectancy_female` 
+> > to numbers. We get a warning  because the function introduces `NA` when it finds 
+> > the value "-" (which is impossible to be converted, so it is encoded as missing).
+> > Again, we can use the `arrange()` function to check that we no longer get the value 
+> > "-" (try running `arrange()` with and without the `mutate()` step).
+> > 
+> > ```{r}
+> > gapminder1960to2010 %>% 
+> >   mutate(life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
+> >   arrange(life_expectancy_female) %>% 
+> >   select(life_expectancy, life_expectancy_female)
+> > ```
+> > 
+> > After checking all of these individual steps work correctly, we can then assemble 
+> > them together into a chain, as we did above.
+> {: .solution}
+{: .challenge}
+
+## Saving data
+
+Now that we have a clean version of our table, it's a good idea to save it for 
+future use. You can use the `write_*()` family of functions to save data in a variety 
+of formats. 
+
+Let's use `write_csv()` as an example. 
+The `write_csv()` function needs the name of the table you want to save and then 
+_path_ to the file you want to save it in (don't forget the file extension!):
+
+```{r, eval=FALSE}
+write_csv(gapminder_clean, "data/processed/gapminder1960to2010_clean.csv")
+```
+
+There are many other functions for saving data, you can check the documentation 
+with `?write_delim`. 
+
+
+> ## Data Tip: Cleaning Data
+> 
+> The infamous [80/20 rule](https://whatsthebigdata.com/2016/05/01/data-scientists-spend-most-of-their-time-cleaning-data/) 
+> in data science suggests that about 80% of the time is spend preparing the data
+> for analysis. While this is not really a scientific rule, it does have some relation 
+> to the real life experience of data analysts. 
+> 
+> Although it's a lot of effort, and usually not so much fun, if you make sure to clean
+> and format your data correctly, it will make your downstream analysis much more fluid,
+> fruitful and pleasant.
+> 
+{: .discussion}
