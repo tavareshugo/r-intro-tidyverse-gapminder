@@ -668,25 +668,24 @@ gapminder1960to2010 %>%
 > > 
 > > ~~~
 > > # A tibble: 9,843 x 18
-> >    country_id world_region economic_organi… income_groups main_religion
-> >    <chr>      <chr>        <chr>            <chr>         <chr>        
-> >  1 afg        south_asia   g77              low_income    muslim       
-> >  2 afg        south_asia   g77              low_income    muslim       
-> >  3 afg        south_asia   g77              low_income    Muslim       
-> >  4 afg        south_asia   g77              low_income    muslim       
-> >  5 afg        south_asia   g77              low_income    muslim       
-> >  6 afg        south_asia   g77              low_income    muslim       
-> >  7 afg        south_asia   g77              low_income    muslim       
-> >  8 afg        south_asia   g77              low_income    muslim       
-> >  9 afg        south_asia   g77              low_income    muslim       
-> > 10 afg        south_asia   g77              low_income    muslim       
-> > # … with 9,833 more rows, and 13 more variables: year <dbl>,
-> > #   population_male <dbl>, population_female <dbl>,
-> > #   income_per_person <dbl>, life_expectancy <dbl>,
+> >    country_id world_region economic_organi… income_groups main_religion  year
+> >    <chr>      <chr>        <chr>            <chr>         <chr>         <dbl>
+> >  1 afg        south_asia   g77              low_income    muslim         1960
+> >  2 afg        south_asia   g77              low_income    muslim         1961
+> >  3 afg        south_asia   g77              low_income    Muslim         1962
+> >  4 afg        south_asia   g77              low_income    muslim         1963
+> >  5 afg        south_asia   g77              low_income    muslim         1964
+> >  6 afg        south_asia   g77              low_income    muslim         1965
+> >  7 afg        south_asia   g77              low_income    muslim         1966
+> >  8 afg        south_asia   g77              low_income    muslim         1967
+> >  9 afg        south_asia   g77              low_income    muslim         1968
+> > 10 afg        south_asia   g77              low_income    muslim         1969
+> > # … with 9,833 more rows, and 12 more variables: population_male <dbl>,
+> > #   population_female <dbl>, income_per_person <dbl>, life_expectancy <dbl>,
 > > #   life_expectancy_female <chr>, life_expectancy_male <dbl>,
-> > #   children_per_woman <dbl>, newborn_mortality <dbl>,
-> > #   child_mortality <dbl>, school_years_men <dbl>,
-> > #   school_years_women <dbl>, hdi_human_development_index <dbl>
+> > #   children_per_woman <dbl>, newborn_mortality <dbl>, child_mortality <dbl>,
+> > #   school_years_men <dbl>, school_years_women <dbl>,
+> > #   hdi_human_development_index <dbl>
 > > ~~~
 > > {: .output}
 > > 

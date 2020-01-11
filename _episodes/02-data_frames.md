@@ -256,54 +256,46 @@ For now, let's investigate what kind of object the `read_csv()` function returns
 > > 
 > > 
 > > ~~~
-> >   country_id          country          world_region      
-> >  Length:193         Length:193         Length:193        
-> >  Class :character   Class :character   Class :character  
-> >  Mode  :character   Mode  :character   Mode  :character  
-> >                                                          
-> >                                                          
-> >                                                          
-> >                                                          
-> >  economic_organisation income_groups      main_religion     
-> >  Length:193            Length:193         Length:193        
-> >  Class :character      Class :character   Class :character  
-> >  Mode  :character      Mode  :character   Mode  :character  
-> >                                                             
-> >                                                             
-> >                                                             
-> >                                                             
-> >       year      population_male     population_female   income_per_person
-> >  Min.   :2010   Min.   :    45367   Min.   :    44262   Min.   :   609   
-> >  1st Qu.:2010   1st Qu.:  1346236   1st Qu.:  1192325   1st Qu.:  3279   
-> >  Median :2010   Median :  4354216   Median :  4386635   Median :  9916   
-> >  Mean   :2010   Mean   : 18961371   Mean   : 18641686   Mean   : 16446   
-> >  3rd Qu.:2010   3rd Qu.: 12395772   3rd Qu.: 12488792   3rd Qu.: 21771   
-> >  Max.   :2010   Max.   :699882239   Max.   :659872868   Max.   :125141   
-> >                 NA's   :9           NA's   :9                            
-> >  life_expectancy life_expectancy_female life_expectancy_male
-> >  Min.   :32.11   Length:193             Min.   :-999.00     
-> >  1st Qu.:63.91   Class :character       1st Qu.:  60.27     
-> >  Median :72.56   Mode  :character       Median :  68.25     
-> >  Mean   :70.23                          Mean   :  17.69     
-> >  3rd Qu.:76.70                          3rd Qu.:  72.94     
-> >  Max.   :82.85                          Max.   :  80.06     
-> >  NA's   :6                                                  
-> >  children_per_woman newborn_mortality child_mortality school_years_men
-> >  Min.   :1.190      Min.   : 0.8      Min.   :  2.6   Mode:logical    
-> >  1st Qu.:1.810      1st Qu.: 5.0      1st Qu.:  8.7   NA's:193        
-> >  Median :2.475      Median :11.7      Median : 20.7                   
-> >  Mean   :2.995      Mean   :15.6      Mean   : 38.7                   
-> >  3rd Qu.:4.043      3rd Qu.:24.6      3rd Qu.: 62.2                   
-> >  Max.   :7.490      Max.   :52.6      Max.   :208.0                   
-> >  NA's   :9                                                            
-> >  school_years_women hdi_human_development_index
-> >  Mode:logical       Min.   :0.3230             
-> >  NA's:193           1st Qu.:0.5435             
-> >                     Median :0.7105             
-> >                     Mean   :0.6773             
-> >                     3rd Qu.:0.7957             
-> >                     Max.   :0.9390             
-> >                     NA's   :7                  
+> >   country_id          country          world_region       economic_organisation
+> >  Length:193         Length:193         Length:193         Length:193           
+> >  Class :character   Class :character   Class :character   Class :character     
+> >  Mode  :character   Mode  :character   Mode  :character   Mode  :character     
+> >                                                                                
+> >                                                                                
+> >                                                                                
+> >                                                                                
+> >  income_groups      main_religion           year      population_male    
+> >  Length:193         Length:193         Min.   :2010   Min.   :    45367  
+> >  Class :character   Class :character   1st Qu.:2010   1st Qu.:  1346236  
+> >  Mode  :character   Mode  :character   Median :2010   Median :  4354216  
+> >                                        Mean   :2010   Mean   : 18961371  
+> >                                        3rd Qu.:2010   3rd Qu.: 12395772  
+> >                                        Max.   :2010   Max.   :699882239  
+> >                                                       NA's   :9          
+> >  population_female   income_per_person life_expectancy life_expectancy_female
+> >  Min.   :    44262   Min.   :   609    Min.   :32.11   Length:193            
+> >  1st Qu.:  1192325   1st Qu.:  3279    1st Qu.:63.91   Class :character      
+> >  Median :  4386635   Median :  9916    Median :72.56   Mode  :character      
+> >  Mean   : 18641686   Mean   : 16446    Mean   :70.23                         
+> >  3rd Qu.: 12488792   3rd Qu.: 21771    3rd Qu.:76.70                         
+> >  Max.   :659872868   Max.   :125141    Max.   :82.85                         
+> >  NA's   :9                             NA's   :6                             
+> >  life_expectancy_male children_per_woman newborn_mortality child_mortality
+> >  Min.   :-999.00      Min.   :1.190      Min.   : 0.8      Min.   :  2.6  
+> >  1st Qu.:  60.27      1st Qu.:1.810      1st Qu.: 5.0      1st Qu.:  8.7  
+> >  Median :  68.25      Median :2.475      Median :11.7      Median : 20.7  
+> >  Mean   :  17.69      Mean   :2.995      Mean   :15.6      Mean   : 38.7  
+> >  3rd Qu.:  72.94      3rd Qu.:4.043      3rd Qu.:24.6      3rd Qu.: 62.2  
+> >  Max.   :  80.06      Max.   :7.490      Max.   :52.6      Max.   :208.0  
+> >                       NA's   :9                                           
+> >  school_years_men school_years_women hdi_human_development_index
+> >  Mode:logical     Mode:logical       Min.   :0.3230             
+> >  NA's:193         NA's:193           1st Qu.:0.5435             
+> >                                      Median :0.7105             
+> >                                      Mean   :0.6773             
+> >                                      3rd Qu.:0.7957             
+> >                                      Max.   :0.9390             
+> >                                      NA's   :7                  
 > > ~~~
 > > {: .output}
 > > 
@@ -459,10 +451,10 @@ gapminder2010$country
 > > 
 > > ~~~
 > > 
-> >           christian           Christian eastern   religions 
-> >                 107                  12                   1 
-> >   eastern religions              muslim              Muslim 
-> >                  11                  41                   4 
+> >           christian           Christian eastern   religions   eastern religions 
+> >                 107                  12                   1                  11 
+> >              muslim              Muslim 
+> >                  41                   4 
 > > ~~~
 > > {: .output}
 > {: .solution}

@@ -133,18 +133,18 @@ select(gapminder1960to2010, country:year)
 
 ~~~
 # A tibble: 9,843 x 6
-   country  world_region economic_organi… income_groups main_religion  year
-   <chr>    <chr>        <chr>            <chr>         <chr>         <dbl>
- 1 Afghani… south_asia   g77              low_income    muslim         1960
- 2 Afghani… south_asia   g77              low_income    muslim         1961
- 3 Afghani… south_asia   g77              low_income    Muslim         1962
- 4 Afghani… south_asia   g77              low_income    muslim         1963
- 5 Afghani… south_asia   g77              low_income    muslim         1964
- 6 Afghani… south_asia   g77              low_income    muslim         1965
- 7 Afghani… south_asia   g77              low_income    muslim         1966
- 8 Afghani… south_asia   g77              low_income    muslim         1967
- 9 Afghani… south_asia   g77              low_income    muslim         1968
-10 Afghani… south_asia   g77              low_income    muslim         1969
+   country    world_region economic_organisat… income_groups main_religion  year
+   <chr>      <chr>        <chr>               <chr>         <chr>         <dbl>
+ 1 Afghanist… south_asia   g77                 low_income    muslim         1960
+ 2 Afghanist… south_asia   g77                 low_income    muslim         1961
+ 3 Afghanist… south_asia   g77                 low_income    Muslim         1962
+ 4 Afghanist… south_asia   g77                 low_income    muslim         1963
+ 5 Afghanist… south_asia   g77                 low_income    muslim         1964
+ 6 Afghanist… south_asia   g77                 low_income    muslim         1965
+ 7 Afghanist… south_asia   g77                 low_income    muslim         1966
+ 8 Afghanist… south_asia   g77                 low_income    muslim         1967
+ 9 Afghanist… south_asia   g77                 low_income    muslim         1968
+10 Afghanist… south_asia   g77                 low_income    muslim         1969
 # … with 9,833 more rows
 ~~~
 {: .output}
@@ -217,24 +217,23 @@ rename(gapminder1960to2010,
 
 ~~~
 # A tibble: 9,843 x 19
-   country_code country continent economic_organi… income_groups
-   <chr>        <chr>   <chr>     <chr>            <chr>        
- 1 afg          Afghan… south_as… g77              low_income   
- 2 afg          Afghan… south_as… g77              low_income   
- 3 afg          Afghan… south_as… g77              low_income   
- 4 afg          Afghan… south_as… g77              low_income   
- 5 afg          Afghan… south_as… g77              low_income   
- 6 afg          Afghan… south_as… g77              low_income   
- 7 afg          Afghan… south_as… g77              low_income   
- 8 afg          Afghan… south_as… g77              low_income   
- 9 afg          Afghan… south_as… g77              low_income   
-10 afg          Afghan… south_as… g77              low_income   
-# … with 9,833 more rows, and 14 more variables: main_religion <chr>,
-#   year <dbl>, population_male <dbl>, population_female <dbl>,
-#   income_per_person <dbl>, life_expectancy <dbl>,
-#   life_expectancy_female <chr>, life_expectancy_male <dbl>,
-#   children_per_woman <dbl>, newborn_mortality <dbl>,
-#   child_mortality <dbl>, school_years_men <dbl>,
+   country_code country continent economic_organi… income_groups main_religion
+   <chr>        <chr>   <chr>     <chr>            <chr>         <chr>        
+ 1 afg          Afghan… south_as… g77              low_income    muslim       
+ 2 afg          Afghan… south_as… g77              low_income    muslim       
+ 3 afg          Afghan… south_as… g77              low_income    Muslim       
+ 4 afg          Afghan… south_as… g77              low_income    muslim       
+ 5 afg          Afghan… south_as… g77              low_income    muslim       
+ 6 afg          Afghan… south_as… g77              low_income    muslim       
+ 7 afg          Afghan… south_as… g77              low_income    muslim       
+ 8 afg          Afghan… south_as… g77              low_income    muslim       
+ 9 afg          Afghan… south_as… g77              low_income    muslim       
+10 afg          Afghan… south_as… g77              low_income    muslim       
+# … with 9,833 more rows, and 13 more variables: year <dbl>,
+#   population_male <dbl>, population_female <dbl>, income_per_person <dbl>,
+#   life_expectancy <dbl>, life_expectancy_female <chr>,
+#   life_expectancy_male <dbl>, children_per_woman <dbl>,
+#   newborn_mortality <dbl>, child_mortality <dbl>, school_years_men <dbl>,
 #   school_years_women <dbl>, hdi_human_development_index <dbl>
 ~~~
 {: .output}
@@ -256,24 +255,23 @@ mutate(gapminder1960to2010,
 
 ~~~
 # A tibble: 9,843 x 20
-   country_id country world_region economic_organi… income_groups
-   <chr>      <chr>   <chr>        <chr>            <chr>        
- 1 afg        Afghan… south_asia   g77              low_income   
- 2 afg        Afghan… south_asia   g77              low_income   
- 3 afg        Afghan… south_asia   g77              low_income   
- 4 afg        Afghan… south_asia   g77              low_income   
- 5 afg        Afghan… south_asia   g77              low_income   
- 6 afg        Afghan… south_asia   g77              low_income   
- 7 afg        Afghan… south_asia   g77              low_income   
- 8 afg        Afghan… south_asia   g77              low_income   
- 9 afg        Afghan… south_asia   g77              low_income   
-10 afg        Afghan… south_asia   g77              low_income   
-# … with 9,833 more rows, and 15 more variables: main_religion <chr>,
-#   year <dbl>, population_male <dbl>, population_female <dbl>,
-#   income_per_person <dbl>, life_expectancy <dbl>,
-#   life_expectancy_female <chr>, life_expectancy_male <dbl>,
-#   children_per_woman <dbl>, newborn_mortality <dbl>,
-#   child_mortality <dbl>, school_years_men <dbl>,
+   country_id country world_region economic_organi… income_groups main_religion
+   <chr>      <chr>   <chr>        <chr>            <chr>         <chr>        
+ 1 afg        Afghan… south_asia   g77              low_income    muslim       
+ 2 afg        Afghan… south_asia   g77              low_income    muslim       
+ 3 afg        Afghan… south_asia   g77              low_income    Muslim       
+ 4 afg        Afghan… south_asia   g77              low_income    muslim       
+ 5 afg        Afghan… south_asia   g77              low_income    muslim       
+ 6 afg        Afghan… south_asia   g77              low_income    muslim       
+ 7 afg        Afghan… south_asia   g77              low_income    muslim       
+ 8 afg        Afghan… south_asia   g77              low_income    muslim       
+ 9 afg        Afghan… south_asia   g77              low_income    muslim       
+10 afg        Afghan… south_asia   g77              low_income    muslim       
+# … with 9,833 more rows, and 14 more variables: year <dbl>,
+#   population_male <dbl>, population_female <dbl>, income_per_person <dbl>,
+#   life_expectancy <dbl>, life_expectancy_female <chr>,
+#   life_expectancy_male <dbl>, children_per_woman <dbl>,
+#   newborn_mortality <dbl>, child_mortality <dbl>, school_years_men <dbl>,
 #   school_years_women <dbl>, hdi_human_development_index <dbl>,
 #   population_total <dbl>
 ~~~
@@ -569,24 +567,23 @@ gapminder1960to2010 %>%
 
 ~~~
 # A tibble: 9,843 x 20
-   country_id country world_region economic_organi… income_groups
-   <chr>      <chr>   <chr>        <chr>            <chr>        
- 1 afg        Afghan… low          g77              low-income   
- 2 afg        Afghan… low          g77              low-income   
- 3 afg        Afghan… low          g77              low-income   
- 4 afg        Afghan… low          g77              low-income   
- 5 afg        Afghan… low          g77              low-income   
- 6 afg        Afghan… low          g77              low-income   
- 7 afg        Afghan… low          g77              low-income   
- 8 afg        Afghan… low          g77              low-income   
- 9 afg        Afghan… low          g77              low-income   
-10 afg        Afghan… low          g77              low-income   
-# … with 9,833 more rows, and 15 more variables: main_religion <chr>,
-#   year <dbl>, population_male <dbl>, population_female <dbl>,
-#   income_per_person <dbl>, life_expectancy <dbl>,
-#   life_expectancy_female <dbl>, life_expectancy_male <dbl>,
-#   children_per_woman <dbl>, newborn_mortality <dbl>,
-#   child_mortality <dbl>, school_years_men <dbl>,
+   country_id country world_region economic_organi… income_groups main_religion
+   <chr>      <chr>   <chr>        <chr>            <chr>         <chr>        
+ 1 afg        Afghan… low          g77              low-income    muslim       
+ 2 afg        Afghan… low          g77              low-income    muslim       
+ 3 afg        Afghan… low          g77              low-income    Muslim       
+ 4 afg        Afghan… low          g77              low-income    muslim       
+ 5 afg        Afghan… low          g77              low-income    muslim       
+ 6 afg        Afghan… low          g77              low-income    muslim       
+ 7 afg        Afghan… low          g77              low-income    muslim       
+ 8 afg        Afghan… low          g77              low-income    muslim       
+ 9 afg        Afghan… low          g77              low-income    muslim       
+10 afg        Afghan… low          g77              low-income    muslim       
+# … with 9,833 more rows, and 14 more variables: year <dbl>,
+#   population_male <dbl>, population_female <dbl>, income_per_person <dbl>,
+#   life_expectancy <dbl>, life_expectancy_female <dbl>,
+#   life_expectancy_male <dbl>, children_per_woman <dbl>,
+#   newborn_mortality <dbl>, child_mortality <dbl>, school_years_men <dbl>,
 #   school_years_women <dbl>, hdi_human_development_index <dbl>,
 #   population_total <dbl>
 ~~~

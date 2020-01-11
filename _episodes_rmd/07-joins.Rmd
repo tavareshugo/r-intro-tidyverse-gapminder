@@ -1,0 +1,226 @@
+---
+title: "Joining tables"
+teaching: 30
+exercises: 20
+questions:
+- "How to change the shape of the table from a 'wide' to a 'long' format?"
+- "What are the cases when one or the other format is better?"
+objectives: 
+- "Apply the `pivot_wider()` and `pivot_longer()` functions to reshape data frames."
+- "Recognise when to use a wide or long format."
+keypoints:
+- "Use `pivot_wider()` to go from _long_ to _wide_ format."
+- "Use `pivot_longer()` to go from _wide_ to _long_ format."
+- "To understand which data format is more useful for you, it's often useful to think about what visualisations you want to make with `ggplot`. Any aesthetics you need to define should exist as columns of your table."
+source: Rmd
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("07-")
+knitr::opts_chunk$set(fig.width=12, fig.height=7) 
+```
+
+```{r, include=FALSE}
+# set ggplot2 theme with bigger text size
+library(tidyverse)
+theme_set(theme_grey() + theme(text = element_text(size = 16)))
+```
+
+
+In this lesson we're going to learn how to use functions from the `dplyr` package 
+(part of `tidyverse`) to help us combine different tables together.
+
+As usual when starting an analysis on a new script, let's start by loading the 
+packages and reading the data. In this case, let's use the clean dataset that we 
+created in the last exercise of a 
+[previous episode]({{ page.root }}{% link _episodes/05-manipulate_observations_dplyr.md %}).
+
+```{r, eval=FALSE}
+# load the package
+library(tidyverse)
+
+# Read the data, specifying how missing values are encoded
+gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_clean.csv", 
+                            na = "")
+```
+
+If you haven't completed that exercise, here's how you can recreate the clean dataset:
+
+```{r, eval=FALSE}
+gapminder_clean <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
+  select(-country_id) %>% 
+  mutate(population_total = population_male + population_female,
+         main_religion = str_to_lower(str_squish(main_religion)),
+         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
+         life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
+  filter(!is.na(income_groups))
+```
+
+```{r, include=FALSE}
+gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
+  select(-country_id) %>% 
+  mutate(population_total = population_male + population_female,
+         main_religion = str_to_lower(str_squish(main_religion)),
+         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
+         life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
+  filter(!is.na(income_groups))
+```
+
+
+## Joining tables
+
+A common task in data analysis is to bring different datasets together, so that we 
+can combine columns from two (or more) tables together. 
+
+This can be achieved using the _join_ family of functions in `dplyr`. There are 
+different types of _joins_, which can be represented by a series of Venn diagrams:
+
+![joins](../fig/07-dplyr_joins.svg)
+
+<!--
+This can be used to explain joins in class. Maybe add to instructor guidelines.
+
+Let's start by looking at some simple examples using in-built data that come with R.
+Take the following two tables:
+
+```{r}
+band_members
+band_instruments
+```
+
+As you can see, we have information about individuals and the music band they play in 
+on one table, and the instrument they play on the other table. We can also see that 
+not all artists are present on both tables. 
+
+Let's _join_ these two tables and retain only the artists common to both:
+
+```{r}
+inner_join(band_members, band_instruments, by = "name")
+```
+
+Note that the option `by = "name"` tells the _join_ function what is the column 
+(or columns) that should be used to match the different entries in the two tables. 
+-->
+
+
+In the [apendix exercises]({{ page.root }}{% link _episodes/90-appendix-exercises.md %}) 
+we've been exploring a dataset related to energy consumption in different counties. 
+Let's see how we can _join_ these two datasets together, so that we have all information 
+in a single table. 
+
+First, let's start by reading the data in:
+
+```{r, eval=FALSE}
+# it's a tab-separated file, so we use read_tsv
+energy <- read_tsv("data/raw/gapminder1990to2010_energy.tsv", 
+                   na = "")
+```
+
+```{r, include=FALSE}
+energy <- read_tsv("data/gapminder1990to2010_energy.tsv", 
+                   na = "")
+```
+
+A critical step when joining tables is to identify which columns are used to "match" 
+the rows between them (in databases these are referred to as _key_ variables). 
+In our case the columns `country`, `world_region` and `year` should, together, have a 
+one-to-one match between our two tables. 
+
+We can quickly check that not all countries from `gapminder_clean` are present in 
+the `energy` table (here we use the base R method of accessing columns with `$`,
+which returns a vector):
+
+```{r}
+# the `all()` function checks whether all values of a logical vector are TRUE
+all(gapminder_clean$country %in% energy$country)
+```
+
+And the same happens for year:
+
+```{r}
+all(gapminder_clean$year %in% energy$year)
+```
+
+So, different types of _join_ operations (represented in the figure above) will 
+result in different outcomes. 
+
+Let's start by doing an _inner join_, which retains only the entries common to both tables:
+
+```{r}
+inner_join(gapminder_clean, energy, 
+           by = c("country", "world_region", "year"))
+```
+
+The `by` option is used to tell the _join_ function which column(s) are used to "match" 
+the rows of the two tables. We can see that the output has fewer rows than both of these 
+tables, which makes sense given we're only keeping the "intersection" between the two. 
+Schematically, this is what happened:
+
+![inner_join](https://d33wubrfki0l68.cloudfront.net/3abea0b730526c3f053a3838953c35a0ccbe8980/7f29b/diagrams/join-inner.png)
+
+The other types of _join_ functions work exactly the same as this one, the only thing 
+that changes is what kind of output you get. Schematically:
+
+![outer_joins](https://d33wubrfki0l68.cloudfront.net/9c12ca9e12ed26a7c5d2aa08e36d2ac4fb593f1e/79980/diagrams/join-outer.png)
+
+One important thing to note is that when doing either of these types of _joins_, 
+the functions will take care of filling in the table with missing values, `NA`, 
+whenever a row in one table does not have a match in the other table. 
+
+
+> ## Exercise
+> 
+> 1. Create a new table called `gapminder_all`, which includes all rows from both 
+>    tables joined together by their common variable _keys_. Make a note of how many 
+>    rows you have in the new table, and compare it with the original tables.
+> 2. Use the `anti_join()` function to identify which rows in the `energy` dataset do 
+>    NOT have a match in our original data. 
+> 
+> > ## Answer
+> > 
+> > **A1.**
+> > 
+> > Consulting the Venn diagrams at the top of the lesson, to retain _all_ data from 
+> > both tables, we should use the `full_join()` function (corresponding to an union 
+> > of the two tables):
+> > 
+> > ```{r}
+> > gapminder_all <- full_join(gapminder_clean, energy, by = c("country", "year", "world_region"))
+> > 
+> > # check how many rows
+> > nrow(gapminder_all)
+> > ```
+> > 
+> > This table has more rows than either of the original tables. This must be because 
+> > some data exists in one table but not the other.
+> > 
+> > **A2.**
+> > 
+> > Again, the Venn diagram at the top of the page illustrates the result of an `anti_join()`, 
+> > which we can apply to investigate this issue:
+> > 
+> > ```{r}
+> > anti_join(energy, gapminder_clean, by = c("country", "year", "world_region"))
+> > ```
+> > 
+> > We could further pipe (`%>%`) the output of the above operation to `distinct()` 
+> > to check which countries were present in `energy` but missing in `gapminder_clean`:
+> > 
+> > ```{r}
+> > # take the energy data frame, and then...
+> > energy %>% 
+> >   # anti join it with gapminder_clean, and then...
+> >   anti_join(gapminder_clean, by = c("country", "world_region", "year")) %>% 
+> >   # get the distinct values of country
+> >   distinct(country)
+> > ```
+> > 
+> > Note that if we dug a bit deeper into this, we would find that "Nauru" does not exist in
+> > `gapminder_clean`, but "Brasil" does exist, but it's recorded as "Brazil", so it's a 
+> > spelling inconsistency between the two datasets (in fact, the `energy` table has both 
+> > "Brasil" and "Brazil", which we should correct if we were analysing these data further).
+> {: .solution}
+{: .challenge}
+
+

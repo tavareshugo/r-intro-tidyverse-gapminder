@@ -3,21 +3,20 @@ title: "Grouped operations using `dplyr`"
 teaching: 50
 exercises: 30
 questions:
-- "How do you obtain summary statistics for groups in the data?"
-- "How do you count observations by groups in the data?"
+- "How to calculate summary statistics from a dataset?"
+- "How to apply those summaries to groups within the data?"
+- "How to apply other data manipulation steps to groups within the data?"
 objectives: 
 - "Recognise when to use grouped operations in data analysis."
+- "Differentiate between grouped summaries and other types of grouped operations."
 - "Apply grouped summaries using the `group_by()` + `summarise()` functions."
 - "Apply other grouped operations such as: `group_by()` + `filter()` and `group_by()` + `mutate()`."
-- "Differentiate between grouped summaries and other types of grouped operations."
 - "Recognise the importance of the `ungroup()` function."
 keypoints:
-- "Use `group_by()` & `summarise()` to obtain summary statistics for groups in your data (e.g. the mean and variance income for each year)."
-- "Use the special `n()` function inside `summarise()` to obtain row counts in each group."
-- "Use `sum(!is.na(column_name))` inside `summarise()` to count how many non-missing values there are in a variable of interest."
-- "Use `group_by()` & `mutate()` to create columns which use calculations done per group (e.g. the country's income as a percentage of the total for each year)."
-- "Use `group_by()` & `filter()` to fetch rows of data that fulfill a condition for each group (e.g. get the rows of data where the country had the minimum income for each year)."
-- "As a habit, always remember to `ungroup()` tables after performing grouping operations."
+- "Use `summarise()` to calculate summary statistics in your data (e.g. mean, median, maximum, minimum, quantiles, etc.)."
+- "Chain together `group_by() %>% summarise()` to calculate those summaries across groups in the data (e.g. countries, years, world regions)."
+- "Chain together `group_by() %>% mutate()` or `group_by() %>% filter()` to apply these functions based on groups in the data."
+- "As a safety measure, always remember to `ungroup()` tables after using `group_by()` operations."
 source: Rmd
 ---
 
@@ -51,8 +50,7 @@ gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_cl
                             na = "")
 ```
 
-If you haven't completed the previous exercise, here's how you can recreate the 
-clean dataset:
+If you haven't completed that exercise, here's how you can recreate the clean dataset:
 
 ```{r, message=FALSE, warning=FALSE}
 gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
@@ -669,48 +667,3 @@ gapminder_clean %>%
 ```
 
 
-Could include this in the box:
-
-```{r, echo=FALSE, message=FALSE}
-p1 <- gapminder_clean %>% 
-  ggplot(aes(year, child_mortality)) +
-  geom_line(aes(group = country), alpha = 0.3) +
-  labs(title = "Original data", y = "Child Mortality")
-
-p2 <- gapminder_clean %>% 
-  drop_na(income_per_person) %>% 
-  group_by(country) %>% 
-  mutate(mortality_centered = child_mortality - mean(child_mortality),
-         mortality_scaled = mortality_centered/sd(child_mortality)) %>% 
-  ggplot(aes(year, mortality_centered)) +
-  geom_line(aes(group = country), alpha = 0.3) +
-  labs(title = "Mean centered", y = "Child Mortality (mean centered)")
-
-p3 <- gapminder_clean %>% 
-  drop_na(income_per_person) %>% 
-  group_by(country) %>% 
-  mutate(mortality_centered = child_mortality - mean(child_mortality),
-         mortality_scaled = mortality_centered/sd(child_mortality)) %>% 
-  ggplot(aes(year, mortality_scaled)) +
-  geom_line(aes(group = country), alpha = 0.3) +
-  labs(title = "Z-score", y = "Child Mortality (z-score)")
-
-library(patchwork)
-p1 | p2 | p3
-```
-
-These 3 graphs show different perspectives of the data:
-
-- The first graph tells us how many children die in each country across years. 
-- The second graph tells us how many children die in each country as a deviation 
-  from the country's mean (e.g. 200 children above the mean or -100 children below 
-  the mean).
-- The third graph tells us how many children die in each country on a scale that 
-  is _relative_ to the variation in that country (e.g. 2 standard deviations above 
-  the mean and -2 standard deviations below the mean).
-
-Which view of the data one chooses, depends on the underlying questions, and it's up 
-for the analysis to decide. In this case, if what I'm interested in is how many 
-children still die across the world, then I'd choose the graph on the left. 
-But if I'm interested in understanding how countries compare in their relative efforts 
-to reduce child mortality, then the 3rd graph migth be more adequate.

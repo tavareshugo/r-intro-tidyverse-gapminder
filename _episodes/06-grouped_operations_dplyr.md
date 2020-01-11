@@ -5,21 +5,20 @@ title: "Grouped operations using `dplyr`"
 teaching: 50
 exercises: 30
 questions:
-- "How do you obtain summary statistics for groups in the data?"
-- "How do you count observations by groups in the data?"
+- "How to calculate summary statistics from a dataset?"
+- "How to apply those summaries to groups within the data?"
+- "How to apply other data manipulation steps to groups within the data?"
 objectives: 
 - "Recognise when to use grouped operations in data analysis."
+- "Differentiate between grouped summaries and other types of grouped operations."
 - "Apply grouped summaries using the `group_by()` + `summarise()` functions."
 - "Apply other grouped operations such as: `group_by()` + `filter()` and `group_by()` + `mutate()`."
-- "Differentiate between grouped summaries and other types of grouped operations."
 - "Recognise the importance of the `ungroup()` function."
 keypoints:
-- "Use `group_by()` & `summarise()` to obtain summary statistics for groups in your data (e.g. the mean and variance income for each year)."
-- "Use the special `n()` function inside `summarise()` to obtain row counts in each group."
-- "Use `sum(!is.na(column_name))` inside `summarise()` to count how many non-missing values there are in a variable of interest."
-- "Use `group_by()` & `mutate()` to create columns which use calculations done per group (e.g. the country's income as a percentage of the total for each year)."
-- "Use `group_by()` & `filter()` to fetch rows of data that fulfill a condition for each group (e.g. get the rows of data where the country had the minimum income for each year)."
-- "As a habit, always remember to `ungroup()` tables after performing grouping operations."
+- "Use `summarise()` to calculate summary statistics in your data (e.g. mean, median, maximum, minimum, quantiles, etc.)."
+- "Chain together `group_by() %>% summarise()` to calculate those summaries across groups in the data (e.g. countries, years, world regions)."
+- "Chain together `group_by() %>% mutate()` or `group_by() %>% filter()` to apply these functions based on groups in the data."
+- "As a safety measure, always remember to `ungroup()` tables after using `group_by()` operations."
 source: Rmd
 ---
 
@@ -47,8 +46,7 @@ gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_cl
 ~~~
 {: .language-r}
 
-If you haven't completed the previous exercise, here's how you can recreate the 
-clean dataset:
+If you haven't completed that exercise, here's how you can recreate the clean dataset:
 
 
 ~~~
@@ -362,13 +360,12 @@ gapminder_clean %>%
 
 ~~~
 # A tibble: 4 x 5
-  income_groups life_expect_mean life_expect_sd n_obs_total
-  <chr>                    <dbl>          <dbl>       <int>
-1 high_income               72.5           6.02        2805
-2 low_income                52.3           7.26        1836
-3 lower_middle…             60.4           7.93        2397
-4 upper_middle…             66.8           7.34        2754
-# … with 1 more variable: n_obs_life_expect <int>
+  income_groups     life_expect_mean life_expect_sd n_obs_total n_obs_life_expe…
+  <chr>                        <dbl>          <dbl>       <int>            <int>
+1 high_income                   72.5           6.02        2805             2642
+2 low_income                    52.3           7.26        1836             1836
+3 lower_middle_inc…             60.4           7.93        2397             2397
+4 upper_middle_inc…             66.8           7.34        2754             2632
 ~~~
 {: .output}
 
@@ -669,10 +666,9 @@ gapminder_clean %>%
  9 Congo,… sub_saharan… g77              low_income    christian      2008
 10 Congo,… sub_saharan… g77              low_income    christian      2009
 # … with 41 more rows, and 13 more variables: population_male <dbl>,
-#   population_female <dbl>, income_per_person <dbl>,
-#   life_expectancy <dbl>, life_expectancy_female <dbl>,
-#   life_expectancy_male <dbl>, children_per_woman <dbl>,
-#   newborn_mortality <dbl>, child_mortality <dbl>,
+#   population_female <dbl>, income_per_person <dbl>, life_expectancy <dbl>,
+#   life_expectancy_female <dbl>, life_expectancy_male <dbl>,
+#   children_per_woman <dbl>, newborn_mortality <dbl>, child_mortality <dbl>,
 #   school_years_men <dbl>, school_years_women <dbl>,
 #   hdi_human_development_index <dbl>, population_total <dbl>
 ~~~
@@ -930,36 +926,3 @@ gapminder_clean %>%
 <img src="../fig/rmd-06-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="864" style="display: block; margin: auto;" />
 
 
-Could include this in the box:
-
-
-~~~
-Warning: Removed 124 rows containing missing values (geom_path).
-~~~
-{: .error}
-
-
-
-~~~
-Warning: Removed 306 rows containing missing values (geom_path).
-Warning: Removed 306 rows containing missing values (geom_path).
-~~~
-{: .error}
-
-<img src="../fig/rmd-06-unnamed-chunk-39-1.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" width="864" style="display: block; margin: auto;" />
-
-These 3 graphs show different perspectives of the data:
-
-- The first graph tells us how many children die in each country across years. 
-- The second graph tells us how many children die in each country as a deviation 
-  from the country's mean (e.g. 200 children above the mean or -100 children below 
-  the mean).
-- The third graph tells us how many children die in each country on a scale that 
-  is _relative_ to the variation in that country (e.g. 2 standard deviations above 
-  the mean and -2 standard deviations below the mean).
-
-Which view of the data one chooses, depends on the underlying questions, and it's up 
-for the analysis to decide. In this case, if what I'm interested in is how many 
-children still die across the world, then I'd choose the graph on the left. 
-But if I'm interested in understanding how countries compare in their relative efforts 
-to reduce child mortality, then the 3rd graph migth be more adequate.
