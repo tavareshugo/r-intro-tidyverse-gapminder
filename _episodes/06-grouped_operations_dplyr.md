@@ -50,7 +50,7 @@ If you haven't completed that exercise, here's how you can recreate the clean da
 
 
 ~~~
-gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
+gapminder_clean <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
   select(-country_id) %>% 
   mutate(population_total = population_male + population_female,
          main_religion = str_to_lower(str_squish(main_religion)),
@@ -59,6 +59,7 @@ gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "
   filter(!is.na(income_groups))
 ~~~
 {: .language-r}
+
 
 
 ## Summarising data
@@ -184,7 +185,7 @@ gapminder_clean %>%
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-06-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="864" style="display: block; margin: auto;" />
 > 
 > > ## Answer
 > > 
@@ -230,7 +231,7 @@ gapminder_clean %>%
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="864" style="display: block; margin: auto;" />
 > > 
 > > A2. To get the change per year and also world region, we can add `world_region` to 
 > > `group_by()`:
@@ -276,7 +277,7 @@ gapminder_clean %>%
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="864" style="display: block; margin: auto;" />
 > > 
 > > 
 > > A3. Here is the fixed code:
@@ -488,7 +489,7 @@ sum(some_numbers > 10, na.rm = TRUE)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="864" style="display: block; margin: auto;" />
 > > 
 > > And here we graph the mean and its [standard error](https://en.wikipedia.org/wiki/Standard_error) 
 > > (= standard deviation divided by the square-root of the number of observations). 
@@ -509,7 +510,7 @@ sum(some_numbers > 10, na.rm = TRUE)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="864" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -582,7 +583,7 @@ gapminder_clean %>%
 > 
 > Take the following graphs as an example: 
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-06-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="864" style="display: block; margin: auto;" />
 > 
 > These 3 graphs show different perspectives of the data:
 > 
@@ -629,7 +630,7 @@ Warning: Removed 285 rows containing missing values (geom_path).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-06-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="864" style="display: block; margin: auto;" />
 
 -->
 
@@ -688,7 +689,7 @@ gapminder_clean %>%
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-06-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="864" style="display: block; margin: auto;" />
 > 
 > Fix the code below, to graph the change in child mortality centered on the mean of 
 > each year:
@@ -724,7 +725,7 @@ gapminder_clean %>%
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-31-1.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" width="864" style="display: block; margin: auto;" />
 > > 
 > > This graph shows a different perspective of the data, which is now centered 
 > > around the mean of each year (highlighted by the horizontal line at zero). 
@@ -868,7 +869,7 @@ gapminder_clean %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
 
 * The `lead()` and `lag()` functions shift vectors by one value, so that we can use 
   them for example to compare values ahead or behind the current value. 
@@ -898,7 +899,7 @@ Warning: Removed 316 rows containing missing values (geom_path).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-06-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="864" style="display: block; margin: auto;" />
 
 * The `cumsum()` function can be used to calculate cumulative sums (see more 
   cumulative functions in [dplyr's cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf))
@@ -921,6 +922,6 @@ gapminder_clean %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-39-1.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" width="864" style="display: block; margin: auto;" />
 
 

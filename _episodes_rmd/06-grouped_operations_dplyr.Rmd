@@ -52,8 +52,8 @@ gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_cl
 
 If you haven't completed that exercise, here's how you can recreate the clean dataset:
 
-```{r, message=FALSE, warning=FALSE}
-gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
+```{r, eval=FALSE}
+gapminder_clean <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
   select(-country_id) %>% 
   mutate(population_total = population_male + population_female,
          main_religion = str_to_lower(str_squish(main_religion)),
@@ -62,6 +62,15 @@ gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "
   filter(!is.na(income_groups))
 ```
 
+```{r, include=FALSE, warning=FALSE}
+gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
+  select(-country_id) %>% 
+  mutate(population_total = population_male + population_female,
+         main_religion = str_to_lower(str_squish(main_religion)),
+         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
+         life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
+  filter(!is.na(income_groups))
+```
 
 ## Summarising data
 
