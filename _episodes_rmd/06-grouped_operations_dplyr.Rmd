@@ -497,8 +497,6 @@ gapminder_clean %>%
 > ```{r}
 > gapminder_clean %>%
 >   filter(!is.na(child_mortality)) %>% 
->   # group_by(year) %>%
->   # mutate(child_mortality = child_mortality - mean(child_mortality)) %>%
 >   ggplot(aes(x = year, y = child_mortality)) +
 >   geom_line(aes(group = country))
 > ```
