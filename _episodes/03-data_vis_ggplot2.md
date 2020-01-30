@@ -838,7 +838,7 @@ You can also specify options for the size of the graph and dpi (for PNG  or JPEG
 ~~~
 # save the plot stored in our "p" object as a PDF
 # it will be 15cm x 7cm (default units is inches)
-ggsave(filename = "~/temp/fertility_vs_life_expectancy.pdf",
+ggsave(filename = "figures/fertility_vs_life_expectancy.pdf",
        plot = p, 
        width = 15, 
        height = 7, 

@@ -351,3 +351,31 @@ whenever a row in one table does not have a match in the other table.
 {: .challenge}
 
 
+> ## Data tip: linking datasets
+> 
+> Combining datasets together is a very common task in data analysis, often referred 
+> to as [data linkage](https://hdsr.mitpress.mit.edu/pub/8fm8lo1e). 
+> 
+> Although this task might seem easy at a first glance, it can be quite challenging 
+> due to unforeseen properties of the data. For example: 
+> 
+> - which variables in one table have a correspondence in the other table? 
+> (having the same column name doesn't necessarily mean they are the same)
+> - are the values encoded similarly across datasets? 
+> (for example, one dataset might encode _income groups_ as "low", "medium", "high" 
+> and another as "1", "2", "3")
+> - were the data recorded in a consistent manner? (for example, an individual's 
+> _age_ might have been recorded as their date of birth or, due to confidentiality
+> reasons, their age the last time they visited a clinic)
+> 
+> Thinking of these (and other) issues can be useful in order to avoid them when
+> collecting your own data. 
+> Also, when you share data, make sure to provide with _metadata_, explaining as 
+> much as possible what each of your variables is and how it was measured. 
+> 
+> Finally, it's worth thinking that every observation of your data should have a 
+> unique identifier (this is referred to as a "primary key"). 
+> For example, in our data, a unique identifier could be created by the combination 
+> of the `country` and `year` variables, as those two define our unit of study in 
+> this case. 
+{: .callout}
