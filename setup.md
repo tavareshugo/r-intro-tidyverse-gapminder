@@ -70,8 +70,8 @@ r-workshop/
 Download the following files and save them in the `data/raw` folder (<kbd>right-click</kbd> 
 the file link and choose "Save link as..."):
 
-- [Gapminder socio-economic dataset 2010](https://github.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/gapminder2010_socioeconomic.csv)
-- [Gapminder socio-economic dataset 1960-2010](https://github.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/gapminder1960to2010_socioeconomic.csv)
+- [Gapminder socio-economic dataset 2010](https://github.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/raw/gapminder2010_socioeconomic.csv)
+- [Gapminder socio-economic dataset 1960-2010](https://github.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/raw/gapminder1960to2010_socioeconomic.csv)
 
 
 **Note:** these data were slightly modified from the original and should not be 

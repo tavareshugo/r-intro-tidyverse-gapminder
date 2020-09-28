@@ -51,7 +51,7 @@ This new data file includes the following variables:
 1. On your computer, create a new directory for this project, for example `gapminder-energy`
 2. Create a new R Project on this directory
 3. Create directories that you feel are important, including one for saving the raw data.
-4. Download the [gapminder energy dataset](https://raw.githubusercontent.com/tavareshugo/r-eda-gapminder/gh-pages/_episodes_rmd/data/gapminder1990to2010_energy.tsv) 
+4. Download the [gapminder energy dataset](https://raw.githubusercontent.com/tavareshugo/r-eda-gapminder/gh-pages/_episodes_rmd/data/raw/gapminder1990to2010_energy.tsv) 
 and save it in your project's data folder. 
 (<kbd>right-click</kbd> the file link and choose "Save link as...")
 5. Install the `skimr` package, which you will use to do some quality control checks 
