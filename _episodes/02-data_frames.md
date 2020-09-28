@@ -7,21 +7,18 @@ exercises: 20
 questions:
   - "How to import tabular data into R?"
   - "What kind of object stores tabular data?"
-  - "How to investigate the contents of such object?"
-  - "How to deal with  missing data?"
+  - "How to investigate the contents of such object (types of variables and missing data)?"
 objectives: 
   - "Import tabular data into R using the `read_csv()` function."
   - "Understand the relationship between vectors and data.frames/tibbles and distinguish between them."
   - "Discuss the importance of and apply basic quality control checks of data."
   - "Apply the following functions to examine data: `summary()`, `str()`, `unique()`, `length()`"
-  - "Analyse vectors with missing data."
 keypoints:
   - "Use `library()` to load a library into R. You need to do this every time you start a new R session."
-  - "Read data using the `read_csv()` function, or one of it's other similarly-named functions."
+  - "Read data using the `read_*()` family of functions (`read_csv()` and `read_tsv()` are two common types for comma- and tab-delimited values, respectively)."
   - "In R tabular data is stored in a `data.frame` object."
   - "Columns in a `data.frame` are _vectors_. Therefore, a `data.frame` is a _list_ of _vectors_ of the same length."
   - "A vector can only contain data of one type (e.g. all numeric, or all character). Therefore, each column of a `data.frame` can only be of one type also (although different columns may be of different types)."
-  - 
 source: Rmd
 ---
 
@@ -43,25 +40,19 @@ Both of these have the same columns of data:
 
 | Column                       | Description                                                                                                                     |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| country_id                  | gapminder country identifier                                                                                                    |
 | country                     | country name                                                                                                                    |
 | world_region                | 6 world regions                                                                                                                 |
-| economic_organisation       | “OECD”, “G77” or “others”                                                                                                       |
-| income_groups               | categorical classification of income groups                                                                                     |
-| main_religion               | religion of the majority of population in 2008                                                                                  |
 | year                        | year that each datapoint refers to                                                                                               |
-| population_male             | total number of male population                                                                                                 |
-| population_female           | total number of female population                                                                                               |
-| income_per_person           | gross domestic product per person adjusted for differences in purchasing power                                                  |
+| children_per_woman          | total fertility rate                                                                                                            |
 | life_expectancy             | average number of years a newborn child would live if current mortality patterns were to stay the same                          |
+| income_per_person           | gross domestic product per person adjusted for differences in purchasing power                                                  |
+| is_oecd       | Whether a country belongs to the “OECD” (`TRUE`) or not (`FALSE`)                                                                                                       |
+| income_groups               | categorical classification of income groups                                                                                     |
+| population             | total number of a country's population                                                                                                 |
+| main_religion               | religion of the majority of population in 2008                                                                                  |
+| child_mortality             | death of children under 5 years old per 1000 births                                                                             |
 | life_expectancy_female      | life expectancy at birth, females                                                                                               |
 | life_expectancy_male        | life expectancy at birth, males                                                                                                 |
-| children_per_woman          | total fertility rate                                                                                                            |
-| newborn_mortality           | death of children within the first 28 days per 1000 births                                                                      |
-| child_mortality             | death of children under 5 years old per 1000 births                                                                             |
-| school_years_men            | mean years in school, men 25 years and older    |
-| school_years_women          | mean years in school, women 25 years and older  |
-| hdi_human_development_index | index used to rank countries by level of “human development” accounting for health level, educational level and living standard |
 
 
 ## Reading Data Into R
@@ -92,7 +83,7 @@ Here's the command:
 
 
 ~~~
-gapminder2010 <- read_csv("data/gapminder2010_socioeconomic.csv", na = "")
+gapminder2010 <- read_csv("data/raw/gapminder2010_socioeconomic.csv", na = "")
 ~~~
 {: .language-r}
 
@@ -101,25 +92,19 @@ gapminder2010 <- read_csv("data/gapminder2010_socioeconomic.csv", na = "")
 ~~~
 Parsed with column specification:
 cols(
-  country_id = col_character(),
   country = col_character(),
   world_region = col_character(),
-  economic_organisation = col_character(),
-  income_groups = col_character(),
-  main_religion = col_character(),
   year = col_double(),
-  population_male = col_double(),
-  population_female = col_double(),
-  income_per_person = col_double(),
-  life_expectancy = col_double(),
-  life_expectancy_female = col_character(),
-  life_expectancy_male = col_double(),
   children_per_woman = col_double(),
-  newborn_mortality = col_double(),
+  life_expectancy = col_double(),
+  income_per_person = col_double(),
+  is_oecd = col_logical(),
+  income_groups = col_character(),
+  population = col_double(),
+  main_religion = col_character(),
   child_mortality = col_double(),
-  school_years_men = col_logical(),
-  school_years_women = col_logical(),
-  hdi_human_development_index = col_double()
+  life_expectancy_female = col_character(),
+  life_expectancy_male = col_double()
 )
 ~~~
 {: .output}
@@ -183,7 +168,7 @@ For now, let's investigate what kind of object the `read_csv()` function returns
 > > 
 > > 
 > > ~~~
-> > [1] 19
+> > [1] 13
 > > ~~~
 > > {: .output}
 > > 
@@ -199,47 +184,35 @@ For now, let's investigate what kind of object the `read_csv()` function returns
 > > 
 > > 
 > > ~~~
-> > Classes 'spec_tbl_df', 'tbl_df', 'tbl' and 'data.frame':	193 obs. of  19 variables:
-> >  $ country_id                 : chr  "afg" "ago" "alb" "and" ...
-> >  $ country                    : chr  "Afghanistan" "Angola" "Albania" "Andorra" ...
-> >  $ world_region               : chr  "south_asia" "sub_saharan_africa" "europe_central_asia" "europe_central_asia" ...
-> >  $ economic_organisation      : chr  "g77" "g77" "others" "others" ...
-> >  $ income_groups              : chr  "low_income" "upper_middle_income" "upper_middle_income" "high_income" ...
-> >  $ main_religion              : chr  "muslim" "christian" "muslim" "christian" ...
-> >  $ year                       : num  2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
-> >  $ population_male            : num  14797692 11433112 1475395 NA 6161489 ...
-> >  $ population_female          : num  14005472 11936012 1465122 NA 2109193 ...
-> >  $ income_per_person          : num  1614 5895 9927 38982 57580 ...
-> >  $ life_expectancy            : num  56.2 60.1 76.3 82.7 76.5 ...
-> >  $ life_expectancy_female     : chr  "62.476" "60.908" "79.209" "-" ...
-> >  $ life_expectancy_male       : num  60.1 55.5 74.4 -999 75.7 ...
-> >  $ children_per_woman         : num  5.82 6.16 1.65 NA 1.87 2.37 1.55 2.13 1.93 1.44 ...
-> >  $ newborn_mortality          : num  38.7 52.6 7.5 1.7 4.3 7.5 9.5 6 2.8 2.5 ...
-> >  $ child_mortality            : num  90.2 119.4 16.6 3.3 8.6 ...
-> >  $ school_years_men           : logi  NA NA NA NA NA NA ...
-> >  $ school_years_women         : logi  NA NA NA NA NA NA ...
-> >  $ hdi_human_development_index: num  0.454 0.495 0.738 0.819 0.824 0.816 0.729 0.782 0.927 0.88 ...
+> > tibble [193 × 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+> >  $ country               : chr [1:193] "Afghanistan" "Angola" "Albania" "Andorra" ...
+> >  $ world_region          : chr [1:193] "south_asia" "sub_saharan_africa" "europe_central_asia" "europe_central_asia" ...
+> >  $ year                  : num [1:193] 2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
+> >  $ children_per_woman    : num [1:193] 5.82 6.16 1.65 NA 1.87 2.37 1.55 2.13 1.93 1.44 ...
+> >  $ life_expectancy       : num [1:193] 59.9 59.9 77.6 82.3 72.9 ...
+> >  $ income_per_person     : num [1:193] 1672 6360 9928 38982 55363 ...
+> >  $ is_oecd               : logi [1:193] FALSE FALSE FALSE FALSE FALSE FALSE ...
+> >  $ income_groups         : chr [1:193] "low_income" "lower_middle_income" "upper_middle_income" "high_income" ...
+> >  $ population            : num [1:193] 29185511 23356247 2948029 NA 8549998 ...
+> >  $ main_religion         : chr [1:193] "muslim" "christian" "muslim" "christian" ...
+> >  $ child_mortality       : num [1:193] 87.95 120.49 13.3 4.18 8.48 ...
+> >  $ life_expectancy_female: chr [1:193] "62.459" "58.033" "79.302" "-" ...
+> >  $ life_expectancy_male  : num [1:193] 59.7 52.8 74.1 -999 75.6 ...
 > >  - attr(*, "spec")=
 > >   .. cols(
-> >   ..   country_id = col_character(),
 > >   ..   country = col_character(),
 > >   ..   world_region = col_character(),
-> >   ..   economic_organisation = col_character(),
-> >   ..   income_groups = col_character(),
-> >   ..   main_religion = col_character(),
 > >   ..   year = col_double(),
-> >   ..   population_male = col_double(),
-> >   ..   population_female = col_double(),
-> >   ..   income_per_person = col_double(),
-> >   ..   life_expectancy = col_double(),
-> >   ..   life_expectancy_female = col_character(),
-> >   ..   life_expectancy_male = col_double(),
 > >   ..   children_per_woman = col_double(),
-> >   ..   newborn_mortality = col_double(),
+> >   ..   life_expectancy = col_double(),
+> >   ..   income_per_person = col_double(),
+> >   ..   is_oecd = col_logical(),
+> >   ..   income_groups = col_character(),
+> >   ..   population = col_double(),
+> >   ..   main_religion = col_character(),
 > >   ..   child_mortality = col_double(),
-> >   ..   school_years_men = col_logical(),
-> >   ..   school_years_women = col_logical(),
-> >   ..   hdi_human_development_index = col_double()
+> >   ..   life_expectancy_female = col_character(),
+> >   ..   life_expectancy_male = col_double()
 > >   .. )
 > > ~~~
 > > {: .output}
@@ -256,46 +229,38 @@ For now, let's investigate what kind of object the `read_csv()` function returns
 > > 
 > > 
 > > ~~~
-> >   country_id          country          world_region       economic_organisation
-> >  Length:193         Length:193         Length:193         Length:193           
-> >  Class :character   Class :character   Class :character   Class :character     
-> >  Mode  :character   Mode  :character   Mode  :character   Mode  :character     
-> >                                                                                
-> >                                                                                
-> >                                                                                
-> >                                                                                
-> >  income_groups      main_religion           year      population_male    
-> >  Length:193         Length:193         Min.   :2010   Min.   :    45367  
-> >  Class :character   Class :character   1st Qu.:2010   1st Qu.:  1346236  
-> >  Mode  :character   Mode  :character   Median :2010   Median :  4354216  
-> >                                        Mean   :2010   Mean   : 18961371  
-> >                                        3rd Qu.:2010   3rd Qu.: 12395772  
-> >                                        Max.   :2010   Max.   :699882239  
-> >                                                       NA's   :9          
-> >  population_female   income_per_person life_expectancy life_expectancy_female
-> >  Min.   :    44262   Min.   :   609    Min.   :32.11   Length:193            
-> >  1st Qu.:  1192325   1st Qu.:  3279    1st Qu.:63.91   Class :character      
-> >  Median :  4386635   Median :  9916    Median :72.56   Mode  :character      
-> >  Mean   : 18641686   Mean   : 16446    Mean   :70.23                         
-> >  3rd Qu.: 12488792   3rd Qu.: 21771    3rd Qu.:76.70                         
-> >  Max.   :659872868   Max.   :125141    Max.   :82.85                         
-> >  NA's   :9                             NA's   :6                             
-> >  life_expectancy_male children_per_woman newborn_mortality child_mortality
-> >  Min.   :-999.00      Min.   :1.190      Min.   : 0.8      Min.   :  2.6  
-> >  1st Qu.:  60.27      1st Qu.:1.810      1st Qu.: 5.0      1st Qu.:  8.7  
-> >  Median :  68.25      Median :2.475      Median :11.7      Median : 20.7  
-> >  Mean   :  17.69      Mean   :2.995      Mean   :15.6      Mean   : 38.7  
-> >  3rd Qu.:  72.94      3rd Qu.:4.043      3rd Qu.:24.6      3rd Qu.: 62.2  
-> >  Max.   :  80.06      Max.   :7.490      Max.   :52.6      Max.   :208.0  
-> >                       NA's   :9                                           
-> >  school_years_men school_years_women hdi_human_development_index
-> >  Mode:logical     Mode:logical       Min.   :0.3230             
-> >  NA's:193         NA's:193           1st Qu.:0.5435             
-> >                                      Median :0.7105             
-> >                                      Mean   :0.6773             
-> >                                      3rd Qu.:0.7957             
-> >                                      Max.   :0.9390             
-> >                                      NA's   :7                  
+> >    country          world_region            year      children_per_woman
+> >  Length:193         Length:193         Min.   :2010   Min.   :1.190     
+> >  Class :character   Class :character   1st Qu.:2010   1st Qu.:1.810     
+> >  Mode  :character   Mode  :character   Median :2010   Median :2.475     
+> >                                        Mean   :2010   Mean   :2.995     
+> >                                        3rd Qu.:2010   3rd Qu.:4.043     
+> >                                        Max.   :2010   Max.   :7.490     
+> >                                                       NA's   :9         
+> >  life_expectancy income_per_person  is_oecd        income_groups     
+> >  Min.   :32.54   Min.   :   614    Mode :logical   Length:193        
+> >  1st Qu.:63.88   1st Qu.:  3338    FALSE:162       Class :character  
+> >  Median :73.31   Median :  9928    TRUE :31        Mode  :character  
+> >  Mean   :70.47   Mean   : 16700                                      
+> >  3rd Qu.:76.97   3rd Qu.: 22405                                      
+> >  Max.   :83.19   Max.   :119974                                      
+> >  NA's   :6                                                           
+> >    population        main_religion      child_mortality  life_expectancy_female
+> >  Min.   :8.803e+04   Length:193         Min.   :  2.62   Length:193            
+> >  1st Qu.:2.570e+06   Class :character   1st Qu.:  8.70   Class :character      
+> >  Median :8.613e+06   Mode  :character   Median : 20.23   Mode  :character      
+> >  Mean   :3.760e+07                      Mean   : 38.19                         
+> >  3rd Qu.:2.534e+07                      3rd Qu.: 58.23                         
+> >  Max.   :1.369e+09                      Max.   :208.62                         
+> >  NA's   :9                                                                     
+> >  life_expectancy_male
+> >  Min.   :-999.00     
+> >  1st Qu.:  60.10     
+> >  Median :  68.18     
+> >  Mean   :  17.61     
+> >  3rd Qu.:  73.42     
+> >  Max.   :  80.08     
+> >                      
 > > ~~~
 > > {: .output}
 > > 
@@ -542,7 +507,7 @@ gapminder2010[, c("country", "income_per_person")]
 > 
 > There are also some R packages that can help making these diagnostic analysis 
 > easier. One good one is the `skimr` package (which has a good 
-> [`introduction document`](https://cran.r-project.org/web/packages/skimr/vignettes/Using_skimr.html). 
+> [introduction document](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html). 
 > If you use the `skim()` function with your `data.frame` it will give you a tabular 
 > summary that will help you answer all these questions in one go!
 {: .discussion}

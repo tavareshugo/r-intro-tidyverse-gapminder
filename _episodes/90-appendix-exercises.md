@@ -38,7 +38,6 @@ This new data file includes the following variables:
 
 | Column                       | Description                             |
 |------------------------------|-----------------------------------------|
-| country_id                   | gapminder country identifier            |
 | country                      | country name                            |
 | world_region                 | 6 world regions                         |
 | year                         | year that each datapoint refers to      |

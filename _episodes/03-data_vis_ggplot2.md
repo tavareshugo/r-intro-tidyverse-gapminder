@@ -45,7 +45,7 @@ packages and reading the data:
 library(tidyverse)
 
 # Read the data, specifying how missing values are encoded
-gapminder2010 <- read_csv("data/gapminder2010_socioeconomic.csv", 
+gapminder2010 <- read_csv("data/raw/gapminder2010_socioeconomic.csv", 
                           na = "")
 ~~~
 {: .language-r}
@@ -134,12 +134,12 @@ the points).
 
 > ## Exercise
 > 
-> It would be useful to explore the missing data in this graph. 
+> It would be useful to explore the pattern of missing data in these two variables. 
 > The `naniar` package provides a ggplot geometry that allows us to do this, 
 > by replacing `NA` values with values 10% lower than the minimum in the variable. 
 > 
 > Try and modify the previous graph, using the `geom_miss_point()` from this package. 
-> (hint: don't forget to load the package first)
+> (hint: don't forget to load the package first using `library()`)
 > 
 > What can you conclude from this exploration? Are the data missing at random?
 > 
@@ -158,12 +158,12 @@ the points).
 > > <img src="../fig/rmd-03-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="864" style="display: block; margin: auto;" />
 > > 
 > > The data do not seem to be missing at random: it seems to be the case that 
-> > when data is missing for one variable it is also missing for the other. 
-> > It is also always missing for fertility rate.
+> > when data is missing for one variable it is often also missing for the other. 
+> > And there seem to be more missing data for `children_per_woman` than `life_expectancy`.
 > > However, we only have 9 cases with missing data, so perhaps we should not 
 > > make very strong conclusions from this. But it gives us more questions that 
 > > we could follow up on: are the countries with missing data generaly lacking 
-> > population statistics? Is it harder to obtain data for fertility rate than 
+> > other statistics? Is it harder to obtain data for fertility than 
 > > for life expectancy?
 > > 
 > {: .solution}
@@ -449,7 +449,7 @@ then we use `facet_grid()`:
 ggplot(gapminder2010, 
        aes(x = children_per_woman, y = life_expectancy, colour = world_region)) +
   geom_point() +
-  facet_grid(rows = vars(income_groups), cols = vars(economic_organisation))
+  facet_grid(rows = vars(income_groups), cols = vars(is_oecd))
 ~~~
 {: .language-r}
 
@@ -464,13 +464,13 @@ Try running this code yourself:
 ggplot(gapminder2010, 
        aes(x = children_per_woman, y = life_expectancy, colour = world_region)) +
   geom_point() +
-  facet_grid(rows = vars(economic_organisation))
+  facet_grid(rows = vars(is_oecd))
 
 # One row, facet by column
 ggplot(gapminder2010, 
        aes(x = children_per_woman, y = life_expectancy, colour = world_region)) +
   geom_point() +
-  facet_grid(cols = vars(economic_organisation))
+  facet_grid(cols = vars(is_oecd))
 ~~~
 {: .language-r}
 
@@ -628,7 +628,7 @@ functions. For example, to _limit_ which categories are shown and in which order
 
 ~~~
 ggplot(gapminder2010, aes(x = world_region, y = children_per_woman)) +
-  geom_boxplot(aes(fill = economic_organisation)) +
+  geom_boxplot(aes(fill = is_oecd)) +
   scale_x_discrete(limits = c("europe_central_asia", "america"))
 ~~~
 {: .language-r}
@@ -644,11 +644,10 @@ Taking the previous plot, let's change the `fill` scale to define custom colours
 
 ~~~
 ggplot(gapminder2010, aes(x = world_region, y = children_per_woman)) +
-  geom_boxplot(aes(fill = economic_organisation)) +
+  geom_boxplot(aes(fill = is_oecd)) +
   scale_x_discrete(limits = c("europe_central_asia", "america")) +
-  scale_fill_manual(values = c("g77" = "brown", 
-                               "oecd" = "green3",
-                               "others" = "magenta"))
+  scale_fill_manual(values = c("TRUE" = "brown", 
+                               "FALSE" = "green3"))
 ~~~
 {: .language-r}
 
@@ -662,7 +661,7 @@ ones:
 ~~~
 # The "Dark2" palette is colour-blind friendly
 ggplot(gapminder2010, aes(x = world_region, y = children_per_woman)) +
-  geom_boxplot(aes(fill = economic_organisation)) +
+  geom_boxplot(aes(fill = is_oecd)) +
   scale_x_discrete(limits = c("europe_central_asia", "america")) +
   scale_fill_brewer(palette = "Dark2")
 ~~~
@@ -705,6 +704,13 @@ give a warning if it has fewer colours available than categories in the data.
 > > ~~~
 > > {: .language-r}
 > > 
+> > 
+> > 
+> > ~~~
+> > Error in FUN(X[[i]], ...): object 'population_female' not found
+> > ~~~
+> > {: .error}
+> > 
 > > <img src="../fig/rmd-03-unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="864" style="display: block; margin: auto;" />
 > > 
 > > In this case the scale of the point's size is on the original (linear) scale.
@@ -720,106 +726,16 @@ give a warning if it has fewer colours available than categories in the data.
 > > ~~~
 > > {: .language-r}
 > > 
+> > 
+> > 
+> > ~~~
+> > Error in FUN(X[[i]], ...): object 'population_female' not found
+> > ~~~
+> > {: .error}
+> > 
 > > <img src="../fig/rmd-03-unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" width="864" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
-
-
-## Customising your graphs
-
-Every single element of the graph can be modified, althought the syntax can get 
-quite complicated. 
-We will highlight some common cases in this section.
-
-We also note that you can assign a plot to an object, which sometimes makes it easier 
-to modify, because there's less code to type. For example, let's save our scatterplot 
-in an object simply called `p`:
-
-
-~~~
-p <- ggplot(data = gapminder2010, 
-       mapping = aes(x = children_per_woman, y = life_expectancy)) +
-  geom_point(aes(colour = world_region)) +
-  scale_colour_brewer(palette = "Dark2")
-~~~
-{: .language-r}
-
-To view the plot, you can type it's name on the console:
-
-
-~~~
-p
-~~~
-{: .language-r}
-
-<img src="../fig/rmd-03-unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" width="864" style="display: block; margin: auto;" />
-
-
-### Labels
-
-We can change the labels of every aesthetic using the `labs()` function, added on to 
-the graph. 
-
-For example:
-
-
-~~~
-p + 
-  labs(x = "Fertility Rate", 
-       y = "Life Expectancy (years)", 
-       colour = "Region",
-       tag = "A", 
-       title = "Scatterplot", 
-       subtitle = "Based on Gapminder data",
-       caption = "done with ggplot2 in R")
-~~~
-{: .language-r}
-
-<img src="../fig/rmd-03-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="864" style="display: block; margin: auto;" />
-
-**Note:** the `tag` label is particularly useful for numbering panels in composite figures.
-
-### Themes
-
-You can change the overall look of a graph using some pre-defined _themes_, 
-using the `theme_*` family of functions. For example, let's use `theme_classic()` 
-for a cleaner-looking graph:
-
-
-~~~
-p + 
-  theme_classic()
-~~~
-{: .language-r}
-
-<img src="../fig/rmd-03-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
-
-
-### Finer customisation with `theme()`
-
-To tune individual elements of the graph, you can use the generic `theme()` function. 
-This allows you to change the look of _every single aspect_ of the graph, so we cannot 
-cover it all here. 
-
-But here's some cases that might be useful (try running them yourself!):
-
-
-~~~
-# Change the font size
-p + theme(text = element_text(size = 16))
-
-# Remove legend
-p + theme(legend.position = "none") # can also use "top", "bottom", "left"
-
-# Change orientation of the x-axis text
-p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-~~~
-{: .language-r}
-
-In most cases, the way to figure out how to do these customisations is to do a web search. 
-For example searching for "ggplot2 how to change axis text orientation" returns 
-[this stackoverflow answer](https://stackoverflow.com/questions/13297995/changing-font-size-and-direction-of-axes-text-in-ggplot2) 
-as one of the top results. 
 
 
 ## Saving graphs
@@ -851,6 +767,12 @@ Another easy way to save your graphs is by using RStudio's interface. From the "
 panel there is an option to "Export" the graph. However, doing it with code like 
 above ensures reproducibility, and will allow you to track which files where generated 
 from which script. 
+
+
+## Customising your graphs
+
+Every single element of a ggplot can be modified. This is further covered in a 
+[future episode]({{ page.root }}{% link _episodes/10-data_vis_partII.md %}).
 
 ---- 
 
@@ -886,7 +808,7 @@ from which script.
 > facets can be used to display many dimensions on a single graph. For example, 
 > take the following graph:
 > 
-> <img src="../fig/rmd-03-unnamed-chunk-40-1.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-03-unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" width="864" style="display: block; margin: auto;" />
 > 
 > We were able to display 5 dimensions of our data: income (x-axis), life expectancy 
 > (y-axis), fertility rate (colour), economic organisation (point shape), and 

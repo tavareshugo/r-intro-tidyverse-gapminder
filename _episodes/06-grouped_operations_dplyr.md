@@ -31,35 +31,17 @@ In this lesson we're going to learn how to use the `dplyr` package to make calcu
 for sub-groups in our data.
 
 As usual when starting an analysis on a new script, let's start by loading the 
-packages and reading the data. In this case, let's use the clean dataset that we 
-created in the last exercise of the 
-[previous episode]({{ page.root }}{% link _episodes/05-manipulate_observations_dplyr.md %}).
+packages and reading the data. We will continue with gapminder data from 1960 to 2010:
 
 
 ~~~
-# load the package
 library(tidyverse)
 
 # Read the data, specifying how missing values are encoded
-gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_clean.csv", 
-                            na = "")
+gapminder1960to2010 <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", 
+                                na = "")
 ~~~
 {: .language-r}
-
-If you haven't completed that exercise, here's how you can recreate the clean dataset:
-
-
-~~~
-gapminder_clean <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
-  select(-country_id) %>% 
-  mutate(population_total = population_male + population_female,
-         main_religion = str_to_lower(str_squish(main_religion)),
-         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
-         life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
-  filter(!is.na(income_groups))
-~~~
-{: .language-r}
-
 
 
 ## Summarising data
@@ -72,7 +54,7 @@ what the mean and standard deviation are for life expectancy:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE))
 ~~~
@@ -84,7 +66,7 @@ gapminder_clean %>%
 # A tibble: 1 x 2
   life_expect_mean life_expect_sd
              <dbl>          <dbl>
-1             64.0           10.1
+1             64.0           10.3
 ~~~
 {: .output}
 
@@ -131,7 +113,7 @@ income_group:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(income_groups) %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE))
@@ -141,31 +123,38 @@ gapminder_clean %>%
 
 
 ~~~
-# A tibble: 4 x 3
-  income_groups       life_expect_mean life_expect_sd
-  <chr>                          <dbl>          <dbl>
-1 high_income                     72.5           6.02
-2 low_income                      52.3           7.26
-3 lower_middle_income             60.4           7.93
-4 upper_middle_income             66.8           7.34
+`summarise()` ungrouping output (override with `.groups` argument)
 ~~~
 {: .output}
 
-- The table output now includes both the columns we defined within `summarise()` 
-  as well as the grouping columns defined within `group_by()`.
+
+
+~~~
+# A tibble: 4 x 3
+  income_groups       life_expect_mean life_expect_sd
+  <chr>                          <dbl>          <dbl>
+1 high_income                     73.0           5.10
+2 low_income                      51.8           7.68
+3 lower_middle_income             58.7           7.85
+4 upper_middle_income             66.9           7.15
+~~~
+{: .output}
+
+The table output now includes both the columns we defined within `summarise()` 
+as well as the grouping columns defined within `group_by()`.
 
 
 > ## Exercise 
 > 
-> 1. Calculate the median `life_expectancy` across the years. Can you graph how it 
->    changed over time?
+> 1. Calculate the median `life_expectancy` for each year. Can you make a line plot 
+>    to visualise how it changed over time?
 > 2. Modify the previous code to calculate the median `life_expectancy` per year and 
->    world region. Can you graph how each world region changed over time?
+>    world region. Can you modify your graph by colouring each line by world region?
 > 3. Fix the following code (where "FIXME" appears) to recreate the graph below.
 > 
 > 
 > ~~~
-> gapminder_clean %>% 
+> gapminder1960to2010 %>% 
 >   # remove rows with missing values for children_per_woman
 >   filter(FIXME) %>% 
 >   # grouped summary
@@ -185,7 +174,13 @@ gapminder_clean %>%
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="864" style="display: block; margin: auto;" />
+> 
+> ~~~
+> `summarise()` ungrouping output (override with `.groups` argument)
+> ~~~
+> {: .output}
+> 
+> <img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="864" style="display: block; margin: auto;" />
 > 
 > > ## Answer
 > > 
@@ -193,7 +188,7 @@ gapminder_clean %>%
 > > 
 > > 
 > > ~~~
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE))
 > > ~~~
@@ -202,19 +197,26 @@ gapminder_clean %>%
 > > 
 > > 
 > > ~~~
+> > `summarise()` ungrouping output (override with `.groups` argument)
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
 > > # A tibble: 51 x 2
 > >     year life_expect_median
 > >    <dbl>              <dbl>
-> >  1  1960               55.8
-> >  2  1961               56.3
-> >  3  1962               57.0
-> >  4  1963               57.8
-> >  5  1964               58.6
-> >  6  1965               59.4
-> >  7  1966               60.1
-> >  8  1967               60.5
-> >  9  1968               60.7
-> > 10  1969               61.5
+> >  1  1960               55.9
+> >  2  1961               56.4
+> >  3  1962               56.8
+> >  4  1963               57.4
+> >  5  1964               58.2
+> >  6  1965               58.9
+> >  7  1966               60.0
+> >  8  1967               60.9
+> >  9  1968               61.4
+> > 10  1969               61.7
 > > # … with 41 more rows
 > > ~~~
 > > {: .output}
@@ -223,7 +225,7 @@ gapminder_clean %>%
 > > 
 > > 
 > > ~~~
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE)) %>% 
 > >   ggplot(aes(year, life_expect_median)) +
@@ -231,14 +233,21 @@ gapminder_clean %>%
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="864" style="display: block; margin: auto;" />
+> > 
+> > 
+> > ~~~
+> > `summarise()` ungrouping output (override with `.groups` argument)
+> > ~~~
+> > {: .output}
+> > 
+> > <img src="../fig/rmd-06-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="864" style="display: block; margin: auto;" />
 > > 
 > > A2. To get the change per year and also world region, we can add `world_region` to 
 > > `group_by()`:
 > > 
 > > 
 > > ~~~
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year, world_region) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE))
 > > ~~~
@@ -247,20 +256,27 @@ gapminder_clean %>%
 > > 
 > > 
 > > ~~~
+> > `summarise()` regrouping output by 'year' (override with `.groups` argument)
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
 > > # A tibble: 306 x 3
 > > # Groups:   year [51]
 > >     year world_region             life_expect_median
 > >    <dbl> <chr>                                 <dbl>
-> >  1  1960 america                                60.8
-> >  2  1960 east_asia_pacific                      55  
-> >  3  1960 europe_central_asia                    68.7
-> >  4  1960 middle_east_north_africa               52.7
-> >  5  1960 south_asia                             42.8
-> >  6  1960 sub_saharan_africa                     44.8
+> >  1  1960 america                                60.7
+> >  2  1960 east_asia_pacific                      55.3
+> >  3  1960 europe_central_asia                    68.8
+> >  4  1960 middle_east_north_africa               52.9
+> >  5  1960 south_asia                             42.9
+> >  6  1960 sub_saharan_africa                     44.6
 > >  7  1961 america                                61.3
-> >  8  1961 east_asia_pacific                      55.5
+> >  8  1961 east_asia_pacific                      55.8
 > >  9  1961 europe_central_asia                    68.9
-> > 10  1961 middle_east_north_africa               53.7
+> > 10  1961 middle_east_north_africa               53.8
 > > # … with 296 more rows
 > > ~~~
 > > {: .output}
@@ -269,7 +285,7 @@ gapminder_clean %>%
 > > 
 > > 
 > > ~~~
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year, world_region) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE)) %>% 
 > >   ggplot(aes(year, life_expect_median)) +
@@ -277,14 +293,21 @@ gapminder_clean %>%
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="864" style="display: block; margin: auto;" />
+> > 
+> > 
+> > ~~~
+> > `summarise()` regrouping output by 'year' (override with `.groups` argument)
+> > ~~~
+> > {: .output}
+> > 
+> > <img src="../fig/rmd-06-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="864" style="display: block; margin: auto;" />
 > > 
 > > 
 > > A3. Here is the fixed code:
 > > 
 > > 
 > > ~~~
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   # remove rows with missing values for children_per_woman
 > >   filter(!is.na(children_per_woman)) %>% 
 > >   # grouped summary
@@ -319,7 +342,7 @@ and add the number of observations (rows) in each group:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(income_groups) %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE),
@@ -330,13 +353,20 @@ gapminder_clean %>%
 
 
 ~~~
+`summarise()` ungrouping output (override with `.groups` argument)
+~~~
+{: .output}
+
+
+
+~~~
 # A tibble: 4 x 4
   income_groups       life_expect_mean life_expect_sd n_obs
   <chr>                          <dbl>          <dbl> <int>
-1 high_income                     72.5           6.02  2805
-2 low_income                      52.3           7.26  1836
-3 lower_middle_income             60.4           7.93  2397
-4 upper_middle_income             66.8           7.34  2754
+1 high_income                     73.0           5.10  2907
+2 low_income                      51.8           7.68  1581
+3 lower_middle_income             58.7           7.85  2397
+4 upper_middle_income             66.9           7.15  2958
 ~~~
 {: .output}
 
@@ -348,7 +378,7 @@ by combining the `sum()` and `is.na()` functions in the following way:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(income_groups) %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE),
@@ -360,13 +390,20 @@ gapminder_clean %>%
 
 
 ~~~
+`summarise()` ungrouping output (override with `.groups` argument)
+~~~
+{: .output}
+
+
+
+~~~
 # A tibble: 4 x 5
   income_groups     life_expect_mean life_expect_sd n_obs_total n_obs_life_expe…
   <chr>                        <dbl>          <dbl>       <int>            <int>
-1 high_income                   72.5           6.02        2805             2642
-2 low_income                    52.3           7.26        1836             1836
-3 lower_middle_inc…             60.4           7.93        2397             2397
-4 upper_middle_inc…             66.8           7.34        2754             2632
+1 high_income                   73.0           5.10        2907             2693
+2 low_income                    51.8           7.68        1581             1581
+3 lower_middle_inc…             58.7           7.85        2397             2397
+4 upper_middle_inc…             66.9           7.15        2958             2836
 ~~~
 {: .output}
 
@@ -467,7 +504,7 @@ sum(some_numbers > 10, na.rm = TRUE)
 > > 
 > > 
 > > ~~~
-> > income_summary <- gapminder_clean %>% 
+> > income_summary <- gapminder1960to2010 %>% 
 > >   group_by(year, world_region) %>% 
 > >   summarise(mean_income = mean(income_per_person, na.rm = TRUE),
 > >             sd_income = sd(income_per_person, na.rm = TRUE),
@@ -476,6 +513,13 @@ sum(some_numbers > 10, na.rm = TRUE)
 > >             n_income_below_2dollar = sum(income_per_person < 365*2, na.rm = TRUE))
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > `summarise()` regrouping output by 'year' (override with `.groups` argument)
+> > ~~~
+> > {: .output}
 > > 
 > > For example, here we show the proportion of countries that have income less than $2,
 > > so we divide `n_income_below_2dollar` (number of countries below this income) by 
@@ -489,7 +533,7 @@ sum(some_numbers > 10, na.rm = TRUE)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="864" style="display: block; margin: auto;" />
 > > 
 > > And here we graph the mean and its [standard error](https://en.wikipedia.org/wiki/Standard_error) 
 > > (= standard deviation divided by the square-root of the number of observations). 
@@ -510,7 +554,7 @@ sum(some_numbers > 10, na.rm = TRUE)
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="864" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -525,32 +569,32 @@ Here's the example:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(year) %>% 
-  mutate(population_pct = population_total/sum(population_total, na.rm = TRUE)*100) %>% 
+  mutate(population_pct = population/sum(population, na.rm = TRUE)*100) %>% 
   # select a few columns for readability purpose only
-  select(country, year, population_total, population_pct)
+  select(country, year, population, population_pct)
 ~~~
 {: .language-r}
 
 
 
 ~~~
-# A tibble: 9,792 x 4
+# A tibble: 9,843 x 4
 # Groups:   year [51]
-   country      year population_total population_pct
-   <chr>       <dbl>            <dbl>          <dbl>
- 1 Afghanistan  1960          8996343          0.298
- 2 Afghanistan  1961          9166754          0.298
- 3 Afghanistan  1962          9345868          0.299
- 4 Afghanistan  1963          9533952          0.299
- 5 Afghanistan  1964          9731362          0.299
- 6 Afghanistan  1965          9938420          0.299
- 7 Afghanistan  1966         10152333          0.300
- 8 Afghanistan  1967         10372619          0.300
- 9 Afghanistan  1968         10604346          0.301
-10 Afghanistan  1969         10854432          0.301
-# … with 9,782 more rows
+   country      year population population_pct
+   <chr>       <dbl>      <dbl>          <dbl>
+ 1 Afghanistan  1960    8996967          0.298
+ 2 Afghanistan  1961    9169406          0.298
+ 3 Afghanistan  1962    9351442          0.299
+ 4 Afghanistan  1963    9543200          0.299
+ 5 Afghanistan  1964    9744772          0.300
+ 6 Afghanistan  1965    9956318          0.300
+ 7 Afghanistan  1966   10174840          0.301
+ 8 Afghanistan  1967   10399936          0.301
+ 9 Afghanistan  1968   10637064          0.301
+10 Afghanistan  1969   10893772          0.302
+# … with 9,833 more rows
 ~~~
 {: .output}
 
@@ -558,9 +602,9 @@ And, as usual, we could have piped this to a graph (try running it):
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(year) %>% 
-  mutate(population_pct = population_total/sum(population_total, na.rm = TRUE)*100) %>% 
+  mutate(population_pct = population/sum(population, na.rm = TRUE)*100) %>% 
   # make a graph
   ggplot(aes(year, population_pct)) +
   geom_line(aes(group = country))
@@ -571,7 +615,7 @@ gapminder_clean %>%
 > 
 > Often it's useful to standardise your variables, so that they are on a scale that 
 > can be interpreted and/or compared more easily. 
-> Here are some commonly used metrics:
+> Here are some common ways to standardise data:
 > 
 > - Percentage (or fraction). This has no units.
 > - Mean-centering (each value minus the mean of the group). This has the same units 
@@ -583,7 +627,7 @@ gapminder_clean %>%
 > 
 > Take the following graphs as an example: 
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-06-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="864" style="display: block; margin: auto;" />
 > 
 > These 3 graphs show different perspectives of the data:
 > 
@@ -610,7 +654,7 @@ Example of mean-centering and z-score calculation:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   select(country, year, life_expectancy) %>% 
   group_by(year) %>% 
   mutate(life_expectancy_mean = mean(life_expectancy, na.rm = TRUE),
@@ -626,11 +670,11 @@ gapminder_clean %>%
 
 
 ~~~
-Warning: Removed 285 rows containing missing values (geom_path).
+Warning: Removed 336 row(s) containing missing values (geom_path).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-06-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="864" style="display: block; margin: auto;" />
 
 -->
 
@@ -643,7 +687,7 @@ Here is an example:
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(year) %>% 
   filter(income_per_person == min(income_per_person, na.rm = TRUE))
 ~~~
@@ -652,26 +696,24 @@ gapminder_clean %>%
 
 
 ~~~
-# A tibble: 51 x 19
+# A tibble: 52 x 13
 # Groups:   year [51]
-   country world_region economic_organi… income_groups main_religion  year
-   <chr>   <chr>        <chr>            <chr>         <chr>         <dbl>
- 1 Congo,… sub_saharan… g77              low_income    christian      2000
- 2 Congo,… sub_saharan… g77              low_income    christian      2001
- 3 Congo,… sub_saharan… g77              low_income    christian      2002
- 4 Congo,… sub_saharan… g77              low_income    christian      2003
- 5 Congo,… sub_saharan… g77              low_income    christian      2004
- 6 Congo,… sub_saharan… g77              low_income    christian      2005
- 7 Congo,… sub_saharan… g77              low_income    christian      2006
- 8 Congo,… sub_saharan… g77              low_income    christian      2007
- 9 Congo,… sub_saharan… g77              low_income    christian      2008
-10 Congo,… sub_saharan… g77              low_income    christian      2009
-# … with 41 more rows, and 13 more variables: population_male <dbl>,
-#   population_female <dbl>, income_per_person <dbl>, life_expectancy <dbl>,
-#   life_expectancy_female <dbl>, life_expectancy_male <dbl>,
-#   children_per_woman <dbl>, newborn_mortality <dbl>, child_mortality <dbl>,
-#   school_years_men <dbl>, school_years_women <dbl>,
-#   hdi_human_development_index <dbl>, population_total <dbl>
+   country world_region  year children_per_wo… life_expectancy income_per_pers…
+   <chr>   <chr>        <dbl>            <dbl>           <dbl>            <dbl>
+ 1 Congo,… sub_saharan…  2000             6.96            53.8              573
+ 2 Congo,… sub_saharan…  2001             6.91            54.1              545
+ 3 Congo,… sub_saharan…  2002             6.86            54.2              545
+ 4 Congo,… sub_saharan…  2003             6.81            54.6              558
+ 5 Congo,… sub_saharan…  2004             6.76            55.3              577
+ 6 Congo,… sub_saharan…  2005             6.71            55.9              594
+ 7 Congo,… sub_saharan…  2006             6.66            56.3              605
+ 8 Cambod… east_asia_p…  1972             6.18            45.4              565
+ 9 Liberia sub_saharan…  1996             6.11            48.9              413
+10 Mozamb… sub_saharan…  1960             6.95            41.4              404
+# … with 42 more rows, and 7 more variables: is_oecd <lgl>,
+#   income_groups <chr>, population <dbl>, main_religion <chr>,
+#   child_mortality <dbl>, life_expectancy_female <chr>,
+#   life_expectancy_male <dbl>
 ~~~
 {: .output}
 
@@ -682,21 +724,21 @@ gapminder_clean %>%
 > 
 > 
 > ~~~
-> gapminder_clean %>%
+> gapminder1960to2010 %>%
 >   filter(!is.na(child_mortality)) %>% 
 >   ggplot(aes(x = year, y = child_mortality)) +
 >   geom_line(aes(group = country))
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-06-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="864" style="display: block; margin: auto;" />
 > 
 > Fix the code below, to graph the change in child mortality centered on the mean of 
-> each year:
+> each year (i.e. subtracting each child_mortality value from its mean value):
 > 
 > 
 > ~~~
-> gapminder_clean %>%
+> gapminder1960to2010 %>%
 >   filter(!is.na(child_mortality)) %>% 
 >   group_by(FIXME) %>%
 >   mutate(child_mortality_centered = FIXME) %>%
@@ -713,7 +755,7 @@ gapminder_clean %>%
 > > 
 > > 
 > > ~~~
-> > gapminder_clean %>%
+> > gapminder1960to2010 %>%
 > >   filter(!is.na(child_mortality)) %>% 
 > >   # group by year
 > >   group_by(year) %>%
@@ -721,11 +763,12 @@ gapminder_clean %>%
 > >   mutate(child_mortality_centered = child_mortality - mean(child_mortality)) %>%
 > >   ggplot(aes(x = year, y = child_mortality_centered)) +
 > >   geom_line(aes(group = country)) +
-> >   geom_hline(yintercept = 0, colour = "firebrick", size = 1)
+> >   # add an horizontal line at zero
+> >   geom_hline(yintercept = 0, colour = "firebrick", size = 1, linetype = "dashed")
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-31-1.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="864" style="display: block; margin: auto;" />
 > > 
 > > This graph shows a different perspective of the data, which is now centered 
 > > around the mean of each year (highlighted by the horizontal line at zero). 
@@ -748,10 +791,22 @@ year (and save it in a new object):
 
 
 ~~~
-total_incomes <- gapminder_clean %>% 
+total_incomes <- gapminder1960to2010 %>% 
   group_by(world_region, year) %>% 
   summarise(total_income = sum(income_per_person))
+~~~
+{: .language-r}
 
+
+
+~~~
+`summarise()` regrouping output by 'world_region' (override with `.groups` argument)
+~~~
+{: .output}
+
+
+
+~~~
 total_incomes
 ~~~
 {: .language-r}
@@ -763,22 +818,22 @@ total_incomes
 # Groups:   world_region [6]
    world_region  year total_income
    <chr>        <dbl>        <dbl>
- 1 america       1960       197929
- 2 america       1961       201360
- 3 america       1962       207046
- 4 america       1963       209785
- 5 america       1964       217924
- 6 america       1965       225248
- 7 america       1966       231937
- 8 america       1967       237498
- 9 america       1968       243673
-10 america       1969       251068
+ 1 america       1960       192879
+ 2 america       1961       197252
+ 3 america       1962       203730
+ 4 america       1963       207844
+ 5 america       1964       216469
+ 6 america       1965       223334
+ 7 america       1966       230608
+ 8 america       1967       235679
+ 9 america       1968       242752
+10 america       1969       251373
 # … with 296 more rows
 ~~~
 {: .output}
 
-As you see in the output, the grouping by `world_region` was retained (by default  
-`summarise()` drops the last grouping variable). Now, let's say that I wanted to transform 
+As you see in the output, the grouping by `world_region` was retained (by default `summarise()` 
+drops the last grouping variable). Now, let's say that I wanted to transform 
 the `total_income` variable to a percentage of the total. 
 I can use `mutate()` to update my table:
 
@@ -814,7 +869,7 @@ step added:
 
 
 ~~~
-total_incomes <- gapminder_clean %>% 
+total_incomes <- gapminder1960to2010 %>% 
   group_by(world_region, year) %>% 
   # this calculates total income per world_region and year
   summarise(total_income = sum(income_per_person)) %>% 
@@ -824,6 +879,13 @@ total_incomes <- gapminder_clean %>%
   mutate(total_income_pct = total_income/sum(total_income)*100)
 ~~~
 {: .language-r}
+
+
+
+~~~
+`summarise()` regrouping output by 'world_region' (override with `.groups` argument)
+~~~
+{: .output}
 
 And we can check our percentages now add up to 100%:
 
@@ -854,7 +916,7 @@ can hopefully demonstrate the range of questions that we can ask from our data.
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   # remove missing values
   filter(!is.na(income_per_person)) %>% 
   # for each year
@@ -869,7 +931,14 @@ gapminder_clean %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
+
+
+~~~
+`summarise()` regrouping output by 'year' (override with `.groups` argument)
+~~~
+{: .output}
+
+<img src="../fig/rmd-06-unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" width="864" style="display: block; margin: auto;" />
 
 * The `lead()` and `lag()` functions shift vectors by one value, so that we can use 
   them for example to compare values ahead or behind the current value. 
@@ -878,7 +947,7 @@ gapminder_clean %>%
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   # for each country
   group_by(country) %>% 
   # order the table by year
@@ -895,18 +964,18 @@ gapminder_clean %>%
 
 
 ~~~
-Warning: Removed 316 rows containing missing values (geom_path).
+Warning: Removed 193 row(s) containing missing values (geom_path).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-06-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="864" style="display: block; margin: auto;" />
 
 * The `cumsum()` function can be used to calculate cumulative sums (see more 
   cumulative functions in [dplyr's cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf))
 
 
 ~~~
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   # remove missing values
   filter(!is.na(income_per_person)) %>% 
   # for each country
@@ -922,6 +991,6 @@ gapminder_clean %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-39-1.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
 
 
