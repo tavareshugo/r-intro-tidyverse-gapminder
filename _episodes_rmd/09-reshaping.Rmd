@@ -1,0 +1,201 @@
+---
+title: "Data reshaping: from wide to long and back"
+teaching: 20
+exercises: 15
+questions:
+- "How to change the shape of a table from a 'wide' to a 'long' format?"
+- "When is one or the other format more suitable for analysis?"
+objectives: 
+- "Apply the `pivot_wider()` and `pivot_longer()` functions to reshape data frames."
+- "Recognise some cases when using a wide or long format is desirable."
+keypoints:
+- "Use `pivot_wider()` to reshape a table from _long_ to _wide_ format."
+- "Use `pivot_longer()` to reshape a table from _wide_ to _long_ format."
+- "To figure out which data format is more suited for a given analysis, it can help to think about what visualisation you want to make with `ggplot`: any aesthetics needed to build the graph should exist as columns of your table."
+source: Rmd
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("09-")
+knitr::opts_chunk$set(fig.width=12, fig.height=7) 
+```
+
+```{r, include=FALSE}
+# set ggplot2 theme with bigger text size
+library(tidyverse)
+theme_set(theme_grey() + theme(text = element_text(size = 16)))
+```
+
+
+In this lesson we're going to learn how to use functions from the `tidyr` package 
+(part of `tidyverse`) to help us change the shape of our data to suit our needs.
+
+As usual when starting an analysis on a new script, let's start by loading the 
+packages and reading the data. In this case, let's use the clean dataset that we 
+created in the last exercise of our 
+[previous episode]({{ page.root }}{% link _episodes/07-categorical_variables.md %}).
+
+```{r, eval=FALSE}
+# load the package
+library(tidyverse)
+# Read the data, specifying how missing values are encoded
+gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_clean.csv", 
+                            na = "")
+```
+
+If you haven't completed that exercise, here's how you can recreate the clean dataset:
+
+```{r, message=FALSE, warning=FALSE}
+gapminder_clean <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
+ # fix typos in main_religion and world region
+ mutate(main_religion = str_to_title(str_squish(main_religion)),
+        world_region = str_to_title(str_replace_all(world_region, "_", " "))) %>% 
+ # fit typos in income groups, which needs more steps
+ mutate(income_groups = str_remove(income_groups, "_income")) %>% 
+ mutate(income_groups = str_to_title(str_replace_all(income_groups, "_", " "))) %>% 
+ # fix/create numeric variables
+ mutate(life_expectancy_female = as.numeric(life_expectancy_female),
+        life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male))
+```
+
+
+## Data reshaping
+
+What we mean by "the shape of our data" is how the values are distributed across rows or 
+columns. Here's a visual representation of the same data in two different shapes:
+
+![Data Shapes](../fig/07-data_shapes.png)
+
+- "Long" format is where we have a column for each of the types of things we measured 
+  or recorded in our data. In other words, each _variable_ has its own column.
+- "Wide" format occurs when we have data relating to the same measured thing in 
+  different columns. In this case, we have values related to our "metric" spread 
+  across multiple columns (a column each for a year). 
+  
+Neither of these formats is necessarily more correct than the other: it will depend 
+on what analysis you intend on doing. 
+However, it is worth mentioning that the "long" format is often preferred, as it 
+is clearer how many distinct types of variables we have in the data. 
+
+To figure out which format you might need, it may help to think of which visualisations 
+you may want to build with `ggplot2`. Taking the above example:
+
+- If one was interested in looking at the change of the "metric" across years for each country,
+  then the long format is more suitable to define each _aesthetic_ of such a graph: 
+  `aes(x = year, y = metric, colour = country)`.
+- If one was interested in the _correlation_ of this metric between 1960 and 2010, then the 
+  wide format would be more suitable: `aes(x = yr1960, y = yr2010, colour = country)`.
+
+
+### Using the `pivot` functions
+
+Let's look at how we can reshape our data in practice. There are two functions in the 
+`tidyr` package (part of `tidyverse`) that can help us with this:
+
+- `pivot_wider()`: from _long_ to _wide_ format.
+- `pivot_longer()`: from _wide_ to _long_ format.
+
+Here is the same picture with added code: 
+
+![pivot](../fig/07-tidyr_pivot.png)
+
+Let's say we'd like to look at the correlation of `income_per_person` between 1960 and 
+2010 across all the countries in our dataset. 
+To achieve this, we will need to create a "wide" version of our table, where each row 
+is a country and each column a year, with values of `income_per_person` in each cell 
+of the table.
+
+```{r}
+income_wide <- gapminder_clean %>% 
+  # select only the columns we're interested in
+  select(country, year, income_per_person) %>% 
+  # use pivot_wider to go from long to wide format
+  pivot_wider(names_from = "year", 
+              names_prefix = "yr",
+              values_from = "income_per_person")
+income_wide
+```
+
+Note that the `names_prefix` argument is optional. Here, we've used it because it's a
+good idea to avoid column names that start with a number. In other cases you can omit it.
+
+Now, we could answer our question of interest:
+
+```{r}
+income_wide %>% 
+  ggplot(aes(yr1960, yr2010)) +
+  geom_point() +
+  geom_abline() +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10")
+```
+
+The oposite of this operation can be achieved with the `pivot_longer()` function. 
+Let's reverse the reshaping we did above:
+
+```{r}
+income_wide %>% 
+  pivot_longer(cols = yr1960:yr2010,
+               names_to = "year", 
+               values_to = "income_per_person")
+```
+
+Note that the `cols` argument of `pivot_longer()` accepts column specifications in a 
+similar way to the `select()` function discussed in an earlier episode. For example, 
+in this case we could have also used `contains("yr")` to use all the columns containing 
+the string "yr".
+
+
+> ## Exercise
+> 
+> - Create a "wide" table of `life_expectancy` values, with a row for each year and a column 
+>   for each country.
+> 
+> - Fix the _pivoting_ step in the following code, which should allow making the graph
+>   below.
+>   
+> ```{r, eval=FALSE}
+> gapminder_clean %>% 
+>   # retain data from a few years only
+>   filter(year %in% c(1960, 1970, 1980, 1990, 2010)) %>% 
+>   # select columns of interest
+>   select(country, year, life_expectancy_female, life_expectancy_male) %>% 
+>   # reshape the table
+>   pivot_longer(cols = FIXME, 
+>                names_to = "FIXME", 
+>                values_to = "FIXME") %>% 
+>   ggplot(aes(factor(year), life_expect)) +
+>   geom_boxplot(aes(fill = sex))
+> ```
+> 
+> ```{r, echo=FALSE, warning=FALSE}
+> gapminder_clean %>% 
+>   filter(year %in% c(1960, 1970, 1980, 1990, 2010)) %>% 
+>   select(country, year, life_expectancy_female, life_expectancy_male) %>% 
+>   pivot_longer(cols = life_expectancy_female:life_expectancy_male, 
+>                names_to = "sex", values_to = "life_expect") %>% 
+>   ggplot(aes(factor(year), life_expect)) +
+>   geom_boxplot(aes(fill = sex))
+> ```
+> 
+> > ## Answer
+> > 
+> > ```{r}
+> > gapminder_clean %>% 
+> >   select(country, year, life_expectancy) %>% 
+> >   pivot_wider(names_from = "country", values_from = "life_expectancy")
+> > ```
+> > 
+> > 
+> > ```{r, warning=FALSE}
+> > gapminder_clean %>% 
+> >   filter(year %in% c(1960, 1970, 1980, 1990, 2010)) %>% 
+> >   select(country, year, life_expectancy_female, life_expectancy_male) %>% 
+> >   pivot_longer(cols = life_expectancy_female:life_expectancy_male, 
+> >                names_to = "sex", values_to = "life_expect") %>% 
+> >   ggplot(aes(factor(year), life_expect)) +
+> >   geom_boxplot(aes(fill = sex))
+> > ```
+> {: .solution}
+{: .challenge}

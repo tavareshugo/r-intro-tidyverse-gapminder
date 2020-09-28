@@ -39,7 +39,6 @@ This new data file includes the following variables:
 
 | Column                       | Description                             |
 |------------------------------|-----------------------------------------|
-| country_id                   | gapminder country identifier            |
 | country                      | country name                            |
 | world_region                 | 6 world regions                         |
 | year                         | year that each datapoint refers to      |
@@ -92,7 +91,7 @@ from the _brewer_ colour scale.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=15, fig.height=15}
 library(tidyverse)
-energy <- read_tsv("data/gapminder1990to2010_energy.tsv", na = "")
+energy <- read_tsv("data/raw/gapminder1990to2010_energy.tsv", na = "")
 
 energy %>% 
   ggplot(aes(energy_use_per_person, yearly_co2_emissions)) +

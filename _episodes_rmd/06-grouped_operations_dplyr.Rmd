@@ -37,40 +37,16 @@ In this lesson we're going to learn how to use the `dplyr` package to make calcu
 for sub-groups in our data.
 
 As usual when starting an analysis on a new script, let's start by loading the 
-packages and reading the data. In this case, let's use the clean dataset that we 
-created in the last exercise of the 
-[previous episode]({{ page.root }}{% link _episodes/05-manipulate_observations_dplyr.md %}).
+packages and reading the data. We will continue with gapminder data from 1960 to 2010:
 
-```{r, eval=FALSE}
-# load the package
+```{r, message=FALSE}
 library(tidyverse)
 
 # Read the data, specifying how missing values are encoded
-gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_clean.csv", 
-                            na = "")
+gapminder1960to2010 <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", 
+                                na = "")
 ```
 
-If you haven't completed that exercise, here's how you can recreate the clean dataset:
-
-```{r, eval=FALSE}
-gapminder_clean <- read_csv("data/raw/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
-  select(-country_id) %>% 
-  mutate(population_total = population_male + population_female,
-         main_religion = str_to_lower(str_squish(main_religion)),
-         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
-         life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
-  filter(!is.na(income_groups))
-```
-
-```{r, include=FALSE, warning=FALSE}
-gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>% 
-  select(-country_id) %>% 
-  mutate(population_total = population_male + population_female,
-         main_religion = str_to_lower(str_squish(main_religion)),
-         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
-         life_expectancy_female = as.numeric(life_expectancy_female)) %>% 
-  filter(!is.na(income_groups))
-```
 
 ## Summarising data
 
@@ -81,7 +57,7 @@ We can achieve this task using the `summarise()` function. For example, let's ca
 what the mean and standard deviation are for life expectancy:
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE))
 ```
@@ -128,26 +104,26 @@ For example, let's modify the previous example to calculate the summary for each
 income_group:
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(income_groups) %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE))
 ```
 
-- The table output now includes both the columns we defined within `summarise()` 
-  as well as the grouping columns defined within `group_by()`.
+The table output now includes both the columns we defined within `summarise()` 
+as well as the grouping columns defined within `group_by()`.
 
 
 > ## Exercise 
 > 
-> 1. Calculate the median `life_expectancy` across the years. Can you graph how it 
->    changed over time?
+> 1. Calculate the median `life_expectancy` for each year. Can you make a line plot 
+>    to visualise how it changed over time?
 > 2. Modify the previous code to calculate the median `life_expectancy` per year and 
->    world region. Can you graph how each world region changed over time?
+>    world region. Can you modify your graph by colouring each line by world region?
 > 3. Fix the following code (where "FIXME" appears) to recreate the graph below.
 > 
 > ```{r, eval=FALSE}
-> gapminder_clean %>% 
+> gapminder1960to2010 %>% 
 >   # remove rows with missing values for children_per_woman
 >   filter(FIXME) %>% 
 >   # grouped summary
@@ -167,7 +143,7 @@ gapminder_clean %>%
 > ```
 > 
 > ```{r, echo=FALSE}
-> gapminder_clean %>% 
+> gapminder1960to2010 %>% 
 >   filter(!is.na(children_per_woman)) %>% 
 >   group_by(year) %>% 
 >   summarise(q5 = quantile(children_per_woman, 0.05),
@@ -189,7 +165,7 @@ gapminder_clean %>%
 > > A1. To calculate the median per year, we combine `group_by()` and `summarise()`:
 > > 
 > > ```{r}
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE))
 > > ```
@@ -197,7 +173,7 @@ gapminder_clean %>%
 > > To create the desired plot, we could _pipe_ the previous code directly to ggplot:
 > > 
 > > ```{r}
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE)) %>% 
 > >   ggplot(aes(year, life_expect_median)) +
@@ -208,7 +184,7 @@ gapminder_clean %>%
 > > `group_by()`:
 > > 
 > > ```{r}
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year, world_region) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE))
 > > ```
@@ -216,7 +192,7 @@ gapminder_clean %>%
 > > And we can modify our previous graph, by adding a colour aesthetic to `geom_line()`:
 > > 
 > > ```{r}
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   group_by(year, world_region) %>% 
 > >   summarise(life_expect_median = median(life_expectancy, na.rm = TRUE)) %>% 
 > >   ggplot(aes(year, life_expect_median)) +
@@ -227,7 +203,7 @@ gapminder_clean %>%
 > > A3. Here is the fixed code:
 > > 
 > > ```{r, eval=FALSE}
-> > gapminder_clean %>% 
+> > gapminder1960to2010 %>% 
 > >   # remove rows with missing values for children_per_woman
 > >   filter(!is.na(children_per_woman)) %>% 
 > >   # grouped summary
@@ -260,7 +236,7 @@ For example, let's take our previous summary of life expectancy per income group
 and add the number of observations (rows) in each group:
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(income_groups) %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE),
@@ -274,7 +250,7 @@ To count how many values had complete data for `life_expectancy`, we can use a t
 by combining the `sum()` and `is.na()` functions in the following way:
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(income_groups) %>% 
   summarise(life_expect_mean = mean(life_expectancy, na.rm = TRUE),
             life_expect_sd = sd(life_expectancy, na.rm = TRUE),
@@ -337,7 +313,7 @@ sum(some_numbers > 10, na.rm = TRUE)
 > > table to `summarise()`, where we use calculate the requested statistics:
 > > 
 > > ```{r}
-> > income_summary <- gapminder_clean %>% 
+> > income_summary <- gapminder1960to2010 %>% 
 > >   group_by(year, world_region) %>% 
 > >   summarise(mean_income = mean(income_per_person, na.rm = TRUE),
 > >             sd_income = sd(income_per_person, na.rm = TRUE),
@@ -385,19 +361,19 @@ _add a new column_ to our table, which is a job for `mutate()`.
 Here's the example:
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(year) %>% 
-  mutate(population_pct = population_total/sum(population_total, na.rm = TRUE)*100) %>% 
+  mutate(population_pct = population/sum(population, na.rm = TRUE)*100) %>% 
   # select a few columns for readability purpose only
-  select(country, year, population_total, population_pct)
+  select(country, year, population, population_pct)
 ```
 
 And, as usual, we could have piped this to a graph (try running it):
 
 ```{r, eval=FALSE}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(year) %>% 
-  mutate(population_pct = population_total/sum(population_total, na.rm = TRUE)*100) %>% 
+  mutate(population_pct = population/sum(population, na.rm = TRUE)*100) %>% 
   # make a graph
   ggplot(aes(year, population_pct)) +
   geom_line(aes(group = country))
@@ -407,7 +383,7 @@ gapminder_clean %>%
 > 
 > Often it's useful to standardise your variables, so that they are on a scale that 
 > can be interpreted and/or compared more easily. 
-> Here are some commonly used metrics:
+> Here are some common ways to standardise data:
 > 
 > - Percentage (or fraction). This has no units.
 > - Mean-centering (each value minus the mean of the group). This has the same units 
@@ -420,12 +396,12 @@ gapminder_clean %>%
 > Take the following graphs as an example: 
 > 
 > ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-> p1 <- gapminder_clean %>% 
+> p1 <- gapminder1960to2010 %>% 
 >   ggplot(aes(year, child_mortality)) +
 >   geom_line(aes(group = country), alpha = 0.3) +
 >   labs(title = "Original data", y = "Child Mortality")
 > 
-> p2 <- gapminder_clean %>% 
+> p2 <- gapminder1960to2010 %>% 
 >   drop_na(income_per_person) %>% 
 >   group_by(country) %>% 
 >   mutate(mortality_centered = child_mortality - mean(child_mortality),
@@ -434,7 +410,7 @@ gapminder_clean %>%
 >   geom_line(aes(group = country), alpha = 0.3) +
 >   labs(title = "Mean centered", y = "Child Mortality (mean centered)")
 > 
-> p3 <- gapminder_clean %>% 
+> p3 <- gapminder1960to2010 %>% 
 >   drop_na(income_per_person) %>% 
 >   group_by(country) %>% 
 >   mutate(mortality_centered = child_mortality - mean(child_mortality),
@@ -471,7 +447,7 @@ gapminder_clean %>%
 Example of mean-centering and z-score calculation: 
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   select(country, year, life_expectancy) %>% 
   group_by(year) %>% 
   mutate(life_expectancy_mean = mean(life_expectancy, na.rm = TRUE),
@@ -493,7 +469,7 @@ for that year. For _getting rows based on a condition_ we use `filter()`.
 Here is an example:
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   group_by(year) %>% 
   filter(income_per_person == min(income_per_person, na.rm = TRUE))
 ```
@@ -504,17 +480,17 @@ gapminder_clean %>%
 > The following graph shows the change in child mortality over the years:
 > 
 > ```{r}
-> gapminder_clean %>%
+> gapminder1960to2010 %>%
 >   filter(!is.na(child_mortality)) %>% 
 >   ggplot(aes(x = year, y = child_mortality)) +
 >   geom_line(aes(group = country))
 > ```
 > 
 > Fix the code below, to graph the change in child mortality centered on the mean of 
-> each year:
+> each year (i.e. subtracting each child_mortality value from its mean value):
 > 
 > ```{r, eval=FALSE}
-> gapminder_clean %>%
+> gapminder1960to2010 %>%
 >   filter(!is.na(child_mortality)) %>% 
 >   group_by(FIXME) %>%
 >   mutate(child_mortality_centered = FIXME) %>%
@@ -529,7 +505,7 @@ gapminder_clean %>%
 > > Here is the fixed code:
 > > 
 > > ```{r}
-> > gapminder_clean %>%
+> > gapminder1960to2010 %>%
 > >   filter(!is.na(child_mortality)) %>% 
 > >   # group by year
 > >   group_by(year) %>%
@@ -537,7 +513,8 @@ gapminder_clean %>%
 > >   mutate(child_mortality_centered = child_mortality - mean(child_mortality)) %>%
 > >   ggplot(aes(x = year, y = child_mortality_centered)) +
 > >   geom_line(aes(group = country)) +
-> >   geom_hline(yintercept = 0, colour = "firebrick", size = 1)
+> >   # add an horizontal line at zero
+> >   geom_hline(yintercept = 0, colour = "firebrick", size = 1, linetype = "dashed")
 > > ```
 > > 
 > > This graph shows a different perspective of the data, which is now centered 
@@ -560,15 +537,15 @@ Take this example, where we calculate the total income of each world region and
 year (and save it in a new object):
 
 ```{r}
-total_incomes <- gapminder_clean %>% 
+total_incomes <- gapminder1960to2010 %>% 
   group_by(world_region, year) %>% 
   summarise(total_income = sum(income_per_person))
 
 total_incomes
 ```
 
-As you see in the output, the grouping by `world_region` was retained (by default  
-`summarise()` drops the last grouping variable). Now, let's say that I wanted to transform 
+As you see in the output, the grouping by `world_region` was retained (by default `summarise()` 
+drops the last grouping variable). Now, let's say that I wanted to transform 
 the `total_income` variable to a percentage of the total. 
 I can use `mutate()` to update my table:
 
@@ -592,7 +569,7 @@ can do with `ungroup()`. Here's the full string of commands, with the ungrouping
 step added:
 
 ```{r}
-total_incomes <- gapminder_clean %>% 
+total_incomes <- gapminder1960to2010 %>% 
   group_by(world_region, year) %>% 
   # this calculates total income per world_region and year
   summarise(total_income = sum(income_per_person)) %>% 
@@ -621,7 +598,7 @@ can hopefully demonstrate the range of questions that we can ask from our data.
   per year.
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   # remove missing values
   filter(!is.na(income_per_person)) %>% 
   # for each year
@@ -641,7 +618,7 @@ gapminder_clean %>%
   year and the previous one.
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   # for each country
   group_by(country) %>% 
   # order the table by year
@@ -658,7 +635,7 @@ gapminder_clean %>%
   cumulative functions in [dplyr's cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf))
 
 ```{r}
-gapminder_clean %>% 
+gapminder1960to2010 %>% 
   # remove missing values
   filter(!is.na(income_per_person)) %>% 
   # for each country

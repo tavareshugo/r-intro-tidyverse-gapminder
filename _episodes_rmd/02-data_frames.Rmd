@@ -5,21 +5,18 @@ exercises: 20
 questions:
   - "How to import tabular data into R?"
   - "What kind of object stores tabular data?"
-  - "How to investigate the contents of such object?"
-  - "How to deal with  missing data?"
+  - "How to investigate the contents of such object (types of variables and missing data)?"
 objectives: 
   - "Import tabular data into R using the `read_csv()` function."
   - "Understand the relationship between vectors and data.frames/tibbles and distinguish between them."
   - "Discuss the importance of and apply basic quality control checks of data."
   - "Apply the following functions to examine data: `summary()`, `str()`, `unique()`, `length()`"
-  - "Analyse vectors with missing data."
 keypoints:
   - "Use `library()` to load a library into R. You need to do this every time you start a new R session."
-  - "Read data using the `read_csv()` function, or one of it's other similarly-named functions."
+  - "Read data using the `read_*()` family of functions (`read_csv()` and `read_tsv()` are two common types for comma- and tab-delimited values, respectively)."
   - "In R tabular data is stored in a `data.frame` object."
   - "Columns in a `data.frame` are _vectors_. Therefore, a `data.frame` is a _list_ of _vectors_ of the same length."
   - "A vector can only contain data of one type (e.g. all numeric, or all character). Therefore, each column of a `data.frame` can only be of one type also (although different columns may be of different types)."
-  - 
 source: Rmd
 ---
 
@@ -44,25 +41,19 @@ Both of these have the same columns of data:
 
 | Column                       | Description                                                                                                                     |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| country_id                  | gapminder country identifier                                                                                                    |
 | country                     | country name                                                                                                                    |
 | world_region                | 6 world regions                                                                                                                 |
-| economic_organisation       | “OECD”, “G77” or “others”                                                                                                       |
-| income_groups               | categorical classification of income groups                                                                                     |
-| main_religion               | religion of the majority of population in 2008                                                                                  |
 | year                        | year that each datapoint refers to                                                                                               |
-| population_male             | total number of male population                                                                                                 |
-| population_female           | total number of female population                                                                                               |
-| income_per_person           | gross domestic product per person adjusted for differences in purchasing power                                                  |
+| children_per_woman          | total fertility rate                                                                                                            |
 | life_expectancy             | average number of years a newborn child would live if current mortality patterns were to stay the same                          |
+| income_per_person           | gross domestic product per person adjusted for differences in purchasing power                                                  |
+| is_oecd       | Whether a country belongs to the “OECD” (`TRUE`) or not (`FALSE`)                                                                                                       |
+| income_groups               | categorical classification of income groups                                                                                     |
+| population             | total number of a country's population                                                                                                 |
+| main_religion               | religion of the majority of population in 2008                                                                                  |
+| child_mortality             | death of children under 5 years old per 1000 births                                                                             |
 | life_expectancy_female      | life expectancy at birth, females                                                                                               |
 | life_expectancy_male        | life expectancy at birth, males                                                                                                 |
-| children_per_woman          | total fertility rate                                                                                                            |
-| newborn_mortality           | death of children within the first 28 days per 1000 births                                                                      |
-| child_mortality             | death of children under 5 years old per 1000 births                                                                             |
-| school_years_men            | mean years in school, men 25 years and older    |
-| school_years_women          | mean years in school, women 25 years and older  |
-| hdi_human_development_index | index used to rank countries by level of “human development” accounting for health level, educational level and living standard |
 
 
 ## Reading Data Into R
@@ -90,7 +81,7 @@ cell in a spreadsheet).
 Here's the command:
 
 ```{r}
-gapminder2010 <- read_csv("data/gapminder2010_socioeconomic.csv", na = "")
+gapminder2010 <- read_csv("data/raw/gapminder2010_socioeconomic.csv", na = "")
 ```
 
 We see a lot of output there, but this is not an error! It's a message that `read_csv()` 
@@ -310,7 +301,7 @@ gapminder2010[, c("country", "income_per_person")]
 > 
 > There are also some R packages that can help making these diagnostic analysis 
 > easier. One good one is the `skimr` package (which has a good 
-> [`introduction document`](https://cran.r-project.org/web/packages/skimr/vignettes/Using_skimr.html). 
+> [`introduction document`](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html). 
 > If you use the `skim()` function with your `data.frame` it will give you a tabular 
 > summary that will help you answer all these questions in one go!
 {: .discussion}

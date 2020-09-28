@@ -33,7 +33,7 @@ pop_datasets <- c("male_population_with_projections",
                   "income_per_person_gdppercapita_ppp_inflation_adjusted",
                   "life_expectancy_years",
                   "children_per_woman_total_fertility",
-                  "newborn_mortality_rate_per_1000",
+                  #"newborn_mortality_rate_per_1000",
                   "child_mortality_0_5_year_olds_dying_per_1000_born",
                   "life_expectancy_female",
                   "life_expectancy_male",
@@ -61,7 +61,8 @@ read_gapminder_datapoints <- function(datasets, geo_tbl){
 
   # read data
   datapoints <- map(datasets, function(i){
-    read_csv(paste0("https://github.com/open-numbers/ddf--gapminder--systema_globalis/raw/master/ddf--datapoints--", i, "--by--geo--time.csv"), col_types = cols())
+    read_csv(paste0("https://github.com/open-numbers/ddf--gapminder--systema_globalis/raw/master/countries-etc-datapoints/ddf--datapoints--", i, "--by--geo--time.csv"),
+             col_types = cols())
   })
 
   # join the tables together
@@ -81,23 +82,33 @@ pop_datapoints <- read_gapminder_datapoints(pop_datasets, geo)
 
 # reorder and rename columns
 pop_datapoints <- pop_datapoints %>%
-  select(country_id = country, country = name,
-         world_region, economic_organisation, income_groups,
-         main_religion = main_religion_2008,
-         year,
-         population_male = male_population_with_projections,
-         population_female = female_population_with_projections,
-         income_per_person = income_per_person_gdppercapita_ppp_inflation_adjusted,
-         life_expectancy = life_expectancy_years,
-         life_expectancy_female, life_expectancy_male,
-         children_per_woman = children_per_woman_total_fertility,
-         newborn_mortality = newborn_mortality_rate_per_1000,
-         child_mortality = child_mortality_0_5_year_olds_dying_per_1000_born,
-         #employment_percent_female = females_aged_15plus_employment_rate_percent,
-         #employment_percent_male = males_aged_15plus_employment_rate_percent,
-         school_years_men = mean_years_in_school_men_25_years_and_older,
-         school_years_women = mean_years_in_school_women_25_years_and_older,
-         hdi_human_development_index) %>%
+  # add binary variable
+  mutate(is_oecd = economic_organisation == "oecd") %>%
+  # calculate total population
+  mutate(population = male_population_with_projections + female_population_with_projections) %>%
+  select(
+    country = name,
+    world_region,
+    year,
+    children_per_woman = children_per_woman_total_fertility,
+    life_expectancy = life_expectancy_years,
+    income_per_person = income_per_person_gdppercapita_ppp_inflation_adjusted,
+    is_oecd,
+    income_groups,
+    population,
+    main_religion = main_religion_2008,
+    child_mortality = child_mortality_0_5_year_olds_dying_per_1000_born,
+    life_expectancy_female,
+    life_expectancy_male
+    #population_male = male_population_with_projections,
+    #population_female = female_population_with_projections,
+    #newborn_mortality = newborn_mortality_rate_per_1000,
+    #employment_percent_female = females_aged_15plus_employment_rate_percent,
+    #employment_percent_male = males_aged_15plus_employment_rate_percent,
+    #school_years_men = mean_years_in_school_men_25_years_and_older,
+    #school_years_women = mean_years_in_school_women_25_years_and_older,
+    #hdi_human_development_index
+  ) %>%
   # remove one country (Liechtenstein) with no data for most variables
   filter(!is.na(income_per_person))
 
@@ -108,8 +119,9 @@ energy_datapoints <- read_gapminder_datapoints(energy_datasets, geo)
 energy_datapoints <- energy_datapoints %>%
   # keep only more recent years (too much missing data otherwise)
   filter(year >= 1990) %>%
-  select(country_id = country, country = name,
-         world_region, year,
+  select(country = name,
+         world_region,
+         year,
          yearly_co2_emissions = yearly_co2_emissions_1000_tonnes,
          #coal_use_per_person = coal_consumption_per_cap,
          #oil_use_per_person = oil_consumption_per_cap,
@@ -122,7 +134,9 @@ energy_datapoints <- energy_datapoints %>%
          energy_use_per_person,
          energy_production_per_person) %>%
   # remove one country (Liechtenstein) with no data for most variables
-  filter(country != "Liechtenstein")
+  filter(country != "Liechtenstein") %>%
+  # tidy world region (necessary for joins lesson)
+  mutate(world_region = str_to_title(str_replace_all(world_region, "_", " ")))
 
 #
 # Introduce typos ---------------------------------------------------------
@@ -153,7 +167,7 @@ pop_datapoints <- pop_datapoints %>%
 energy_datapoints <- energy_datapoints %>%
   # Introduce a couple of typos
   mutate(country = ifelse(country == "Brazil" & year == 1995, "Brasil", country),
-         energy_production_per_person = ifelse(country_id == "afg" & year == "1992",
+         energy_production_per_person = ifelse(country == "Afghanistan" & year == "1992",
                                                "?",
                                                energy_production_per_person))
 
@@ -163,16 +177,16 @@ energy_datapoints <- energy_datapoints %>%
 #
 pop_datapoints %>%
   filter(year == 2010) %>%
-  write_csv("./_episodes_rmd/data/gapminder2010_socioeconomic.csv",
+  write_csv("./_episodes_rmd/data/raw/gapminder2010_socioeconomic.csv",
             na = "")
 
 pop_datapoints %>%
-  write_csv("./_episodes_rmd/data/gapminder1960to2010_socioeconomic.csv",
+  write_csv("./_episodes_rmd/data/raw/gapminder1960to2010_socioeconomic.csv",
             na = "")
 
 energy_datapoints %>%
   # write this as a tab-separated to illustrate usage of different function
-  write_tsv("./_episodes_rmd/data/gapminder1990to2010_energy.tsv",
+  write_tsv("./_episodes_rmd/data/raw/gapminder1990to2010_energy.tsv",
             na = "")
 
 
