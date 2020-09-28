@@ -301,7 +301,7 @@ gapminder2010[, c("country", "income_per_person")]
 > 
 > There are also some R packages that can help making these diagnostic analysis 
 > easier. One good one is the `skimr` package (which has a good 
-> [`introduction document`](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html). 
+> [introduction document](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html). 
 > If you use the `skim()` function with your `data.frame` it will give you a tabular 
 > summary that will help you answer all these questions in one go!
 {: .discussion}

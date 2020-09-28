@@ -206,7 +206,7 @@ whenever a row in one table does not have a match in the other table.
 > > ```
 > > 
 > > Note that if we dug a bit deeper into this, we would find that the country "Brasil" 
-> > does occur in `gapminder_clean, but it's recorded as "Brazil", so it's a 
+> > does occur in `gapminder_clean`, but it's recorded as "Brazil", so it's a 
 > > spelling inconsistency between the two datasets (in fact, the `energy` table has both 
 > > "Brasil" and "Brazil", which we should correct if we were analysing these data further).
 > {: .solution}
