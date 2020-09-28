@@ -10,7 +10,7 @@
 carpentry: "dc"
 
 # Overall title for pages.
-title: "Exploratory Data Analysis with R"
+title: "Introduction to R/tidyverse for Exploratory Data Analysis"
 
 # Life cycle stage of the lesson
 # possible values: "pre-alpha", "alpha", "beta", "stable"
@@ -29,7 +29,7 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "hugo.tavares@slcu.cam.ac.uk"
+email: "hm533@cam.ac.uk"
 
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
