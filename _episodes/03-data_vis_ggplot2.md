@@ -676,9 +676,8 @@ give a warning if it has fewer colours available than categories in the data.
 
 > ## Exercise
 > 
-> Modify the following code so that the point size is defined by the population size 
-> (use either `population_male` or `population_female` variables for this). The size 
-> should be on a log scale. 
+> Modify the following code so that the point size is defined by the population size. 
+> The size should be on a log scale. 
 > 
 > 
 > ~~~
@@ -699,17 +698,10 @@ give a warning if it has fewer colours available than categories in the data.
 > > ~~~
 > > ggplot(data = gapminder2010, 
 > >        mapping = aes(x = children_per_woman, y = life_expectancy)) +
-> >   geom_point(aes(colour = world_region, size = population_female)) +
+> >   geom_point(aes(colour = world_region, size = population)) +
 > >   scale_colour_brewer(palette = "Dark2")
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in FUN(X[[i]], ...): object 'population_female' not found
-> > ~~~
-> > {: .error}
 > > 
 > > <img src="../fig/rmd-03-unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="864" style="display: block; margin: auto;" />
 > > 
@@ -720,18 +712,11 @@ give a warning if it has fewer colours available than categories in the data.
 > > ~~~
 > > ggplot(data = gapminder2010, 
 > >        mapping = aes(x = children_per_woman, y = life_expectancy)) +
-> >   geom_point(aes(colour = world_region, size = population_female)) +
+> >   geom_point(aes(colour = world_region, size = population)) +
 > >   scale_colour_brewer(palette = "Dark2") +
 > >   scale_size_continuous(trans = "log10")
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in FUN(X[[i]], ...): object 'population_female' not found
-> > ~~~
-> > {: .error}
 > > 
 > > <img src="../fig/rmd-03-unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" width="864" style="display: block; margin: auto;" />
 > {: .solution}
