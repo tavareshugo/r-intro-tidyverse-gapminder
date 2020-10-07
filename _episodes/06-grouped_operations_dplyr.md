@@ -373,6 +373,9 @@ gapminder1960to2010 %>%
 Notice that this gives you the _total number of rows_ per group. But because of missing 
 data, we might have less observations with actual life expectancy information. 
 
+
+### Counting non-missing observations
+
 To count how many values had complete data for `life_expectancy`, we can use a trick 
 by combining the `sum()` and `is.na()` functions in the following way:
 
@@ -558,6 +561,94 @@ sum(some_numbers > 10, na.rm = TRUE)
 > {: .solution}
 {: .challenge}
 
+### Quickly count observations per group
+
+As we saw, the `group_by()` + `summarise(n())` functions can be used together 
+to count the number of observations in groups of your data. 
+However, this operation is so common, that there is a function just dedicated for 
+counting the unique values of one of more variables.
+
+For example, how many observations do we have for each combination of year and world
+region:
+
+
+~~~
+gapminder1960to2010 %>% 
+  count(year, world_region)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 306 x 3
+    year world_region                 n
+   <dbl> <chr>                    <int>
+ 1  1960 america                     35
+ 2  1960 east_asia_pacific           30
+ 3  1960 europe_central_asia         52
+ 4  1960 middle_east_north_africa    20
+ 5  1960 south_asia                   8
+ 6  1960 sub_saharan_africa          48
+ 7  1961 america                     35
+ 8  1961 east_asia_pacific           30
+ 9  1961 europe_central_asia         52
+10  1961 middle_east_north_africa    20
+# … with 296 more rows
+~~~
+{: .output}
+
+This is essentially equivalent (but more compact) to:
+
+
+~~~
+gapminder1960to2010 %>% 
+  group_by(year, world_region) %>% 
+  summarise(n = n())
+~~~
+{: .language-r}
+
+
+## Grouped `filter()`
+
+The `group_by()` function can be combined with other functions besides `summarise()`. 
+
+Let's say we wanted to get the rows of our table where the income was the lowest 
+for that year. For _getting rows based on a condition_ we use `filter()`. 
+Here is an example:
+
+
+~~~
+gapminder1960to2010 %>% 
+  group_by(year) %>% 
+  filter(income_per_person == min(income_per_person, na.rm = TRUE))
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 52 x 13
+# Groups:   year [51]
+   country world_region  year children_per_wo… life_expectancy income_per_pers…
+   <chr>   <chr>        <dbl>            <dbl>           <dbl>            <dbl>
+ 1 Congo,… sub_saharan…  2000             6.96            53.8              573
+ 2 Congo,… sub_saharan…  2001             6.91            54.1              545
+ 3 Congo,… sub_saharan…  2002             6.86            54.2              545
+ 4 Congo,… sub_saharan…  2003             6.81            54.6              558
+ 5 Congo,… sub_saharan…  2004             6.76            55.3              577
+ 6 Congo,… sub_saharan…  2005             6.71            55.9              594
+ 7 Congo,… sub_saharan…  2006             6.66            56.3              605
+ 8 Cambod… east_asia_p…  1972             6.18            45.4              565
+ 9 Liberia sub_saharan…  1996             6.11            48.9              413
+10 Mozamb… sub_saharan…  1960             6.95            41.4              404
+# … with 42 more rows, and 7 more variables: is_oecd <lgl>,
+#   income_groups <chr>, population <dbl>, main_religion <chr>,
+#   child_mortality <dbl>, life_expectancy_female <chr>,
+#   life_expectancy_male <dbl>
+~~~
+{: .output}
+
 
 ## Grouped `mutate()` 
 
@@ -611,43 +702,6 @@ gapminder1960to2010 %>%
 ~~~
 {: .language-r}
 
-> ## Data Tip: Standardising Variables 
-> 
-> Often it's useful to standardise your variables, so that they are on a scale that 
-> can be interpreted and/or compared more easily. 
-> Here are some common ways to standardise data:
-> 
-> - Percentage (or fraction). This has no units.
-> - Mean-centering (each value minus the mean of the group). This has the same units 
->   as the original variable. It's interpreted as the deviation of that observation 
->   from the group's mean.
-> - [Standard score (Z-score)](https://en.wikipedia.org/wiki/Standard_score). This 
->   has no units. It can be interpreted as the number of standard deviations away 
->   from the mean.
-> 
-> Take the following graphs as an example: 
-> 
-> <img src="../fig/rmd-06-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="864" style="display: block; margin: auto;" />
-> 
-> These 3 graphs show different perspectives of the data:
-> 
-> - The first graph tells us how many children die in each country across years. 
-> - The second graph tells us how many children die in each country as a deviation 
->   from the country's mean (e.g. 200 children above the mean or -100 children below 
->   the mean).
-> - The third graph tells us how many children die in each country on a scale that 
->   is _relative_ to the variation in that country (e.g. 2 standard deviations above 
->   the mean and -2 standard deviations below the mean).
-> 
-> Which view of the data one chooses, depends on the underlying questions, and it's up 
-> for the analyst to decide. In this case, if what I'm interested in is how many 
-> children still die across the world, then I'd choose the graph on the left. 
-> But if I'm interested in understanding how countries compare in their relative efforts 
-> to reduce child mortality, then the 3rd graph migth be more adequate.
-> 
-{: .discussion}
-
-
 <!--
 
 Example of mean-centering and z-score calculation: 
@@ -674,49 +728,9 @@ Warning: Removed 336 row(s) containing missing values (geom_path).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-06-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="864" style="display: block; margin: auto;" />
 
 -->
-
-
-## Grouped `filter()`
-
-Let's say we wanted to get the rows of our table where the income was the lowest 
-for that year. For _getting rows based on a condition_ we use `filter()`. 
-Here is an example:
-
-
-~~~
-gapminder1960to2010 %>% 
-  group_by(year) %>% 
-  filter(income_per_person == min(income_per_person, na.rm = TRUE))
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 52 x 13
-# Groups:   year [51]
-   country world_region  year children_per_wo… life_expectancy income_per_pers…
-   <chr>   <chr>        <dbl>            <dbl>           <dbl>            <dbl>
- 1 Congo,… sub_saharan…  2000             6.96            53.8              573
- 2 Congo,… sub_saharan…  2001             6.91            54.1              545
- 3 Congo,… sub_saharan…  2002             6.86            54.2              545
- 4 Congo,… sub_saharan…  2003             6.81            54.6              558
- 5 Congo,… sub_saharan…  2004             6.76            55.3              577
- 6 Congo,… sub_saharan…  2005             6.71            55.9              594
- 7 Congo,… sub_saharan…  2006             6.66            56.3              605
- 8 Cambod… east_asia_p…  1972             6.18            45.4              565
- 9 Liberia sub_saharan…  1996             6.11            48.9              413
-10 Mozamb… sub_saharan…  1960             6.95            41.4              404
-# … with 42 more rows, and 7 more variables: is_oecd <lgl>,
-#   income_groups <chr>, population <dbl>, main_religion <chr>,
-#   child_mortality <dbl>, life_expectancy_female <chr>,
-#   life_expectancy_male <dbl>
-~~~
-{: .output}
-
 
 > ## Exercise
 > 
@@ -731,7 +745,7 @@ gapminder1960to2010 %>%
 > ~~~
 > {: .language-r}
 > 
-> <img src="../fig/rmd-06-unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="864" style="display: block; margin: auto;" />
+> <img src="../fig/rmd-06-unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="864" style="display: block; margin: auto;" />
 > 
 > Fix the code below, to graph the change in child mortality centered on the mean of 
 > each year (i.e. subtracting each child_mortality value from its mean value):
@@ -768,7 +782,7 @@ gapminder1960to2010 %>%
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-06-unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-06-unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="864" style="display: block; margin: auto;" />
 > > 
 > > This graph shows a different perspective of the data, which is now centered 
 > > around the mean of each year (highlighted by the horizontal line at zero). 
@@ -903,42 +917,47 @@ sum(total_incomes$total_income_pct)
 {: .output}
 
 
+> ## Data Tip: Standardising Variables 
+> 
+> Often it's useful to standardise your variables, so that they are on a scale that 
+> can be interpreted and/or compared more easily. 
+> Here are some common ways to standardise data:
+> 
+> - Percentage (or fraction). This has no units.
+> - Mean-centering (each value minus the mean of the group). This has the same units 
+>   as the original variable. It's interpreted as the deviation of that observation 
+>   from the group's mean.
+> - [Standard score (Z-score)](https://en.wikipedia.org/wiki/Standard_score). This 
+>   has no units. It can be interpreted as the number of standard deviations away 
+>   from the mean.
+> 
+> Take the following graphs as an example: 
+> 
+> <img src="../fig/rmd-06-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="864" style="display: block; margin: auto;" />
+> 
+> These 3 graphs show different perspectives of the data:
+> 
+> - The first graph tells us how many children die in each country across years. 
+> - The second graph tells us how many children die in each country as a deviation 
+>   from the country's mean (e.g. 200 children above the mean or -100 children below 
+>   the mean).
+> - The third graph tells us how many children die in each country on a scale that 
+>   is _relative_ to the variation in that country (e.g. 2 standard deviations above 
+>   the mean and -2 standard deviations below the mean).
+> 
+> Which view of the data one chooses, depends on the underlying questions, and it's up 
+> for the analyst to decide. In this case, if what I'm interested in is how many 
+> children still die across the world, then I'd choose the graph on the left. 
+> But if I'm interested in understanding how countries compare in their relative efforts 
+> to reduce child mortality, then the 3rd graph migth be more adequate.
+> 
+{: .discussion}
 
 ## (optional) Advanced Examples 
 
 This section briefly demonstrates slightly more advanced examples of using 
 grouped operations, mixed with visualisation. The explanations are brief, but 
 can hopefully demonstrate the range of questions that we can ask from our data.
-
-* We can use conditional vector subsetting (with `[]`) inside these functions. 
-  In this example, we find the `country` where the `income_per_person` is lowest,
-  per year.
-
-
-~~~
-gapminder1960to2010 %>% 
-  # remove missing values
-  filter(!is.na(income_per_person)) %>% 
-  # for each year
-  group_by(year) %>% 
-  # calculate the minimum income and the country where income is equal to the minimum
-  summarise(income_min = min(income_per_person),
-            country = country[income_per_person == min(income_per_person)]) %>% 
-  # visualise
-  ggplot(aes(year, income_min)) +
-  geom_line() +
-  geom_point(aes(colour = country))
-~~~
-{: .language-r}
-
-
-
-~~~
-`summarise()` regrouping output by 'year' (override with `.groups` argument)
-~~~
-{: .output}
-
-<img src="../fig/rmd-06-unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" width="864" style="display: block; margin: auto;" />
 
 * The `lead()` and `lag()` functions shift vectors by one value, so that we can use 
   them for example to compare values ahead or behind the current value. 
@@ -968,7 +987,7 @@ Warning: Removed 193 row(s) containing missing values (geom_path).
 ~~~
 {: .error}
 
-<img src="../fig/rmd-06-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
 
 * The `cumsum()` function can be used to calculate cumulative sums (see more 
   cumulative functions in [dplyr's cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf))
@@ -991,6 +1010,35 @@ gapminder1960to2010 %>%
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" width="864" style="display: block; margin: auto;" />
 
+* We can use conditional vector subsetting (with `[]`) inside these functions. 
+  In this example, we find the `country` where the `income_per_person` is lowest,
+  per year.
+
+
+~~~
+gapminder1960to2010 %>% 
+  # remove missing values
+  filter(!is.na(income_per_person)) %>% 
+  # for each year
+  group_by(year) %>% 
+  # calculate the minimum income and the country where income is equal to the minimum
+  summarise(income_min = min(income_per_person),
+            country = country[income_per_person == min(income_per_person)]) %>% 
+  # visualise
+  ggplot(aes(year, income_min)) +
+  geom_line() +
+  geom_point(aes(colour = country))
+~~~
+{: .language-r}
+
+
+
+~~~
+`summarise()` regrouping output by 'year' (override with `.groups` argument)
+~~~
+{: .output}
+
+<img src="../fig/rmd-06-unnamed-chunk-39-1.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" width="864" style="display: block; margin: auto;" />
 

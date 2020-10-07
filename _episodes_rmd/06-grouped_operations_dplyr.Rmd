@@ -246,6 +246,9 @@ gapminder1960to2010 %>%
 Notice that this gives you the _total number of rows_ per group. But because of missing 
 data, we might have less observations with actual life expectancy information. 
 
+
+### Counting non-missing observations
+
 To count how many values had complete data for `life_expectancy`, we can use a trick 
 by combining the `sum()` and `is.na()` functions in the following way:
 
@@ -351,6 +354,44 @@ sum(some_numbers > 10, na.rm = TRUE)
 > {: .solution}
 {: .challenge}
 
+### Quickly count observations per group
+
+As we saw, the `group_by()` + `summarise(n())` functions can be used together 
+to count the number of observations in groups of your data. 
+However, this operation is so common, that there is a function just dedicated for 
+counting the unique values of one of more variables.
+
+For example, how many observations do we have for each combination of year and world
+region:
+
+```{r}
+gapminder1960to2010 %>% 
+  count(year, world_region)
+```
+
+This is essentially equivalent (but more compact) to:
+
+```{r, eval=FALSE}
+gapminder1960to2010 %>% 
+  group_by(year, world_region) %>% 
+  summarise(n = n())
+```
+
+
+## Grouped `filter()`
+
+The `group_by()` function can be combined with other functions besides `summarise()`. 
+
+Let's say we wanted to get the rows of our table where the income was the lowest 
+for that year. For _getting rows based on a condition_ we use `filter()`. 
+Here is an example:
+
+```{r}
+gapminder1960to2010 %>% 
+  group_by(year) %>% 
+  filter(income_per_person == min(income_per_person, na.rm = TRUE))
+```
+
 
 ## Grouped `mutate()` 
 
@@ -379,69 +420,6 @@ gapminder1960to2010 %>%
   geom_line(aes(group = country))
 ```
 
-> ## Data Tip: Standardising Variables 
-> 
-> Often it's useful to standardise your variables, so that they are on a scale that 
-> can be interpreted and/or compared more easily. 
-> Here are some common ways to standardise data:
-> 
-> - Percentage (or fraction). This has no units.
-> - Mean-centering (each value minus the mean of the group). This has the same units 
->   as the original variable. It's interpreted as the deviation of that observation 
->   from the group's mean.
-> - [Standard score (Z-score)](https://en.wikipedia.org/wiki/Standard_score). This 
->   has no units. It can be interpreted as the number of standard deviations away 
->   from the mean.
-> 
-> Take the following graphs as an example: 
-> 
-> ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-> p1 <- gapminder1960to2010 %>% 
->   ggplot(aes(year, child_mortality)) +
->   geom_line(aes(group = country), alpha = 0.3) +
->   labs(title = "Original data", y = "Child Mortality")
-> 
-> p2 <- gapminder1960to2010 %>% 
->   drop_na(income_per_person) %>% 
->   group_by(country) %>% 
->   mutate(mortality_centered = child_mortality - mean(child_mortality),
->          mortality_scaled = mortality_centered/sd(child_mortality)) %>% 
->   ggplot(aes(year, mortality_centered)) +
->   geom_line(aes(group = country), alpha = 0.3) +
->   labs(title = "Mean centered", y = "Child Mortality (mean centered)")
-> 
-> p3 <- gapminder1960to2010 %>% 
->   drop_na(income_per_person) %>% 
->   group_by(country) %>% 
->   mutate(mortality_centered = child_mortality - mean(child_mortality),
->          mortality_scaled = mortality_centered/sd(child_mortality)) %>% 
->   ggplot(aes(year, mortality_scaled)) +
->   geom_line(aes(group = country), alpha = 0.3) +
->   labs(title = "Z-score", y = "Child Mortality (z-score)")
-> 
-> library(patchwork)
-> p1 | p2 | p3
-> ```
-> 
-> These 3 graphs show different perspectives of the data:
-> 
-> - The first graph tells us how many children die in each country across years. 
-> - The second graph tells us how many children die in each country as a deviation 
->   from the country's mean (e.g. 200 children above the mean or -100 children below 
->   the mean).
-> - The third graph tells us how many children die in each country on a scale that 
->   is _relative_ to the variation in that country (e.g. 2 standard deviations above 
->   the mean and -2 standard deviations below the mean).
-> 
-> Which view of the data one chooses, depends on the underlying questions, and it's up 
-> for the analyst to decide. In this case, if what I'm interested in is how many 
-> children still die across the world, then I'd choose the graph on the left. 
-> But if I'm interested in understanding how countries compare in their relative efforts 
-> to reduce child mortality, then the 3rd graph migth be more adequate.
-> 
-{: .discussion}
-
-
 <!--
 
 Example of mean-centering and z-score calculation: 
@@ -460,20 +438,6 @@ gapminder1960to2010 %>%
 ```
 
 -->
-
-
-## Grouped `filter()`
-
-Let's say we wanted to get the rows of our table where the income was the lowest 
-for that year. For _getting rows based on a condition_ we use `filter()`. 
-Here is an example:
-
-```{r}
-gapminder1960to2010 %>% 
-  group_by(year) %>% 
-  filter(income_per_person == min(income_per_person, na.rm = TRUE))
-```
-
 
 > ## Exercise
 > 
@@ -586,31 +550,73 @@ sum(total_incomes$total_income_pct)
 ```
 
 
+> ## Data Tip: Standardising Variables 
+> 
+> Often it's useful to standardise your variables, so that they are on a scale that 
+> can be interpreted and/or compared more easily. 
+> Here are some common ways to standardise data:
+> 
+> - Percentage (or fraction). This has no units.
+> - Mean-centering (each value minus the mean of the group). This has the same units 
+>   as the original variable. It's interpreted as the deviation of that observation 
+>   from the group's mean.
+> - [Standard score (Z-score)](https://en.wikipedia.org/wiki/Standard_score). This 
+>   has no units. It can be interpreted as the number of standard deviations away 
+>   from the mean.
+> 
+> Take the following graphs as an example: 
+> 
+> ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+> p1 <- gapminder1960to2010 %>% 
+>   ggplot(aes(year, child_mortality)) +
+>   geom_line(aes(group = country), alpha = 0.3) +
+>   labs(title = "Original data", y = "Child Mortality")
+> 
+> p2 <- gapminder1960to2010 %>% 
+>   drop_na(income_per_person) %>% 
+>   group_by(country) %>% 
+>   mutate(mortality_centered = child_mortality - mean(child_mortality),
+>          mortality_scaled = mortality_centered/sd(child_mortality)) %>% 
+>   ggplot(aes(year, mortality_centered)) +
+>   geom_line(aes(group = country), alpha = 0.3) +
+>   labs(title = "Mean centered", y = "Child Mortality (mean centered)")
+> 
+> p3 <- gapminder1960to2010 %>% 
+>   drop_na(income_per_person) %>% 
+>   group_by(country) %>% 
+>   mutate(mortality_centered = child_mortality - mean(child_mortality),
+>          mortality_scaled = mortality_centered/sd(child_mortality)) %>% 
+>   ggplot(aes(year, mortality_scaled)) +
+>   geom_line(aes(group = country), alpha = 0.3) +
+>   labs(title = "Z-score", y = "Child Mortality (z-score)")
+> 
+> library(patchwork)
+> p1 | p2 | p3
+> ```
+> 
+> These 3 graphs show different perspectives of the data:
+> 
+> - The first graph tells us how many children die in each country across years. 
+> - The second graph tells us how many children die in each country as a deviation 
+>   from the country's mean (e.g. 200 children above the mean or -100 children below 
+>   the mean).
+> - The third graph tells us how many children die in each country on a scale that 
+>   is _relative_ to the variation in that country (e.g. 2 standard deviations above 
+>   the mean and -2 standard deviations below the mean).
+> 
+> Which view of the data one chooses, depends on the underlying questions, and it's up 
+> for the analyst to decide. In this case, if what I'm interested in is how many 
+> children still die across the world, then I'd choose the graph on the left. 
+> But if I'm interested in understanding how countries compare in their relative efforts 
+> to reduce child mortality, then the 3rd graph migth be more adequate.
+> 
+{: .discussion}
 
 ## (optional) Advanced Examples 
 
 This section briefly demonstrates slightly more advanced examples of using 
 grouped operations, mixed with visualisation. The explanations are brief, but 
 can hopefully demonstrate the range of questions that we can ask from our data.
-
-* We can use conditional vector subsetting (with `[]`) inside these functions. 
-  In this example, we find the `country` where the `income_per_person` is lowest,
-  per year.
-
-```{r}
-gapminder1960to2010 %>% 
-  # remove missing values
-  filter(!is.na(income_per_person)) %>% 
-  # for each year
-  group_by(year) %>% 
-  # calculate the minimum income and the country where income is equal to the minimum
-  summarise(income_min = min(income_per_person),
-            country = country[income_per_person == min(income_per_person)]) %>% 
-  # visualise
-  ggplot(aes(year, income_min)) +
-  geom_line() +
-  geom_point(aes(colour = country))
-```
 
 * The `lead()` and `lag()` functions shift vectors by one value, so that we can use 
   them for example to compare values ahead or behind the current value. 
@@ -650,4 +656,22 @@ gapminder1960to2010 %>%
   scale_y_continuous(trans = "log10")
 ```
 
+* We can use conditional vector subsetting (with `[]`) inside these functions. 
+  In this example, we find the `country` where the `income_per_person` is lowest,
+  per year.
+
+```{r}
+gapminder1960to2010 %>% 
+  # remove missing values
+  filter(!is.na(income_per_person)) %>% 
+  # for each year
+  group_by(year) %>% 
+  # calculate the minimum income and the country where income is equal to the minimum
+  summarise(income_min = min(income_per_person),
+            country = country[income_per_person == min(income_per_person)]) %>% 
+  # visualise
+  ggplot(aes(year, income_min)) +
+  geom_line() +
+  geom_point(aes(colour = country))
+```
 

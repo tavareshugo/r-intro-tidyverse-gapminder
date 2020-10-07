@@ -135,8 +135,7 @@ Note that this did not change the value of `area_acres`.
 
 > ## Keyboard shortcut
 > 
-> In RStudio, the keyboard shortcut for `<-` is <kbd>Alt</kbd> + <kbd>-</kbd> (PC) or 
-> <kbd>&#8984;</kbd> + <kbd>-</kbd> (Mac).
+> In RStudio, the keyboard shortcut for `<-` is <kbd>Alt</kbd> + <kbd>-</kbd>.
 {: .callout}
 
 

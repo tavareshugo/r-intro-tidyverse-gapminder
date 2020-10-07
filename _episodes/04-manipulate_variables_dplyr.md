@@ -30,7 +30,7 @@ of our data.
 
 As usual when starting an analysis on a new script, let's start by loading the 
 packages and reading the data. In this lesson we're going to start using the 
-[full dataset](https://github.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/gapminder1960to2010_socioeconomic.csv) 
+[full dataset](https://github.com/tavareshugo/r-eda-gapminder/raw/gh-pages/_episodes_rmd/data/raw/gapminder1960to2010_socioeconomic.csv) 
 with data from 1960 to 2010:
 
 
