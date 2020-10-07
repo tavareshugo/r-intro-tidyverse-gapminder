@@ -443,10 +443,26 @@ be interested in temporarily.
 >    we realised that `life_expectancy_female` was imported as _character_ rather than _numeric_. 
 >    Update `gapminder1960to2010` by _coercing_ (i.e. converting) this variable to numeric type 
 >    (hint: use `as.numeric()` within the `mutate()` function).
-> 2. Make a histogram showing the distribution of the difference between the life expectancy 
->    of the two sexes with a binwidth of 1 year. 
-> 3. How did the total income of a country change over time? (hint: calculate the total 
->    income from the total population and income per capita)
+> 2. Make a histogram of the difference between the life expectancy of the two sexes 
+>    (hint: pipe these operations `data.frame %>% mutate %>% ggplot`)
+>    (hint2: use a binwidth of 1 year for the histogram with `geom_histogram(binwidth = 1)`)
+> 3. Fix the following code recreate the plot below showing how the total income 
+>    of a country changed over time.
+>    (hint: calculate the total income from `population` and `income_per_person`)
+>
+> 
+> ~~~
+> # take the data; and then...
+> gapminder1960to2010 %>% 
+>   # ... calculate total income; and then...
+>   mutate(income_total = FIXME) %>% 
+>   # ... make the plot
+>   ggplot(aes(x = FIXME, y = FIXME)) +
+>   geom_line(aes(group = country, colour = world_region))
+> ~~~
+> {: .language-r}
+>
+> <img src="../fig/rmd-04-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="864" style="display: block; margin: auto;" />
 > 
 > (While doing the exercise, always try to critically evaluate your results!)
 > 
@@ -489,7 +505,7 @@ be interested in temporarily.
 > > ~~~
 > > {: .error}
 > > 
-> > <img src="../fig/rmd-04-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="864" style="display: block; margin: auto;" />
 > > 
 > > This shows that overall women live longer than men. This trend seems to hold across 
 > > all countries and across many years. Although from just the histogram it's not 
@@ -516,7 +532,12 @@ be interested in temporarily.
 > > ~~~
 > > {: .error}
 > > 
-> > <img src="../fig/rmd-04-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="864" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="864" style="display: block; margin: auto;" />
+> > 
+> > Note how we've used `group = country` inside `geom_line()`, to indicate that each 
+> > country should have its own line (otherwise ggplot would have connected all data points
+> > belonging to the same world_region together, resulting in a big mess! Try removing 
+> > this option to see what happens.
 > > 
 > > It feels like in most countries there is an increase in total income. However, 
 > > it's hard to see with this scale, given that there's two countries which really 
