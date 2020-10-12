@@ -219,7 +219,7 @@ as well as the grouping columns defined within `group_by()`.
 > >   geom_ribbon(aes(ymin = q25, ymax = q75), alpha = 0.2) +
 > >   geom_line() +
 > >   theme_minimal() +
-> >   labs(FIXME, 
+> >   labs(x = "Year", y = "Children per Woman",
 > >        title = "Median, 50% and 90% percentiles"
 > > ```
 > {: .solution}
