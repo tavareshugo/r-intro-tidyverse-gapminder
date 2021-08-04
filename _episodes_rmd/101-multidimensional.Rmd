@@ -1,0 +1,165 @@
+---
+title: "Apendix: multidimensional data analysis"
+teaching: 50
+exercises: 30
+questions:
+  - "How to perform Principal Components Analysis (PCA)?"
+  - "How to perform hierarchical clustering?"
+  - "How to perform k-means clustering?"
+objectives:
+  - "Recognise when to use grouped operations in data analysis."
+  - "Differentiate between grouped summaries and other types of grouped operations."
+  - "Apply grouped summaries using the `group_by()` + `summarise()` functions."
+  - "Apply other grouped operations such as: `group_by()` + `filter()` and `group_by()` + `mutate()`."
+  - "Recognise the importance of the `ungroup()` function."
+keypoints:
+  - ""
+source: Rmd
+---
+
+  ```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("09-")
+knitr::opts_chunk$set(fig.width=12, fig.height=7)
+```
+
+```{r, include=FALSE}
+# set ggplot2 theme with bigger text size
+library(tidyverse)
+theme_set(theme_grey() + theme(text = element_text(size = 16)))
+```
+
+
+In this lesson we're going to learn how to use the `dplyr` package to make calculations
+for sub-groups in our data.
+
+As usual when starting an analysis on a new script, let's start by loading the
+packages and reading the data. In this case, let's use the clean dataset that we
+created in the last exercise of the
+[previous episode]({{ page.root }}{% link _episodes/05-manipulate_observations_dplyr.md %}).
+
+```{r, eval=FALSE}
+# load the package
+library(tidyverse)
+
+# Read the data, specifying how missing values are encoded
+gapminder_clean <- read_csv("data/processed/gapminder1960to2010_socioeconomic_clean.csv",
+                            na = "")
+```
+
+If you haven't completed the previous exercise, here's how you can recreate the
+clean dataset:
+
+```{r, message=FALSE, warning=FALSE}
+gapminder_clean <- read_csv("data/gapminder1960to2010_socioeconomic.csv", na = "") %>%
+  select(-country_id) %>%
+  mutate(population_total = population_male + population_female,
+         main_religion = str_to_lower(str_squish(main_religion)),
+         life_expectancy_male = ifelse(life_expectancy_male == -999, NA, life_expectancy_male),
+         life_expectancy_female = as.numeric(life_expectancy_female)) %>%
+  filter(!is.na(income_groups))
+```
+
+
+## PCA to create an alternative HDI
+
+```{r}
+pca <- gapminder_clean %>%
+  filter(year == 2009) %>%
+  select(country, income_per_person, life_expectancy, school_years_men, school_years_women) %>%
+  # pivot_wider(names_from = "year",
+  #             values_from = c("income_per_person", "life_expectancy", "school_years_women", "school_years_men")) %>%
+  column_to_rownames("country") %>%
+  drop_na() %>%
+  prcomp(scale = TRUE)
+
+library(ggfortify)
+autoplot(pca, loadings = TRUE, loadings.label = TRUE)
+
+library(broom)
+
+# makes sense that PC4 hardly explains anything, given school years male/female being very highly correlated
+tidy(pca, matrix = "pcs") %>%
+  ggplot(aes(PC, percent)) +
+  geom_col() +
+  geom_line(aes(y = cumulative))
+
+# We can see how this creates an alternative score for HDI
+pca$x %>%
+  as_tibble(rownames = "country") %>%
+  inner_join(gapminder_clean, by = c("country")) %>%
+  filter(year == 2005) %>%
+  #with(cor(hdi_human_development_index, PC1, use = "complete.obs", method = "spearman"))
+  ggplot(aes(PC1, hdi_human_development_index)) +
+  geom_point()
+```
+
+
+## Hierarchichal clustering to replace income groups
+
+```{r}
+clust <- gapminder_clean %>%
+  filter(year > 2000) %>%
+  select(country, year, income_per_person) %>%
+  pivot_wider(names_from = "year",
+              names_prefix = "yr",
+              values_from = "income_per_person") %>%
+  column_to_rownames("country") %>%
+  as.matrix() %>%
+  log() %>%
+  dist() %>%
+  hclust("ward.D2")
+
+plot(clust)
+rect.hclust(clust, k = 4)
+```
+
+```{r}
+cutree(clust, k = 4) %>% enframe(name = "country", value = "cluster") %>%
+  full_join(gapminder_clean, by = "country") %>%
+  ggplot(aes(cluster, income_groups)) +
+  geom_count()
+```
+
+```{r}
+cutree(clust, k = 4) %>% enframe(name = "country", value = "cluster") %>%
+  full_join(gapminder_clean, by = "country") %>%
+  ggplot(aes(year, income_per_person)) +
+  geom_line(aes(group = country, colour = factor(cluster))) +
+  scale_y_log10()
+```
+
+
+## PCA per year!
+
+```{r}
+# function to do the PCA
+pca_gapminder <- function(x){
+  pca <- x %>%
+    column_to_rownames("country") %>%
+    drop_na()
+
+  if (nrow(pca) == 0){
+    return(data.frame(PC1 = NA, PC2 = NA, PC3 = NA, PC4 = NA))
+  } else {
+    pca <- pca %>%
+      prcomp(scale = TRUE)
+    return(as_tibble(pca$x, rownames = "country"))
+  }
+}
+
+gapminder_clean %>%
+  select(country, year, income_per_person, life_expectancy,
+         school_years_men, school_years_women) %>%
+  drop_na() %>%
+  group_by(year) %>%
+  nest() %>%
+  mutate(pca_out = map(data, pca_gapminder)) %>%
+  select(-data) %>%
+  unnest(pca_out) %>%
+  ggplot(aes(year, PC1)) +
+  geom_line(aes(group = country, colour = country == "United Arab Emirates"))
+```
+
+
+
